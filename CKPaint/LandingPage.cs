@@ -63,7 +63,8 @@ namespace CKPaint
                 sqlConnection.Open();
 
 
-                //Execute the stored procedure
+                //Execute the stored procedure for Parts OnFloor
+                //and update the data grid view
                 using (SqlCommand sqlCommand = new SqlCommand("spGetOnFloorParts", sqlConnection))
                 {   
                     sqlCommand.CommandType = CommandType.StoredProcedure;
@@ -78,7 +79,8 @@ namespace CKPaint
                   
                 }
 
-                //Execute the stored procedure
+                //Execute the stored procedure for Parts Inline
+                //and update the data grid view
                 using (SqlCommand sqlCommand = new SqlCommand("spGetInlineParts", sqlConnection))
                 {
                     sqlCommand.CommandType = CommandType.StoredProcedure;
@@ -195,6 +197,44 @@ namespace CKPaint
             }
         }
 
-       
+        private void printLabelButton_Click(object sender, EventArgs e)
+        {
+            //
+            //PRINTING WILL OCCURR HERE!
+
+            if (string.IsNullOrEmpty(WOIDTxtBox.Text))
+            {
+                errorLabel.Text = "WOID cannot be empty.";
+                return;
+            }
+
+            //Series of sql calls to gather data
+            using (SqlConnection sqlConnection = new SqlConnection(connStr))
+            {
+                sqlConnection.Open();
+
+
+                //Execute the stored procedure for Parts OnFloor
+                //and update the data grid view
+                using (SqlCommand sqlCommand = new SqlCommand("spSendPartInlineByWOID", sqlConnection))
+                {
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.Parameters.AddWithValue("@WOID", WOIDTxtBox.Text.ToString());
+                    sqlCommand.ExecuteNonQuery();
+
+
+               
+
+                }
+
+                //Close connection after table is filled
+                sqlConnection.Close();
+            }
+        }
+
+        private void WOIDTxtBox_TextChanged(object sender, EventArgs e)
+        {
+            errorLabel.Text = "";
+        }
     }
 }

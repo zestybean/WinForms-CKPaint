@@ -33,12 +33,13 @@ namespace CKPaint
             this.title = new System.Windows.Forms.Label();
             this.errLbl = new System.Windows.Forms.Label();
             this.printLabelButton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.WOIDTxtBox = new System.Windows.Forms.TextBox();
             this.WOIDLabel = new System.Windows.Forms.Label();
             this.controlPanel = new System.Windows.Forms.Panel();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.partsInlineLabel = new System.Windows.Forms.Label();
             this.partsOnFloorLabel = new System.Windows.Forms.Label();
+            this.errorLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.controlPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -60,13 +61,14 @@ namespace CKPaint
             // 
             // title
             // 
-            this.title.AutoSize = true;
+            this.title.Dock = System.Windows.Forms.DockStyle.Top;
             this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.title.Location = new System.Drawing.Point(587, 9);
+            this.title.Location = new System.Drawing.Point(0, 0);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(260, 25);
+            this.title.Size = new System.Drawing.Size(1339, 25);
             this.title.TabIndex = 1;
             this.title.Text = "CK PAINT - SCHEDULE";
+            this.title.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // errLbl
             // 
@@ -80,20 +82,23 @@ namespace CKPaint
             // 
             // printLabelButton
             // 
+            this.printLabelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.printLabelButton.Location = new System.Drawing.Point(310, 3);
             this.printLabelButton.Name = "printLabelButton";
-            this.printLabelButton.Size = new System.Drawing.Size(86, 30);
+            this.printLabelButton.Size = new System.Drawing.Size(123, 30);
             this.printLabelButton.TabIndex = 3;
             this.printLabelButton.Text = "Print Label";
             this.printLabelButton.UseVisualStyleBackColor = true;
+            this.printLabelButton.Click += new System.EventHandler(this.printLabelButton_Click);
             // 
-            // textBox1
+            // WOIDTxtBox
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(77, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(227, 31);
-            this.textBox1.TabIndex = 4;
+            this.WOIDTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.WOIDTxtBox.Location = new System.Drawing.Point(77, 3);
+            this.WOIDTxtBox.Name = "WOIDTxtBox";
+            this.WOIDTxtBox.Size = new System.Drawing.Size(227, 31);
+            this.WOIDTxtBox.TabIndex = 4;
+            this.WOIDTxtBox.TextChanged += new System.EventHandler(this.WOIDTxtBox_TextChanged);
             // 
             // WOIDLabel
             // 
@@ -110,8 +115,9 @@ namespace CKPaint
             this.controlPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.controlPanel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.controlPanel.Controls.Add(this.errorLabel);
             this.controlPanel.Controls.Add(this.printLabelButton);
-            this.controlPanel.Controls.Add(this.textBox1);
+            this.controlPanel.Controls.Add(this.WOIDTxtBox);
             this.controlPanel.Controls.Add(this.WOIDLabel);
             this.controlPanel.Location = new System.Drawing.Point(12, 342);
             this.controlPanel.Name = "controlPanel";
@@ -152,6 +158,16 @@ namespace CKPaint
             this.partsOnFloorLabel.TabIndex = 9;
             this.partsOnFloorLabel.Text = "PARTS-ONFLOOR";
             // 
+            // errorLabel
+            // 
+            this.errorLabel.AutoSize = true;
+            this.errorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errorLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorLabel.Location = new System.Drawing.Point(74, 38);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(0, 13);
+            this.errorLabel.TabIndex = 10;
+            // 
             // LandingPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -166,7 +182,7 @@ namespace CKPaint
             this.Controls.Add(this.dataGridView1);
             this.Name = "LandingPage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "CK-Paint";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LandingPage_FormClosing);
             this.Load += new System.EventHandler(this.LandingPage_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -184,12 +200,13 @@ namespace CKPaint
         private System.Windows.Forms.Label title;
         private System.Windows.Forms.Label errLbl;
         private System.Windows.Forms.Button printLabelButton;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox WOIDTxtBox;
         private System.Windows.Forms.Label WOIDLabel;
         private System.Windows.Forms.Panel controlPanel;
         private System.Windows.Forms.Label partsInlineLabel;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Label partsOnFloorLabel;
+        private System.Windows.Forms.Label errorLabel;
     }
 }
 
