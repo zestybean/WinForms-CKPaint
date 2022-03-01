@@ -17,9 +17,10 @@ namespace CKPaint
 {
     public partial class LandingPage : Form
     {
+        //This connection string is called from App.config file, alternatively it could also be hardcoded into this string var.
         string connStr = ConfigurationManager.ConnectionStrings["PBET"].ConnectionString;
 
-
+        //Sql Dependency Object
         public SqlTableDependency<SecondarySchedule> secondaryScheduleDependency;
 
         public LandingPage()
@@ -29,12 +30,15 @@ namespace CKPaint
 
         private void LandingPage_Load(object sender, EventArgs e)
         {
+            //On the start of the program fill the table up from the DB
+            //and initialiaze the SQL dependecy functions
             RefreshTable();
             StartSecondaryScheduleTableDependency();
         }
 
         private void LandingPage_FormClosing(object sender, FormClosingEventArgs e)
-        {
+        {   
+            //Stop the dependency when applications is closing
             try
             {
                 StopSecondaryScheduleTableDependency();
@@ -47,28 +51,50 @@ namespace CKPaint
 
         void RefreshTable()
         {
-            DataSet dataSet = new DataSet();
+            //This function fills the datagridview from the current data in the
+            //db, because the table is using SQL dependency multi-threading needs
+            //to be called in order to properly execute commands
+            DataSet floorPartsDataSet = new DataSet();
+            DataSet inlinePartsDataSet = new DataSet();
 
-           
-
+            //Series of sql calls to gather data
             using (SqlConnection sqlConnection = new SqlConnection(connStr))
             {
                 sqlConnection.Open();
 
-                using (SqlCommand sqlCommand = new SqlCommand("spGetAllSchedule", sqlConnection))
+
+                //Execute the stored procedure
+                using (SqlCommand sqlCommand = new SqlCommand("spGetOnFloorParts", sqlConnection))
+                {   
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                    using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                    {
+                        sqlDataAdapter.Fill(floorPartsDataSet, "SecondarySchedule");
+                    }
+
+                    ThreadSafe(() => dataGridView1.DataSource = floorPartsDataSet);
+                    ThreadSafe(() => dataGridView1.DataMember = "SecondarySchedule");
+                  
+                }
+
+                //Execute the stored procedure
+                using (SqlCommand sqlCommand = new SqlCommand("spGetInlineParts", sqlConnection))
                 {
                     sqlCommand.CommandType = CommandType.StoredProcedure;
 
                     using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
                     {
-                        sqlDataAdapter.Fill(dataSet, "SecondarySchedule");
+                        sqlDataAdapter.Fill(inlinePartsDataSet, "SecondarySchedule");
                     }
 
-                    ThreadSafe(() => dataGridView1.DataSource = dataSet );
-                    ThreadSafe(() => dataGridView1.DataMember = "SecondarySchedule");
-                    
+                    ThreadSafe(() => dataGridView2.DataSource = inlinePartsDataSet);
+                    ThreadSafe(() => dataGridView2.DataMember = "SecondarySchedule");
+
                 }
 
+
+                //Close connection after table is filled
                 sqlConnection.Close();
             }
         }
@@ -96,6 +122,9 @@ namespace CKPaint
         {
             try
             {
+                //Init the sql dependency using the connection string
+                //after, point to the functions handling the onchanged and 
+                //error functions
                 secondaryScheduleDependency = new SqlTableDependency<SecondarySchedule>(connStr);
                 secondaryScheduleDependency.OnChanged += SecondaryScheduleTableDependency_OnChange;
                 secondaryScheduleDependency.OnError += SecondaryScheduleTableDependency_OnError;

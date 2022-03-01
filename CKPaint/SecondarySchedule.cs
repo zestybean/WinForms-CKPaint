@@ -30,6 +30,7 @@ namespace CKPaint
         public string WOIDRH { get; set; }
         public DateTime ShipDate { get; set; }
         public DateTime ImportDate { get; set; }
+        public Int16 PartInline { get; set; }
 
     }
 }
