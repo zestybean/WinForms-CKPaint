@@ -5,13 +5,13 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Configuration;
+
 using TableDependency.SqlClient;
 using TableDependency.SqlClient.Base.EventArgs;
 using TableDependency.SqlClient.Base.Enums;
-using System.Configuration;
 
 namespace CKPaint
 {
@@ -237,21 +237,35 @@ namespace CKPaint
         private void PrintToZebra()
         {
             string ipAddress = "192.168.9.87";
-            int port = 9100;
+            int PORT = 9100;
+
+            string zplImageData = string.Empty;
+            string filePath = @"C:\Users\brando.lugo\source\repos\CKPaint\CKPaint\Resources\barcode_test.png";
+            byte[] binaryData = System.IO.File.ReadAllBytes(filePath);
+            foreach (Byte b in binaryData)
+            {
+                string hexRep = String.Format("{0:X}", b);
+                if (hexRep.Length == 1)
+                    hexRep = "0" + hexRep;
+                zplImageData += hexRep;
+            }
+            string zplToSend = "^XA" + "^FO50" + "50^GFA,120000,120000,100" + binaryData.Length + ",," + zplImageData + "^XZ";
+            string printImage = "^XA^FO115,50^IME:LOGO.PNG^FS^XZ";
 
             try {
                 //Open zebra connection
-                System.Net.Sockets.TcpClient client = new System.Net.Sockets.TcpClient();
-                client.Connect(ipAddress, port);
+                System.Net.Sockets.TcpClient printer = new System.Net.Sockets.TcpClient();
+                printer.Connect(ipAddress, PORT);
 
                 //Write label file
-                System.IO.StreamWriter writer = new System.IO.StreamWriter(client.GetStream(), Encoding.UTF8);
-                writer.Write("TEST");
-                writer.WriteLine("TEST");
+                System.IO.StreamWriter writer = new System.IO.StreamWriter(printer.GetStream());
+                writer.Write(zplToSend);
+                writer.Flush();
+                writer.Write(printImage);
                 writer.Flush();
 
                 writer.Close();
-                client.Close();
+                printer.Close();
 
                 errLbl.Text = "Print Success!";
             }
