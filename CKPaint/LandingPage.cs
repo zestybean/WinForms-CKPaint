@@ -26,6 +26,7 @@ namespace CKPaint
         public LandingPage()
         {
             InitializeComponent();
+           
         }
 
         private void LandingPage_Load(object sender, EventArgs e)
@@ -199,8 +200,9 @@ namespace CKPaint
 
         private void printLabelButton_Click(object sender, EventArgs e)
         {
-            //
+            //THIS HAS NO BUFFER AND WILL ALWAYS OCCURR
             //PRINTING WILL OCCURR HERE!
+            PrintToZebra();
 
             if (string.IsNullOrEmpty(WOIDTxtBox.Text))
             {
@@ -229,6 +231,37 @@ namespace CKPaint
 
                 //Close connection after table is filled
                 sqlConnection.Close();
+            }
+        }
+
+        private void PrintToZebra()
+        {
+            string ipAddress = "192.168.9.87";
+            int port = 9100;
+
+            try {
+                //Open zebra connection
+                System.Net.Sockets.TcpClient client = new System.Net.Sockets.TcpClient();
+                client.Connect(ipAddress, port);
+
+                //Write label file
+                System.IO.StreamWriter writer = new System.IO.StreamWriter(client.GetStream(), Encoding.UTF8);
+                writer.Write("TEST");
+                writer.WriteLine("TEST");
+                writer.Flush();
+
+                writer.Close();
+                client.Close();
+
+                errLbl.Text = "Print Success!";
+            }
+            
+            catch(Exception err)
+            {
+                errLbl.Text = err.ToString();
+                Console.WriteLine(err);
+
+                
             }
         }
 
