@@ -239,18 +239,11 @@ namespace CKPaint
             string ipAddress = "192.168.9.87";
             int PORT = 9100;
 
-            string zplImageData = string.Empty;
-            string filePath = @"C:\Users\brando.lugo\source\repos\CKPaint\CKPaint\Resources\barcode_test.png";
-            byte[] binaryData = System.IO.File.ReadAllBytes(filePath);
-            foreach (Byte b in binaryData)
-            {
-                string hexRep = String.Format("{0:X}", b);
-                if (hexRep.Length == 1)
-                    hexRep = "0" + hexRep;
-                zplImageData += hexRep;
-            }
-            string zplToSend = "^XA" + "^FO50" + "50^GFA,120000,120000,100" + binaryData.Length + ",," + zplImageData + "^XZ";
-            string printImage = "^XA^FO115,50^IME:LOGO.PNG^FS^XZ";
+            string labelPath = @"\\hail\Manufacturing Engineering\Secondary Equipment\CK_Supervisor\Label Formats\ILVS Navistar.txt";
+
+
+            System.IO.StreamReader fileReader = new System.IO.StreamReader(labelPath);
+            string fileContent = fileReader.ReadToEnd().ToString();
 
             try {
                 //Open zebra connection
@@ -259,10 +252,10 @@ namespace CKPaint
 
                 //Write label file
                 System.IO.StreamWriter writer = new System.IO.StreamWriter(printer.GetStream());
-                writer.Write(zplToSend);
+                writer.Write(fileContent);
                 writer.Flush();
-                writer.Write(printImage);
-                writer.Flush();
+                
+
 
                 writer.Close();
                 printer.Close();
