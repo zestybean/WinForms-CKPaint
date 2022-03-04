@@ -11,7 +11,7 @@ using System.Configuration;
 
 public static class PrintToZebraHelper
 {
-    public static void PrintToZebra(Label errLbl)
+    public static void PrintToZebra(Label errLbl, CKPaint.SecondarySchedule secondarySchedule_Part)
     {
         string IPADDRESS = "CKBFLEX1LZEBRA";
         int PORT = 9100;
@@ -21,7 +21,12 @@ public static class PrintToZebraHelper
 
         System.IO.StreamReader fileReader = new System.IO.StreamReader(labelPath);
         string fileContent = fileReader.ReadToEnd().ToString();
-        fileContent = fileContent.Replace("@P", "100000");
+        fileContent = fileContent.Replace("@JN", secondarySchedule_Part.JobNumber).Replace("@LS", secondarySchedule_Part.SetNumber)
+            .Replace("@P", secondarySchedule_Part.PartNumber).Replace("@CC", secondarySchedule_Part.ColorCode)
+            .Replace("@DES", secondarySchedule_Part.Description).Replace("@RC", secondarySchedule_Part.RackCode)
+            .Replace("@RP", secondarySchedule_Part.RackPosition).Replace("@BLK", secondarySchedule_Part.PaintBlock)
+            .Replace("@WOID", secondarySchedule_Part.WOID).Replace("@DT", System.DateTime.Now.ToString())
+            .Replace("@REV", "");
         try
         {
             //Open zebra connection

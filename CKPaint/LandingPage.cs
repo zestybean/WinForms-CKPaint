@@ -200,33 +200,56 @@ namespace CKPaint
 
         private void printLabelButton_Click(object sender, EventArgs e)
         {
-            //THIS HAS NO BUFFER AND WILL ALWAYS OCCURR
-            //PRINTING WILL OCCURR HERE!
-            PrintToZebraHelper.PrintToZebra(errLbl);
-
+            //Check textfield for user input
             if (string.IsNullOrEmpty(WOIDTxtBox.Text))
             {
                 errorLabel.Text = "WOID cannot be empty.";
                 return;
             }
 
+            SecondarySchedule SecondarySchedule_Part = new SecondarySchedule();
+
             //Series of sql calls to gather data
             using (SqlConnection sqlConnection = new SqlConnection(connStr))
             {
                 sqlConnection.Open();
 
+                using (SqlCommand sqlCommand = new SqlCommand("spGetPartByWOID", sqlConnection))
+                {
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.Parameters.AddWithValue("@WOID", WOIDTxtBox.Text.ToString());
+                    var sqlReader = sqlCommand.ExecuteReader();
+
+                    sqlReader.Read();
+                    if (sqlReader.HasRows)
+                    {
+                        SecondarySchedule_Part.JobNumber = sqlReader.GetString(1);
+                        SecondarySchedule_Part.SetNumber = sqlReader.GetString(2);
+                        SecondarySchedule_Part.PartNumber = sqlReader.GetString(3);
+                        SecondarySchedule_Part.ColorCode = sqlReader.GetString(5);
+                        SecondarySchedule_Part.Description = sqlReader.GetString(9);
+                        SecondarySchedule_Part.RackCode = sqlReader.GetString(11);
+                        SecondarySchedule_Part.RackPosition = sqlReader.GetString(12);
+                        SecondarySchedule_Part.PaintBlock = sqlReader.GetString(16);
+                        SecondarySchedule_Part.WOID = sqlReader.GetString(17);
+                    }
+
+                    sqlCommand.Dispose();
+                    sqlReader.Close();
+                }
+
+                //THIS HAS NO BUFFER AND WILL ALWAYS OCCURR
+                //PRINTING WILL OCCURR HERE!
+                PrintToZebraHelper.PrintToZebra(errLbl, SecondarySchedule_Part);
+
 
                 //Execute the stored procedure for Parts OnFloor
-                //and update the data grid view
                 using (SqlCommand sqlCommand = new SqlCommand("spSendPartInlineByWOID", sqlConnection))
                 {
                     sqlCommand.CommandType = CommandType.StoredProcedure;
                     sqlCommand.Parameters.AddWithValue("@WOID", WOIDTxtBox.Text.ToString());
                     sqlCommand.ExecuteNonQuery();
-
-
-               
-
+                    sqlCommand.Dispose();
                 }
 
                 //Close connection after table is filled
