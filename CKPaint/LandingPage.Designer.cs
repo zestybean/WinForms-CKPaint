@@ -36,10 +36,11 @@ namespace CKPaint
             this.WOIDTxtBox = new System.Windows.Forms.TextBox();
             this.WOIDLabel = new System.Windows.Forms.Label();
             this.controlPanel = new System.Windows.Forms.Panel();
+            this.errorLabel = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.partsInlineLabel = new System.Windows.Forms.Label();
             this.partsOnFloorLabel = new System.Windows.Forms.Label();
-            this.errorLabel = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.controlPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -124,6 +125,16 @@ namespace CKPaint
             this.controlPanel.Size = new System.Drawing.Size(1315, 51);
             this.controlPanel.TabIndex = 6;
             // 
+            // errorLabel
+            // 
+            this.errorLabel.AutoSize = true;
+            this.errorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errorLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorLabel.Location = new System.Drawing.Point(74, 38);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(0, 13);
+            this.errorLabel.TabIndex = 10;
+            // 
             // dataGridView2
             // 
             this.dataGridView2.AllowUserToAddRows = false;
@@ -158,21 +169,22 @@ namespace CKPaint
             this.partsOnFloorLabel.TabIndex = 9;
             this.partsOnFloorLabel.Text = "PARTS-ONFLOOR";
             // 
-            // errorLabel
+            // button1
             // 
-            this.errorLabel.AutoSize = true;
-            this.errorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.errorLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorLabel.Location = new System.Drawing.Point(74, 38);
-            this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(0, 13);
-            this.errorLabel.TabIndex = 10;
+            this.button1.Location = new System.Drawing.Point(867, 29);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // LandingPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1339, 696);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.partsOnFloorLabel);
             this.Controls.Add(this.partsInlineLabel);
             this.Controls.Add(this.dataGridView2);
@@ -207,6 +219,7 @@ namespace CKPaint
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Label partsOnFloorLabel;
         private System.Windows.Forms.Label errorLabel;
+        private System.Windows.Forms.Button button1;
     }
 }
 

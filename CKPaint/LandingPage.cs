@@ -45,7 +45,6 @@ namespace CKPaint
                 StopSecondaryScheduleTableDependency();
             } catch(Exception err)
             {
-                errLbl.Text = err.ToString();
                 Console.WriteLine(err);
             }
         }
@@ -61,44 +60,53 @@ namespace CKPaint
             //Series of sql calls to gather data
             using (SqlConnection sqlConnection = new SqlConnection(connStr))
             {
-                sqlConnection.Open();
-
-
-                //Execute the stored procedure for Parts OnFloor
-                //and update the data grid view
-                using (SqlCommand sqlCommand = new SqlCommand("spGetOnFloorParts", sqlConnection))
-                {   
-                    sqlCommand.CommandType = CommandType.StoredProcedure;
-
-                    using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
-                    {
-                        sqlDataAdapter.Fill(floorPartsDataSet, "SecondarySchedule");
-                    }
-
-                    ThreadSafe(() => dataGridView1.DataSource = floorPartsDataSet);
-                    ThreadSafe(() => dataGridView1.DataMember = "SecondarySchedule");
-                  
-                }
-
-                //Execute the stored procedure for Parts Inline
-                //and update the data grid view
-                using (SqlCommand sqlCommand = new SqlCommand("spGetInlineParts", sqlConnection))
+                Cursor.Current = Cursors.WaitCursor;
+                try
                 {
-                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlConnection.Open();
 
-                    using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                    //Execute the stored procedure for Parts OnFloor
+                    //and update the data grid view
+                    using (SqlCommand sqlCommand = new SqlCommand("spGetOnFloorParts", sqlConnection))
                     {
-                        sqlDataAdapter.Fill(inlinePartsDataSet, "SecondarySchedule");
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                        using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                        {
+                            sqlDataAdapter.Fill(floorPartsDataSet, "SecondarySchedule");
+                        }
+
+                        ThreadSafe(() => dataGridView1.DataSource = floorPartsDataSet);
+                        ThreadSafe(() => dataGridView1.DataMember = "SecondarySchedule");
+
                     }
 
-                    ThreadSafe(() => dataGridView2.DataSource = inlinePartsDataSet);
-                    ThreadSafe(() => dataGridView2.DataMember = "SecondarySchedule");
+                    //Execute the stored procedure for Parts Inline
+                    //and update the data grid view
+                    using (SqlCommand sqlCommand = new SqlCommand("spGetInlineParts", sqlConnection))
+                    {
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
 
+                        using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                        {
+                            sqlDataAdapter.Fill(inlinePartsDataSet, "SecondarySchedule");
+                        }
+
+                        ThreadSafe(() => dataGridView2.DataSource = inlinePartsDataSet);
+                        ThreadSafe(() => dataGridView2.DataMember = "SecondarySchedule");
+
+                    }
+
+
+                    //Close connection after table is filled
+                    sqlConnection.Close();
+                    
+                } catch(Exception err)
+                {
+                    title.BackColor = Color.Red;
+                    Console.WriteLine(err);
                 }
-
-
-                //Close connection after table is filled
-                sqlConnection.Close();
+                Cursor.Current = Cursors.Default;
             }
         }
 
@@ -154,7 +162,6 @@ namespace CKPaint
                 }
             } catch(Exception err)
             {
-                errLbl.Text = err.ToString();
                 Console.WriteLine(err);
             }
             return false;
@@ -162,7 +169,6 @@ namespace CKPaint
 
         private void SecondaryScheduleTableDependency_OnError(object sender, ErrorEventArgs err)
         {
-            errLbl.Text = err.ToString();
             Console.WriteLine(err.Error.Message);
         }
 
@@ -193,7 +199,6 @@ namespace CKPaint
 
             } catch (Exception err)
             {
-                errLbl.Text = err.ToString();
                 Console.WriteLine(err);
             }
         }
@@ -212,48 +217,66 @@ namespace CKPaint
             //Series of sql calls to gather data
             using (SqlConnection sqlConnection = new SqlConnection(connStr))
             {
-                sqlConnection.Open();
 
-                using (SqlCommand sqlCommand = new SqlCommand("spGetPartByWOID", sqlConnection))
+                Cursor.Current = Cursors.WaitCursor;
+                try
                 {
-                    sqlCommand.CommandType = CommandType.StoredProcedure;
-                    sqlCommand.Parameters.AddWithValue("@WOID", WOIDTxtBox.Text.ToString());
-                    var sqlReader = sqlCommand.ExecuteReader();
-
-                    sqlReader.Read();
-                    if (sqlReader.HasRows)
+                    sqlConnection.Open();
+                    using (SqlCommand sqlCommand = new SqlCommand("spGetPartByWOIDNotInline", sqlConnection))
                     {
-                        SecondarySchedule_Part.JobNumber = sqlReader.GetString(1);
-                        SecondarySchedule_Part.SetNumber = sqlReader.GetString(2);
-                        SecondarySchedule_Part.PartNumber = sqlReader.GetString(3);
-                        SecondarySchedule_Part.ColorCode = sqlReader.GetString(5);
-                        SecondarySchedule_Part.Description = sqlReader.GetString(9);
-                        SecondarySchedule_Part.RackCode = sqlReader.GetString(11);
-                        SecondarySchedule_Part.RackPosition = sqlReader.GetString(12);
-                        SecondarySchedule_Part.PaintBlock = sqlReader.GetString(16);
-                        SecondarySchedule_Part.WOID = sqlReader.GetString(17);
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
+                        sqlCommand.Parameters.AddWithValue("@WOID", WOIDTxtBox.Text.ToString());
+                        var sqlReader = sqlCommand.ExecuteReader();
+
+                        sqlReader.Read();
+                        if (sqlReader.HasRows)
+                        {
+                            SecondarySchedule_Part.JobNumber = sqlReader.GetString(1);
+                            SecondarySchedule_Part.SetNumber = sqlReader.GetString(2);
+                            SecondarySchedule_Part.PartNumber = sqlReader.GetString(3);
+                            SecondarySchedule_Part.ColorCode = sqlReader.GetString(5);
+                            SecondarySchedule_Part.Description = sqlReader.GetString(9);
+                            SecondarySchedule_Part.RackCode = sqlReader.GetString(11);
+                            SecondarySchedule_Part.RackPosition = sqlReader.GetString(12);
+                            SecondarySchedule_Part.PaintBlock = sqlReader.GetString(16);
+                            SecondarySchedule_Part.WOID = sqlReader.GetString(17);
+
+                            
+                            //PRINTING WILL OCCURR HERE!
+                            PrintToZebraHelper.PrintToZebra(errLbl, SecondarySchedule_Part);
+                        }
+                        else
+                        {
+                            errLbl.Text = "Part does not exist or is inline!";
+                        }
+
+                        sqlCommand.Dispose();
+                        sqlReader.Close();
                     }
 
-                    sqlCommand.Dispose();
-                    sqlReader.Close();
+                    
+
+
+                    //Execute the stored procedure for Parts OnFloor
+                    using (SqlCommand sqlCommand = new SqlCommand("spSendPartInlineByWOID", sqlConnection))
+                    {
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
+                        sqlCommand.Parameters.AddWithValue("@WOID", WOIDTxtBox.Text.ToString());
+                        sqlCommand.ExecuteNonQuery();
+                        sqlCommand.Dispose();
+                    }
+
+                    //Close connection after table is filled
+                    sqlConnection.Close();
+                    
                 }
-
-                //THIS HAS NO BUFFER AND WILL ALWAYS OCCURR
-                //PRINTING WILL OCCURR HERE!
-                PrintToZebraHelper.PrintToZebra(errLbl, SecondarySchedule_Part);
-
-
-                //Execute the stored procedure for Parts OnFloor
-                using (SqlCommand sqlCommand = new SqlCommand("spSendPartInlineByWOID", sqlConnection))
+                catch(Exception err)
                 {
-                    sqlCommand.CommandType = CommandType.StoredProcedure;
-                    sqlCommand.Parameters.AddWithValue("@WOID", WOIDTxtBox.Text.ToString());
-                    sqlCommand.ExecuteNonQuery();
-                    sqlCommand.Dispose();
+                    Console.WriteLine(err);
                 }
 
-                //Close connection after table is filled
-                sqlConnection.Close();
+                Cursor.Current = Cursors.Default;
+
             }
         }
 
@@ -261,6 +284,12 @@ namespace CKPaint
         private void WOIDTxtBox_TextChanged(object sender, EventArgs e)
         {
             errorLabel.Text = "";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            RefreshTable();
+            StartSecondaryScheduleTableDependency();
         }
     }
 }
