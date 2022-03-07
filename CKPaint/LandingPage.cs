@@ -26,7 +26,6 @@ namespace CKPaint
         public LandingPage()
         {
             InitializeComponent();
-           
         }
 
         private void LandingPage_Load(object sender, EventArgs e)
@@ -45,6 +44,7 @@ namespace CKPaint
                 StopSecondaryScheduleTableDependency();
             } catch(Exception err)
             {
+                MessageBox.Show(err.Message, "Form Closing Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(err);
             }
         }
@@ -103,7 +103,7 @@ namespace CKPaint
                     
                 } catch(Exception err)
                 {
-                    title.BackColor = Color.Red;
+                    MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Console.WriteLine(err);
                 }
                 Cursor.Current = Cursors.Default;
@@ -121,10 +121,10 @@ namespace CKPaint
                 {
                     method();
                 }
-            } catch (ObjectDisposedException e)
+            } catch (ObjectDisposedException err)
             {
-                errLbl.Text = e.ToString();
-                Console.WriteLine(e);
+                MessageBox.Show(err.Message, "Tread Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine(err);
             }
         }
       
@@ -144,7 +144,9 @@ namespace CKPaint
             }
             catch(Exception err)
             {
-                errLbl.Text = err.ToString();
+                
+                MessageBox.Show("Error setting up the table dependency please check the network and contact the shift supervisor.", 
+                    "Secondary Dependency Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(err);
             }
 
@@ -162,6 +164,7 @@ namespace CKPaint
                 }
             } catch(Exception err)
             {
+                MessageBox.Show(err.Message, "Stop Secondary Dependency Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(err);
             }
             return false;
@@ -169,6 +172,7 @@ namespace CKPaint
 
         private void SecondaryScheduleTableDependency_OnError(object sender, ErrorEventArgs err)
         {
+            MessageBox.Show(err.Message, "Secondary Dependency OnError", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Console.WriteLine(err.Error.Message);
         }
 
@@ -199,6 +203,7 @@ namespace CKPaint
 
             } catch (Exception err)
             {
+                MessageBox.Show(err.Message, "Secondary Dependency OnChange", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(err);
             }
         }
@@ -222,7 +227,7 @@ namespace CKPaint
                 try
                 {
                     sqlConnection.Open();
-                    using (SqlCommand sqlCommand = new SqlCommand("spGetPartByWOIDNotInline", sqlConnection))
+                    using (SqlCommand sqlCommand = new SqlCommand("spGetPartAndUpdateToInline", sqlConnection))
                     {
                         sqlCommand.CommandType = CommandType.StoredProcedure;
                         sqlCommand.Parameters.AddWithValue("@WOID", WOIDTxtBox.Text.ToString());
@@ -243,7 +248,7 @@ namespace CKPaint
 
                             
                             //PRINTING WILL OCCURR HERE!
-                            PrintToZebraHelper.PrintToZebra(errLbl, SecondarySchedule_Part);
+                            PrintToZebraHelper.PrintToZebra(SecondarySchedule_Part);
                         }
                         else
                         {
@@ -254,24 +259,10 @@ namespace CKPaint
                         sqlReader.Close();
                     }
 
-                    
-
-
-                    //Execute the stored procedure for Parts OnFloor
-                    using (SqlCommand sqlCommand = new SqlCommand("spSendPartInlineByWOID", sqlConnection))
-                    {
-                        sqlCommand.CommandType = CommandType.StoredProcedure;
-                        sqlCommand.Parameters.AddWithValue("@WOID", WOIDTxtBox.Text.ToString());
-                        sqlCommand.ExecuteNonQuery();
-                        sqlCommand.Dispose();
-                    }
-
-                    //Close connection after table is filled
-                    sqlConnection.Close();
-                    
                 }
                 catch(Exception err)
                 {
+                    MessageBox.Show(err.Message, "Print Label OnClick Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Console.WriteLine(err);
                 }
 

@@ -11,16 +11,16 @@ using System.Configuration;
 
 public static class PrintToZebraHelper
 {
-    public static void PrintToZebra(Label errLbl, CKPaint.SecondarySchedule secondarySchedule_Part)
+    public static void PrintToZebra(CKPaint.SecondarySchedule secondarySchedule_Part)
     {
         string IPADDRESS = "CKBFLEX1LZEBRA";
         int PORT = 9100;
 
         string labelPath = @"\\hail\Manufacturing Engineering\Secondary Equipment\CK_Supervisor\Label Formats\ILVS Navistar.txt";
 
-
         System.IO.StreamReader fileReader = new System.IO.StreamReader(labelPath);
         string fileContent = fileReader.ReadToEnd().ToString();
+        
         fileContent = fileContent.Replace("@JN", secondarySchedule_Part.JobNumber).Replace("@LS", secondarySchedule_Part.SetNumber)
             .Replace("@P", secondarySchedule_Part.PartNumber).Replace("@CC", secondarySchedule_Part.ColorCode)
             .Replace("@DES", secondarySchedule_Part.Description).Replace("@RC", secondarySchedule_Part.RackCode)
@@ -42,12 +42,10 @@ public static class PrintToZebraHelper
 
             writer.Close();
             printer.Close();
-
-            errLbl.Text = "Print Success!";
         }
         catch (Exception err)
         {
-            errLbl.Text = err.ToString();
+            MessageBox.Show(err.ToString(), "Print Label OnClick Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Console.WriteLine(err);
 
 
