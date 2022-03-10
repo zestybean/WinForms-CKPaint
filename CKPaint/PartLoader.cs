@@ -15,15 +15,16 @@ using TableDependency.SqlClient.Base.Enums;
 
 namespace CKPaint
 {
-    public partial class LandingPage : Form
+    public partial class PartLoader : Form
     {
         //This connection string is called from App.config file, alternatively it could also be hardcoded into this string var.
-        string connStr = ConfigurationManager.ConnectionStrings["PBET"].ConnectionString;
+        string connStr_PBET = ConfigurationManager.ConnectionStrings["PBET"].ConnectionString;
+        //string connStr_MODS = ConfigurationManager.ConnectionStrings["MODS"].ConnectionString;
 
         //Sql Dependency Object
         public SqlTableDependency<SecondarySchedule> secondaryScheduleDependency;
 
-        public LandingPage()
+        public PartLoader()
         {
             InitializeComponent();
         }
@@ -58,7 +59,7 @@ namespace CKPaint
             DataSet inlinePartsDataSet = new DataSet();
 
             //Series of sql calls to gather data
-            using (SqlConnection sqlConnection = new SqlConnection(connStr))
+            using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
             {
                 Cursor.Current = Cursors.WaitCursor;
                 try
@@ -136,7 +137,7 @@ namespace CKPaint
                 //Init the sql dependency using the connection string
                 //after, point to the functions handling the onchanged and 
                 //error functions
-                secondaryScheduleDependency = new SqlTableDependency<SecondarySchedule>(connStr);
+                secondaryScheduleDependency = new SqlTableDependency<SecondarySchedule>(connStr_PBET);
                 secondaryScheduleDependency.OnChanged += SecondaryScheduleTableDependency_OnChange;
                 secondaryScheduleDependency.OnError += SecondaryScheduleTableDependency_OnError;
                 secondaryScheduleDependency.Start();
@@ -220,7 +221,7 @@ namespace CKPaint
             SecondarySchedule SecondarySchedule_Part = new SecondarySchedule();
 
             //Series of sql calls to gather data
-            using (SqlConnection sqlConnection = new SqlConnection(connStr))
+            using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
             {
 
                 Cursor.Current = Cursors.WaitCursor;
@@ -281,6 +282,21 @@ namespace CKPaint
         {
             RefreshTable();
             StartSecondaryScheduleTableDependency();
+        }
+
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            foreach(DataGridViewRow row in dataGridView1.Rows)
+            {
+                if(Convert.ToInt32(row.Cells[22].Value) == 1)
+                {
+                    row.DefaultCellStyle.BackColor = Color.Yellow;
+                }
+                else
+                {
+                    row.DefaultCellStyle.BackColor = Color.White;
+                }
+            }
         }
     }
 }

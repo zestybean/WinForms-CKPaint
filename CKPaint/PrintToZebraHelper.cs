@@ -45,7 +45,7 @@ public static class PrintToZebraHelper
         }
         catch (Exception err)
         {
-            MessageBox.Show(err.ToString(), "Print Label OnClick Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(err.Message, "Print Label OnClick Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Console.WriteLine(err);
 
 

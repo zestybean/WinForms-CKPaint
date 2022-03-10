@@ -1,7 +1,7 @@
 ﻿
 namespace CKPaint
 {
-    partial class LandingPage
+    partial class PartLoader
     {
         /// <summary>
         /// Required designer variable.
@@ -40,7 +40,7 @@ namespace CKPaint
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.partsInlineLabel = new System.Windows.Forms.Label();
             this.partsOnFloorLabel = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.refreshBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.controlPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -59,6 +59,7 @@ namespace CKPaint
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1315, 264);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
             // 
             // title
             // 
@@ -169,22 +170,23 @@ namespace CKPaint
             this.partsOnFloorLabel.TabIndex = 9;
             this.partsOnFloorLabel.Text = "PARTS-ONFLOOR";
             // 
-            // button1
+            // refreshBtn
             // 
-            this.button1.Location = new System.Drawing.Point(867, 29);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.refreshBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.refreshBtn.Location = new System.Drawing.Point(1162, 12);
+            this.refreshBtn.Name = "refreshBtn";
+            this.refreshBtn.Size = new System.Drawing.Size(165, 23);
+            this.refreshBtn.TabIndex = 10;
+            this.refreshBtn.Text = "Refresh Connection";
+            this.refreshBtn.UseVisualStyleBackColor = true;
+            this.refreshBtn.Click += new System.EventHandler(this.button1_Click);
             // 
             // LandingPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1339, 696);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.refreshBtn);
             this.Controls.Add(this.partsOnFloorLabel);
             this.Controls.Add(this.partsInlineLabel);
             this.Controls.Add(this.dataGridView2);
@@ -219,7 +221,7 @@ namespace CKPaint
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Label partsOnFloorLabel;
         private System.Windows.Forms.Label errorLabel;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button refreshBtn;
     }
 }
 

@@ -23,7 +23,7 @@ namespace CKPaint
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LandingPage());
+            Application.Run(new PartLoader());
 
             GC.KeepAlive(mutex);
         }
