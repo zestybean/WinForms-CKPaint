@@ -69,7 +69,7 @@ namespace CKPaint
             this.title.Name = "title";
             this.title.Size = new System.Drawing.Size(1339, 25);
             this.title.TabIndex = 1;
-            this.title.Text = "CK PAINT - SCHEDULE";
+            this.title.Text = "CK PAINT - PART LOADER";
             this.title.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // errLbl
@@ -181,7 +181,7 @@ namespace CKPaint
             this.refreshBtn.UseVisualStyleBackColor = true;
             this.refreshBtn.Click += new System.EventHandler(this.button1_Click);
             // 
-            // LandingPage
+            // PartLoader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -194,7 +194,7 @@ namespace CKPaint
             this.Controls.Add(this.errLbl);
             this.Controls.Add(this.title);
             this.Controls.Add(this.dataGridView1);
-            this.Name = "LandingPage";
+            this.Name = "PartLoader";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CK-Paint";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LandingPage_FormClosing);

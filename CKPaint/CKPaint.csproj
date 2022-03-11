@@ -62,10 +62,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Home.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Home.Designer.cs">
+      <DependentUpon>Home.cs</DependentUpon>
+    </Compile>
     <Compile Include="PartLoader.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LandingPage.Designer.cs">
+    <Compile Include="PartLoader.Designer.cs">
       <DependentUpon>PartLoader.cs</DependentUpon>
     </Compile>
     <Compile Include="PartDisposition.cs">
@@ -78,7 +84,13 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecondarySchedule.cs" />
-    <EmbeddedResource Include="LandingPage.resx">
+    <EmbeddedResource Include="Home.resx">
+      <DependentUpon>Home.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PartDisposition.resx">
+      <DependentUpon>PartDisposition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PartLoader.resx">
       <DependentUpon>PartLoader.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

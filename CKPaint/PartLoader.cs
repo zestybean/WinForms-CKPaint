@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Data.SqlClient;
 using System.Configuration;
-
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 using TableDependency.SqlClient;
-using TableDependency.SqlClient.Base.EventArgs;
 using TableDependency.SqlClient.Base.Enums;
+using TableDependency.SqlClient.Base.EventArgs;
 
 namespace CKPaint
 {
@@ -38,12 +33,13 @@ namespace CKPaint
         }
 
         private void LandingPage_FormClosing(object sender, FormClosingEventArgs e)
-        {   
+        {
             //Stop the dependency when applications is closing
             try
             {
                 StopSecondaryScheduleTableDependency();
-            } catch(Exception err)
+            }
+            catch (Exception err)
             {
                 MessageBox.Show(err.Message, "Form Closing Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(err);
@@ -101,8 +97,9 @@ namespace CKPaint
 
                     //Close connection after table is filled
                     sqlConnection.Close();
-                    
-                } catch(Exception err)
+
+                }
+                catch (Exception err)
                 {
                     MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Console.WriteLine(err);
@@ -118,17 +115,19 @@ namespace CKPaint
                 if (InvokeRequired)
                 {
                     Invoke(method);
-                }else
+                }
+                else
                 {
                     method();
                 }
-            } catch (ObjectDisposedException err)
+            }
+            catch (ObjectDisposedException err)
             {
                 MessageBox.Show(err.Message, "Tread Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(err);
             }
         }
-      
+
 
         private bool StartSecondaryScheduleTableDependency()
         {
@@ -143,10 +142,10 @@ namespace CKPaint
                 secondaryScheduleDependency.Start();
                 return true;
             }
-            catch(Exception err)
+            catch (Exception err)
             {
-                
-                MessageBox.Show("Error setting up the table dependency please check the network and contact the shift supervisor.", 
+
+                MessageBox.Show("Error setting up the table dependency please check the network and contact the shift supervisor.",
                     "Secondary Dependency Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(err);
             }
@@ -158,12 +157,13 @@ namespace CKPaint
         {
             try
             {
-                if(secondaryScheduleDependency != null)
+                if (secondaryScheduleDependency != null)
                 {
                     secondaryScheduleDependency.Stop();
                     return true;
                 }
-            } catch(Exception err)
+            }
+            catch (Exception err)
             {
                 MessageBox.Show(err.Message, "Stop Secondary Dependency Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(err);
@@ -202,7 +202,8 @@ namespace CKPaint
                         break;
                 }
 
-            } catch (Exception err)
+            }
+            catch (Exception err)
             {
                 MessageBox.Show(err.Message, "Secondary Dependency OnChange", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(err);
@@ -247,7 +248,7 @@ namespace CKPaint
                             SecondarySchedule_Part.PaintBlock = sqlReader.GetString(16);
                             SecondarySchedule_Part.WOID = sqlReader.GetString(17);
 
-                            
+
                             //PRINTING WILL OCCURR HERE!
                             PrintToZebraHelper.PrintToZebra(SecondarySchedule_Part);
                         }
@@ -261,7 +262,7 @@ namespace CKPaint
                     }
 
                 }
-                catch(Exception err)
+                catch (Exception err)
                 {
                     MessageBox.Show(err.Message, "Print Label OnClick Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Console.WriteLine(err);
@@ -272,7 +273,7 @@ namespace CKPaint
             }
         }
 
-        
+
         private void WOIDTxtBox_TextChanged(object sender, EventArgs e)
         {
             errorLabel.Text = "";
@@ -286,9 +287,9 @@ namespace CKPaint
 
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            foreach(DataGridViewRow row in dataGridView1.Rows)
+            foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                if(Convert.ToInt32(row.Cells[22].Value) == 1)
+                if (Convert.ToInt32(row.Cells[22].Value) == 1)
                 {
                     row.DefaultCellStyle.BackColor = Color.Yellow;
                 }
