@@ -68,6 +68,7 @@
     <Compile Include="Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
+    <Compile Include="PartDispositionHistory.cs" />
     <Compile Include="PartLoader.cs">
       <SubType>Form</SubType>
     </Compile>

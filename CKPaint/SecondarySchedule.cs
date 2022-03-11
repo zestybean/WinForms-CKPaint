@@ -32,6 +32,7 @@ namespace CKPaint
         public DateTime ImportDate { get; set; }
         public Int16 PartInline { get; set; }
         public Int16 PartRework { get; set; }
+        public Int16 PartDisposed { get; set; }
 
     }
 }
