@@ -287,17 +287,21 @@ namespace CKPaint
 
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                if (Convert.ToInt32(row.Cells[22].Value) == 1)
-                {
-                    row.DefaultCellStyle.BackColor = Color.Yellow;
-                }
-                else
-                {
-                    row.DefaultCellStyle.BackColor = Color.White;
-                }
-            }
+            //foreach (DataGridViewRow row in dataGridView1.Rows)
+            //{
+            //    if (row.Cells[22].Value != System.DBNull.Value)
+            //    {
+            //        if (Convert.ToInt32(row.Cells[22].Value) == 1)
+            //        {
+            //            row.DefaultCellStyle.BackColor = Color.Yellow;
+            //        }
+            //        else
+            //        {
+            //            row.DefaultCellStyle.BackColor = Color.White;
+            //        }
+            //    }
+               
+            //}
         }
     }
 }
