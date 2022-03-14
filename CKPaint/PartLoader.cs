@@ -16,6 +16,12 @@ namespace CKPaint
         string connStr_PBET = ConfigurationManager.ConnectionStrings["PBET"].ConnectionString;
         //string connStr_MODS = ConfigurationManager.ConnectionStrings["MODS"].ConnectionString;
 
+        //This function fills the datagridview from the current data in the
+        //db, because the table is using SQL dependency multi-threading needs
+        //to be called in order to properly execute commands
+        DataSet floorPartsDataSet = new DataSet();
+        DataSet inlinePartsDataSet = new DataSet();
+
         //Sql Dependency Object
         public SqlTableDependency<SecondarySchedule> secondaryScheduleDependency;
 
@@ -48,11 +54,7 @@ namespace CKPaint
 
         void RefreshTable()
         {
-            //This function fills the datagridview from the current data in the
-            //db, because the table is using SQL dependency multi-threading needs
-            //to be called in order to properly execute commands
-            DataSet floorPartsDataSet = new DataSet();
-            DataSet inlinePartsDataSet = new DataSet();
+            
 
             //Series of sql calls to gather data
             using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
@@ -302,6 +304,43 @@ namespace CKPaint
             //    }
                
             //}
+        }
+
+        private void SearchTxtBox_TextChanged(object sender, EventArgs e)
+        {
+            filterDataGrid();
+        }
+
+        private void searchWOIDRb_CheckedChanged(object sender, EventArgs e)
+        {
+            SearchTxtBox.Clear();
+        }
+
+        private void searchJobNumRb_CheckedChanged(object sender, EventArgs e)
+        {
+            SearchTxtBox.Clear();
+        }
+
+        private void clearSearchButton_Click(object sender, EventArgs e)
+        {
+            SearchTxtBox.Clear();
+        }
+
+        private void filterDataGrid()
+        {
+            if (searchWOIDRb.Checked)
+            {
+                DataView dv = floorPartsDataSet.Tables[0].DefaultView;
+                dv.RowFilter = string.Format("WOID LIKE '{0}'", SearchTxtBox.Text);
+                dataGridView1.DataSource = dv;
+            }
+
+            if (searchJobNumRb.Checked)
+            {
+                DataView dv = floorPartsDataSet.Tables[0].DefaultView;
+                dv.RowFilter = string.Format("JobNumber LIKE '{0}'", SearchTxtBox.Text);
+                dataGridView1.DataSource = dv;
+            }
         }
     }
 }
