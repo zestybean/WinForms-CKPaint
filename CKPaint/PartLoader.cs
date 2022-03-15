@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 using TableDependency.SqlClient;
 using TableDependency.SqlClient.Base.Enums;
@@ -19,8 +20,7 @@ namespace CKPaint
         //This function fills the datagridview from the current data in the
         //db, because the table is using SQL dependency multi-threading needs
         //to be called in order to properly execute commands
-        DataSet floorPartsDataSet = new DataSet();
-        DataSet inlinePartsDataSet = new DataSet();
+        
 
         //Sql Dependency Object
         public SqlTableDependency<SecondarySchedule> secondaryScheduleDependency;
@@ -34,8 +34,41 @@ namespace CKPaint
         {
             //On the start of the program fill the table up from the DB
             //and initialiaze the SQL dependecy functions
+           
             RefreshTable();
             StartSecondaryScheduleTableDependency();
+            AdjustColumnOrder(dataGridView1);
+            AdjustColumnOrder(dataGridView2);
+        }
+
+        private void AdjustColumnOrder(DataGridView dv)
+        {
+            //Rearrange data grid view columns columns
+            
+            dv.Columns["WOID"].DisplayIndex = 0;
+            dv.Columns["WOIDRH"].DisplayIndex = 1;
+            dv.Columns["JobNumber"].DisplayIndex = 2;
+            dv.Columns["PartNumber"].DisplayIndex = 3;
+            dv.Columns["PartNumberRH"].DisplayIndex = 4;
+            dv.Columns["ColorCode"].DisplayIndex = 5;
+            dv.Columns["SetNumber"].DisplayIndex = 6;
+            dv.Columns["PartInline"].DisplayIndex = 7;
+            dv.Columns["PartRework"].DisplayIndex = 8;
+            dv.Columns["PartDisposed"].DisplayIndex = 9;
+
+            //Ignore these
+            dv.Columns["ScheduleID"].Visible = false;
+            dv.Columns["Primer"].Visible = false;
+            dv.Columns["ProductType"].Visible = false;
+            dv.Columns["ProductPlatform"].Visible = false;
+            dv.Columns["Description"].Visible = false;
+            dv.Columns["DescriptionRH"].Visible = false;
+            dv.Columns["RackPosition"].Visible = false;
+            dv.Columns["RackPositionRH"].Visible = false;
+            dv.Columns["AssembleDate"].Visible = false;
+            dv.Columns["PaintBlock"].Visible = false;
+            dv.Columns["ShipDate"].Visible = false;
+            dv.Columns["ImportDate"].Visible = false;
         }
 
         private void LandingPage_FormClosing(object sender, FormClosingEventArgs e)
@@ -52,9 +85,10 @@ namespace CKPaint
             }
         }
 
-        void RefreshTable()
+        DataSet RefreshTable()
         {
-            
+            DataSet floorPartsDataSet = new DataSet();
+            DataSet inlinePartsDataSet = new DataSet();
 
             //Series of sql calls to gather data
             using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
@@ -72,11 +106,11 @@ namespace CKPaint
 
                         using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
                         {
-                            sqlDataAdapter.Fill(floorPartsDataSet, "SecondarySchedule");
+                            sqlDataAdapter.Fill(floorPartsDataSet, "SecondaryScheduleFloorParts");
                         }
 
                         ThreadSafe(() => dataGridView1.DataSource = floorPartsDataSet);
-                        ThreadSafe(() => dataGridView1.DataMember = "SecondarySchedule");
+                        ThreadSafe(() => dataGridView1.DataMember = "SecondaryScheduleFloorParts");
 
                     }
 
@@ -88,11 +122,11 @@ namespace CKPaint
 
                         using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
                         {
-                            sqlDataAdapter.Fill(inlinePartsDataSet, "SecondarySchedule");
+                            sqlDataAdapter.Fill(inlinePartsDataSet, "SecondaryScheduleInlineParts");
                         }
 
                         ThreadSafe(() => dataGridView2.DataSource = inlinePartsDataSet);
-                        ThreadSafe(() => dataGridView2.DataMember = "SecondarySchedule");
+                        ThreadSafe(() => dataGridView2.DataMember = "SecondaryScheduleInlineParts");
 
                     }
 
@@ -107,7 +141,11 @@ namespace CKPaint
                     Console.WriteLine(err);
                 }
                 Cursor.Current = Cursors.Default;
+                
             }
+
+            
+            return floorPartsDataSet;
         }
 
         public void ThreadSafe(MethodInvoker method)
@@ -125,7 +163,7 @@ namespace CKPaint
             }
             catch (ObjectDisposedException err)
             {
-                MessageBox.Show(err.Message, "Tread Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(err.Message, "Thread Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(err);
             }
         }
@@ -190,11 +228,13 @@ namespace CKPaint
                     case ChangeType.Insert:
                         {
                             RefreshTable();
+                            
                         }
                         break;
                     case ChangeType.Update:
                         {
                             RefreshTable();
+
                         }
                         break;
                     case ChangeType.Delete:
@@ -202,6 +242,7 @@ namespace CKPaint
                             RefreshTable();
                         }
                         break;
+                    
                 }
 
             }
@@ -252,11 +293,11 @@ namespace CKPaint
 
 
                             //PRINTING WILL OCCURR HERE!
-                            PrintToZebraHelper.PrintToZebra(SecondarySchedule_Part);
+                            //PrintToZebraHelper.PrintToZebra(SecondarySchedule_Part);
                         }
                         else
                         {
-                            errLbl.Text = "Part does not exist or is inline!";
+                            debugLabel.Text = "Part does not exist or is inline!";
                         }
 
                         sqlCommand.Dispose();
@@ -271,7 +312,7 @@ namespace CKPaint
                 }
 
                 Cursor.Current = Cursors.Default;
-
+                WOIDTxtBox.Clear();
             }
         }
 
@@ -302,12 +343,14 @@ namespace CKPaint
             //            row.DefaultCellStyle.BackColor = Color.White;
             //        }
             //    }
-               
+
             //}
+            
         }
 
         private void SearchTxtBox_TextChanged(object sender, EventArgs e)
         {
+
             filterDataGrid();
         }
 
@@ -323,24 +366,98 @@ namespace CKPaint
 
         private void clearSearchButton_Click(object sender, EventArgs e)
         {
-            SearchTxtBox.Clear();
+            Console.WriteLine(SearchTxtBox.Text);
+           (dataGridView1.DataSource as DataSet).Tables[0].DefaultView.RowFilter = string.Format("JobNumber LIKE '{0}'", "JobNumber", SearchTxtBox.Text);
+           /////FIX THISSSSSSS
+            
         }
 
         private void filterDataGrid()
         {
-            if (searchWOIDRb.Checked)
-            {
-                DataView dv = floorPartsDataSet.Tables[0].DefaultView;
-                dv.RowFilter = string.Format("WOID LIKE '{0}'", SearchTxtBox.Text);
-                dataGridView1.DataSource = dv;
-            }
+            
 
-            if (searchJobNumRb.Checked)
+            
+            //if (searchWOIDRb.Checked)
+            //{
+            //    DataView dv = floorPartsDataSet.Tables[0].DefaultView;
+            //    dv.RowFilter = string.Format("[{0}] LIKE '%{1}%'", "WOID", SearchTxtBox.Text);
+
+            //    dataGridView1.DataSource = dv;
+
+
+            //}
+
+            //if (searchJobNumRb.Checked)
+            //{
+            //    DataView dv = floorPartsDataSet.Tables[0].DefaultView;
+            //    dv.RowFilter = string.Format("[{0}] LIKE '%{1}%'", "JobNumber", SearchTxtBox.Text);
+            //    dataGridView1.DataSource = dv;
+
+            //}
+        }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //LOAD DOUBLE CLICK
+            string arg = dataGridView1.Rows[e.RowIndex].Cells[17].Value.ToString();
+
+            Console.WriteLine(arg);
+            debugLabel.Text = arg;
+
+            SecondarySchedule SecondarySchedule_Part = new SecondarySchedule();
+
+            //Series of sql calls to gather data
+            using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
             {
-                DataView dv = floorPartsDataSet.Tables[0].DefaultView;
-                dv.RowFilter = string.Format("JobNumber LIKE '{0}'", SearchTxtBox.Text);
-                dataGridView1.DataSource = dv;
+
+                Cursor.Current = Cursors.WaitCursor;
+                try
+                {
+                    sqlConnection.Open();
+                    using (SqlCommand sqlCommand = new SqlCommand("spGetPartAndUpdateToInline", sqlConnection))
+                    {
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
+                        sqlCommand.Parameters.AddWithValue("@WOID", arg);
+                        var sqlReader = sqlCommand.ExecuteReader();
+
+                        sqlReader.Read();
+                        if (sqlReader.HasRows)
+                        {
+                            SecondarySchedule_Part.JobNumber = sqlReader.GetString(1);
+                            SecondarySchedule_Part.SetNumber = sqlReader.GetString(2);
+                            SecondarySchedule_Part.PartNumber = sqlReader.GetString(3);
+                            SecondarySchedule_Part.ColorCode = sqlReader.GetString(5);
+                            SecondarySchedule_Part.Description = sqlReader.GetString(9);
+                            SecondarySchedule_Part.RackCode = sqlReader.GetString(11);
+                            SecondarySchedule_Part.RackPosition = sqlReader.GetString(12);
+                            SecondarySchedule_Part.PaintBlock = sqlReader.GetString(16);
+                            SecondarySchedule_Part.WOID = sqlReader.GetString(17);
+
+
+                            //PRINTING WILL OCCURR HERE!
+                            PrintToZebraHelper.PrintToZebra(SecondarySchedule_Part);
+                          
+                        }
+                        else
+                        {
+                            debugLabel.Text = "Part does not exist or is inline!";
+                        }
+
+                        sqlCommand.Dispose();
+                        sqlReader.Close();
+                    }
+
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message, "Print Label OnClick Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Console.WriteLine(err);
+                }
+
+                Cursor.Current = Cursors.Default;
+                
             }
+            
         }
     }
 }

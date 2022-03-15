@@ -31,7 +31,7 @@ namespace CKPaint
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.title = new System.Windows.Forms.Label();
-            this.errLbl = new System.Windows.Forms.Label();
+            this.debugLabel = new System.Windows.Forms.Label();
             this.printLabelButton = new System.Windows.Forms.Button();
             this.WOIDTxtBox = new System.Windows.Forms.TextBox();
             this.WOIDLabel = new System.Windows.Forms.Label();
@@ -43,13 +43,15 @@ namespace CKPaint
             this.refreshBtn = new System.Windows.Forms.Button();
             this.SearchTxtBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.searchWOIDRb = new System.Windows.Forms.RadioButton();
             this.searchJobNumRb = new System.Windows.Forms.RadioButton();
+            this.searchWOIDRb = new System.Windows.Forms.RadioButton();
             this.clearSearchButton = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.controlPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -65,12 +67,15 @@ namespace CKPaint
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1315, 355);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
             // 
             // title
             // 
+            this.title.BackColor = System.Drawing.SystemColors.HotTrack;
             this.title.Dock = System.Windows.Forms.DockStyle.Top;
             this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.title.ForeColor = System.Drawing.Color.White;
             this.title.Location = new System.Drawing.Point(0, 0);
             this.title.Name = "title";
             this.title.Size = new System.Drawing.Size(1339, 25);
@@ -78,31 +83,34 @@ namespace CKPaint
             this.title.Text = "CK PAINT - PART LOADER";
             this.title.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // errLbl
+            // debugLabel
             // 
-            this.errLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.errLbl.AutoSize = true;
-            this.errLbl.Location = new System.Drawing.Point(9, 839);
-            this.errLbl.Name = "errLbl";
-            this.errLbl.Size = new System.Drawing.Size(57, 13);
-            this.errLbl.TabIndex = 2;
-            this.errLbl.Text = "Debugger:";
+            this.debugLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.debugLabel.AutoSize = true;
+            this.debugLabel.ForeColor = System.Drawing.Color.White;
+            this.debugLabel.Location = new System.Drawing.Point(5, 0);
+            this.debugLabel.Name = "debugLabel";
+            this.debugLabel.Size = new System.Drawing.Size(57, 13);
+            this.debugLabel.TabIndex = 2;
+            this.debugLabel.Text = "Debugger:";
             // 
             // printLabelButton
             // 
+            this.printLabelButton.BackColor = System.Drawing.Color.DodgerBlue;
             this.printLabelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.printLabelButton.Location = new System.Drawing.Point(310, 3);
+            this.printLabelButton.ForeColor = System.Drawing.Color.White;
+            this.printLabelButton.Location = new System.Drawing.Point(309, 10);
             this.printLabelButton.Name = "printLabelButton";
             this.printLabelButton.Size = new System.Drawing.Size(123, 30);
             this.printLabelButton.TabIndex = 3;
             this.printLabelButton.Text = "Print Label";
-            this.printLabelButton.UseVisualStyleBackColor = true;
+            this.printLabelButton.UseVisualStyleBackColor = false;
             this.printLabelButton.Click += new System.EventHandler(this.printLabelButton_Click);
             // 
             // WOIDTxtBox
             // 
             this.WOIDTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WOIDTxtBox.Location = new System.Drawing.Point(77, 3);
+            this.WOIDTxtBox.Location = new System.Drawing.Point(76, 10);
             this.WOIDTxtBox.Name = "WOIDTxtBox";
             this.WOIDTxtBox.Size = new System.Drawing.Size(227, 31);
             this.WOIDTxtBox.TabIndex = 4;
@@ -112,7 +120,7 @@ namespace CKPaint
             // 
             this.WOIDLabel.AutoSize = true;
             this.WOIDLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WOIDLabel.Location = new System.Drawing.Point(4, 6);
+            this.WOIDLabel.Location = new System.Drawing.Point(3, 13);
             this.WOIDLabel.Name = "WOIDLabel";
             this.WOIDLabel.Size = new System.Drawing.Size(79, 25);
             this.WOIDLabel.TabIndex = 5;
@@ -123,6 +131,7 @@ namespace CKPaint
             this.controlPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.controlPanel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.controlPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.controlPanel.Controls.Add(this.errorLabel);
             this.controlPanel.Controls.Add(this.printLabelButton);
             this.controlPanel.Controls.Add(this.WOIDTxtBox);
@@ -146,7 +155,8 @@ namespace CKPaint
             // 
             this.dataGridView2.AllowUserToAddRows = false;
             this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Location = new System.Drawing.Point(12, 565);
@@ -160,6 +170,7 @@ namespace CKPaint
             // 
             this.partsInlineLabel.AutoSize = true;
             this.partsInlineLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.partsInlineLabel.ForeColor = System.Drawing.Color.White;
             this.partsInlineLabel.Location = new System.Drawing.Point(12, 537);
             this.partsInlineLabel.Name = "partsInlineLabel";
             this.partsInlineLabel.Size = new System.Drawing.Size(167, 25);
@@ -170,6 +181,7 @@ namespace CKPaint
             // 
             this.partsOnFloorLabel.AutoSize = true;
             this.partsOnFloorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.partsOnFloorLabel.ForeColor = System.Drawing.Color.White;
             this.partsOnFloorLabel.Location = new System.Drawing.Point(12, 53);
             this.partsOnFloorLabel.Name = "partsOnFloorLabel";
             this.partsOnFloorLabel.Size = new System.Drawing.Size(205, 25);
@@ -179,7 +191,7 @@ namespace CKPaint
             // refreshBtn
             // 
             this.refreshBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.refreshBtn.Location = new System.Drawing.Point(1162, 12);
+            this.refreshBtn.Location = new System.Drawing.Point(1162, 88);
             this.refreshBtn.Name = "refreshBtn";
             this.refreshBtn.Size = new System.Drawing.Size(165, 23);
             this.refreshBtn.TabIndex = 10;
@@ -198,55 +210,74 @@ namespace CKPaint
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.groupBox1.Controls.Add(this.searchJobNumRb);
             this.groupBox1.Controls.Add(this.searchWOIDRb);
-            this.groupBox1.Location = new System.Drawing.Point(379, 81);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.ForeColor = System.Drawing.Color.White;
+            this.groupBox1.Location = new System.Drawing.Point(379, 63);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(224, 31);
+            this.groupBox1.Size = new System.Drawing.Size(224, 49);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search By:";
-            // 
-            // searchWOIDRb
-            // 
-            this.searchWOIDRb.AutoSize = true;
-            this.searchWOIDRb.Location = new System.Drawing.Point(156, 10);
-            this.searchWOIDRb.Name = "searchWOIDRb";
-            this.searchWOIDRb.Size = new System.Drawing.Size(55, 17);
-            this.searchWOIDRb.TabIndex = 0;
-            this.searchWOIDRb.Text = "WOID";
-            this.searchWOIDRb.UseVisualStyleBackColor = true;
-            this.searchWOIDRb.CheckedChanged += new System.EventHandler(this.searchWOIDRb_CheckedChanged);
             // 
             // searchJobNumRb
             // 
             this.searchJobNumRb.AutoSize = true;
             this.searchJobNumRb.Checked = true;
-            this.searchJobNumRb.Location = new System.Drawing.Point(68, 10);
+            this.searchJobNumRb.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchJobNumRb.Location = new System.Drawing.Point(6, 18);
             this.searchJobNumRb.Name = "searchJobNumRb";
-            this.searchJobNumRb.Size = new System.Drawing.Size(82, 17);
+            this.searchJobNumRb.Size = new System.Drawing.Size(123, 24);
             this.searchJobNumRb.TabIndex = 1;
             this.searchJobNumRb.TabStop = true;
             this.searchJobNumRb.Text = "Job Number";
             this.searchJobNumRb.UseVisualStyleBackColor = true;
             this.searchJobNumRb.CheckedChanged += new System.EventHandler(this.searchJobNumRb_CheckedChanged);
             // 
+            // searchWOIDRb
+            // 
+            this.searchWOIDRb.AutoSize = true;
+            this.searchWOIDRb.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchWOIDRb.Location = new System.Drawing.Point(143, 18);
+            this.searchWOIDRb.Name = "searchWOIDRb";
+            this.searchWOIDRb.Size = new System.Drawing.Size(75, 24);
+            this.searchWOIDRb.TabIndex = 0;
+            this.searchWOIDRb.Text = "WOID";
+            this.searchWOIDRb.UseVisualStyleBackColor = true;
+            this.searchWOIDRb.CheckedChanged += new System.EventHandler(this.searchWOIDRb_CheckedChanged);
+            // 
             // clearSearchButton
             // 
+            this.clearSearchButton.BackColor = System.Drawing.Color.DodgerBlue;
             this.clearSearchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clearSearchButton.ForeColor = System.Drawing.Color.White;
             this.clearSearchButton.Location = new System.Drawing.Point(250, 83);
             this.clearSearchButton.Name = "clearSearchButton";
             this.clearSearchButton.Size = new System.Drawing.Size(123, 30);
             this.clearSearchButton.TabIndex = 11;
             this.clearSearchButton.Text = "Clear Search";
-            this.clearSearchButton.UseVisualStyleBackColor = true;
+            this.clearSearchButton.UseVisualStyleBackColor = false;
             this.clearSearchButton.Click += new System.EventHandler(this.clearSearchButton_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.debugLabel);
+            this.panel1.Location = new System.Drawing.Point(12, 810);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1315, 44);
+            this.panel1.TabIndex = 13;
             // 
             // PartLoader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Highlight;
             this.ClientSize = new System.Drawing.Size(1339, 861);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.clearSearchButton);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.SearchTxtBox);
@@ -255,7 +286,6 @@ namespace CKPaint
             this.Controls.Add(this.partsInlineLabel);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.controlPanel);
-            this.Controls.Add(this.errLbl);
             this.Controls.Add(this.title);
             this.Controls.Add(this.dataGridView1);
             this.Name = "PartLoader";
@@ -269,6 +299,8 @@ namespace CKPaint
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -278,7 +310,7 @@ namespace CKPaint
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label title;
-        private System.Windows.Forms.Label errLbl;
+        private System.Windows.Forms.Label debugLabel;
         private System.Windows.Forms.Button printLabelButton;
         private System.Windows.Forms.TextBox WOIDTxtBox;
         private System.Windows.Forms.Label WOIDLabel;
@@ -293,6 +325,7 @@ namespace CKPaint
         private System.Windows.Forms.RadioButton searchJobNumRb;
         private System.Windows.Forms.RadioButton searchWOIDRb;
         private System.Windows.Forms.Button clearSearchButton;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

@@ -310,5 +310,13 @@ namespace CKPaint
 
             }
         }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //DISPOSITION DOUBLE CLICK
+            string arg = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+
+            Console.WriteLine(arg);
+        }
     }
 }
