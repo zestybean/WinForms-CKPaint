@@ -44,10 +44,9 @@ namespace CKPaint
         private void AdjustColumnOrder(DataGridView dv)
         {
             //Rearrange data grid view columns columns
-            
-            dv.Columns["WOID"].DisplayIndex = 0;
-            dv.Columns["WOIDRH"].DisplayIndex = 1;
-            dv.Columns["JobNumber"].DisplayIndex = 2;
+            dv.Columns["JobNumber"].DisplayIndex = 0;
+            dv.Columns["WOID"].DisplayIndex = 1;
+            dv.Columns["WOIDRH"].DisplayIndex = 2;
             dv.Columns["PartNumber"].DisplayIndex = 3;
             dv.Columns["PartNumberRH"].DisplayIndex = 4;
             dv.Columns["ColorCode"].DisplayIndex = 5;
@@ -85,7 +84,7 @@ namespace CKPaint
             }
         }
 
-        DataSet RefreshTable()
+        void RefreshTable()
         {
             DataSet floorPartsDataSet = new DataSet();
             DataSet inlinePartsDataSet = new DataSet();
@@ -103,7 +102,7 @@ namespace CKPaint
                     using (SqlCommand sqlCommand = new SqlCommand("spGetOnFloorParts", sqlConnection))
                     {
                         sqlCommand.CommandType = CommandType.StoredProcedure;
-
+                        
                         using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
                         {
                             sqlDataAdapter.Fill(floorPartsDataSet, "SecondaryScheduleFloorParts");
@@ -144,8 +143,7 @@ namespace CKPaint
                 
             }
 
-            
-            return floorPartsDataSet;
+           
         }
 
         public void ThreadSafe(MethodInvoker method)
@@ -348,52 +346,67 @@ namespace CKPaint
             
         }
 
-        private void SearchTxtBox_TextChanged(object sender, EventArgs e)
-        {
-
-            filterDataGrid();
-        }
-
         private void searchWOIDRb_CheckedChanged(object sender, EventArgs e)
         {
             SearchTxtBox.Clear();
+            RefreshTable();
         }
 
         private void searchJobNumRb_CheckedChanged(object sender, EventArgs e)
         {
             SearchTxtBox.Clear();
+            RefreshTable();
         }
 
         private void clearSearchButton_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(SearchTxtBox.Text);
-           (dataGridView1.DataSource as DataSet).Tables[0].DefaultView.RowFilter = string.Format("JobNumber LIKE '{0}'", "JobNumber", SearchTxtBox.Text);
-           /////FIX THISSSSSSS
-            
+            SearchTxtBox.Clear();
+            RefreshTable();
         }
 
-        private void filterDataGrid()
+        private void searchButton_Click(object sender, EventArgs e)
         {
-            
 
-            
-            //if (searchWOIDRb.Checked)
-            //{
-            //    DataView dv = floorPartsDataSet.Tables[0].DefaultView;
-            //    dv.RowFilter = string.Format("[{0}] LIKE '%{1}%'", "WOID", SearchTxtBox.Text);
+            DataSet floorPartsDataSet = new DataSet();
+            DataSet inlinePartsDataSet = new DataSet();
 
-            //    dataGridView1.DataSource = dv;
+            //Series of sql calls to gather data
+            using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                try
+                {
+                    sqlConnection.Open();
 
+                    //Execute the stored procedure for Parts OnFloor
+                    //and update the data grid view
+                    using (SqlCommand sqlCommand = new SqlCommand("spSearchOnFloorParts", sqlConnection))
+                    {
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
+                        sqlCommand.Parameters.AddWithValue("@JobNumber", SearchTxtBox.Text.ToString());
 
-            //}
+                        using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                        {
+                            sqlDataAdapter.Fill(floorPartsDataSet, "SecondaryScheduleFloorParts");
+                        }
 
-            //if (searchJobNumRb.Checked)
-            //{
-            //    DataView dv = floorPartsDataSet.Tables[0].DefaultView;
-            //    dv.RowFilter = string.Format("[{0}] LIKE '%{1}%'", "JobNumber", SearchTxtBox.Text);
-            //    dataGridView1.DataSource = dv;
+                        ThreadSafe(() => dataGridView1.DataSource = floorPartsDataSet);
+                        ThreadSafe(() => dataGridView1.DataMember = "SecondaryScheduleFloorParts");
 
-            //}
+                    }
+
+                    //Close connection after table is filled
+                    sqlConnection.Close();
+
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Console.WriteLine(err);
+                }
+                Cursor.Current = Cursors.Default;
+
+            }
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -459,5 +472,7 @@ namespace CKPaint
             }
             
         }
+
+       
     }
 }

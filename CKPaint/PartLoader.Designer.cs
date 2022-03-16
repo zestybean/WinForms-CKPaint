@@ -45,8 +45,9 @@ namespace CKPaint
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.searchJobNumRb = new System.Windows.Forms.RadioButton();
             this.searchWOIDRb = new System.Windows.Forms.RadioButton();
-            this.clearSearchButton = new System.Windows.Forms.Button();
+            this.searchButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.controlPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -60,6 +61,7 @@ namespace CKPaint
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(12, 119);
             this.dataGridView1.Name = "dataGridView1";
@@ -158,6 +160,7 @@ namespace CKPaint
             this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Location = new System.Drawing.Point(12, 565);
             this.dataGridView2.Name = "dataGridView2";
@@ -206,7 +209,6 @@ namespace CKPaint
             this.SearchTxtBox.Name = "SearchTxtBox";
             this.SearchTxtBox.Size = new System.Drawing.Size(227, 31);
             this.SearchTxtBox.TabIndex = 11;
-            this.SearchTxtBox.TextChanged += new System.EventHandler(this.SearchTxtBox_TextChanged);
             // 
             // groupBox1
             // 
@@ -248,18 +250,18 @@ namespace CKPaint
             this.searchWOIDRb.UseVisualStyleBackColor = true;
             this.searchWOIDRb.CheckedChanged += new System.EventHandler(this.searchWOIDRb_CheckedChanged);
             // 
-            // clearSearchButton
+            // searchButton
             // 
-            this.clearSearchButton.BackColor = System.Drawing.Color.DodgerBlue;
-            this.clearSearchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clearSearchButton.ForeColor = System.Drawing.Color.White;
-            this.clearSearchButton.Location = new System.Drawing.Point(250, 83);
-            this.clearSearchButton.Name = "clearSearchButton";
-            this.clearSearchButton.Size = new System.Drawing.Size(123, 30);
-            this.clearSearchButton.TabIndex = 11;
-            this.clearSearchButton.Text = "Clear Search";
-            this.clearSearchButton.UseVisualStyleBackColor = false;
-            this.clearSearchButton.Click += new System.EventHandler(this.clearSearchButton_Click);
+            this.searchButton.BackColor = System.Drawing.Color.DodgerBlue;
+            this.searchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchButton.ForeColor = System.Drawing.Color.White;
+            this.searchButton.Location = new System.Drawing.Point(250, 83);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(123, 30);
+            this.searchButton.TabIndex = 11;
+            this.searchButton.Text = "Search";
+            this.searchButton.UseVisualStyleBackColor = false;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
             // panel1
             // 
@@ -271,14 +273,28 @@ namespace CKPaint
             this.panel1.Size = new System.Drawing.Size(1315, 44);
             this.panel1.TabIndex = 13;
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Tomato;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(250, 48);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(123, 30);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "Clear Search";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.clearSearchButton_Click);
+            // 
             // PartLoader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Highlight;
             this.ClientSize = new System.Drawing.Size(1339, 861);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.clearSearchButton);
+            this.Controls.Add(this.searchButton);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.SearchTxtBox);
             this.Controls.Add(this.refreshBtn);
@@ -324,8 +340,9 @@ namespace CKPaint
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton searchJobNumRb;
         private System.Windows.Forms.RadioButton searchWOIDRb;
-        private System.Windows.Forms.Button clearSearchButton;
+        private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button button1;
     }
 }
 

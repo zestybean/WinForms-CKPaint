@@ -35,6 +35,7 @@ namespace CKPaint
             //and initialiaze the SQL dependecy functions
             RefreshTable();
             StartSecondaryScheduleTableDependency();
+            AdjustColumnOrder(dataGridView1);
         }
 
         private void PartDisposition_FormClosing(object sender, FormClosingEventArgs e)
@@ -51,6 +52,34 @@ namespace CKPaint
             }
         }
 
+        private void AdjustColumnOrder(DataGridView dv)
+        {
+            //Rearrange data grid view columns columns
+            dv.Columns["JobNumber"].DisplayIndex = 0;
+            dv.Columns["WOID"].DisplayIndex = 1;
+            dv.Columns["WOIDRH"].DisplayIndex = 2;
+            dv.Columns["PartNumber"].DisplayIndex = 3;
+            dv.Columns["PartNumberRH"].DisplayIndex = 4;
+            dv.Columns["ColorCode"].DisplayIndex = 5;
+            dv.Columns["SetNumber"].DisplayIndex = 6;
+            dv.Columns["PartInline"].DisplayIndex = 7;
+            dv.Columns["PartRework"].DisplayIndex = 8;
+            dv.Columns["PartDisposed"].DisplayIndex = 9;
+
+            //Ignore these
+            dv.Columns["ScheduleID"].Visible = false;
+            dv.Columns["Primer"].Visible = false;
+            dv.Columns["ProductType"].Visible = false;
+            dv.Columns["ProductPlatform"].Visible = false;
+            dv.Columns["Description"].Visible = false;
+            dv.Columns["DescriptionRH"].Visible = false;
+            dv.Columns["RackPosition"].Visible = false;
+            dv.Columns["RackPositionRH"].Visible = false;
+            dv.Columns["AssembleDate"].Visible = false;
+            dv.Columns["PaintBlock"].Visible = false;
+            dv.Columns["ShipDate"].Visible = false;
+            dv.Columns["ImportDate"].Visible = false;
+        }
 
         void RefreshTable()
         {
