@@ -48,6 +48,7 @@ namespace CKPaint
             this.searchButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
+            this.getAllReworkButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.controlPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -185,7 +186,7 @@ namespace CKPaint
             this.partsOnFloorLabel.AutoSize = true;
             this.partsOnFloorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.partsOnFloorLabel.ForeColor = System.Drawing.Color.White;
-            this.partsOnFloorLabel.Location = new System.Drawing.Point(12, 53);
+            this.partsOnFloorLabel.Location = new System.Drawing.Point(12, 36);
             this.partsOnFloorLabel.Name = "partsOnFloorLabel";
             this.partsOnFloorLabel.Size = new System.Drawing.Size(205, 25);
             this.partsOnFloorLabel.TabIndex = 9;
@@ -194,9 +195,9 @@ namespace CKPaint
             // refreshBtn
             // 
             this.refreshBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.refreshBtn.Location = new System.Drawing.Point(1162, 88);
+            this.refreshBtn.Location = new System.Drawing.Point(1141, 3);
             this.refreshBtn.Name = "refreshBtn";
-            this.refreshBtn.Size = new System.Drawing.Size(165, 23);
+            this.refreshBtn.Size = new System.Drawing.Size(171, 38);
             this.refreshBtn.TabIndex = 10;
             this.refreshBtn.Text = "Refresh Connection";
             this.refreshBtn.UseVisualStyleBackColor = true;
@@ -205,7 +206,7 @@ namespace CKPaint
             // SearchTxtBox
             // 
             this.SearchTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SearchTxtBox.Location = new System.Drawing.Point(17, 81);
+            this.SearchTxtBox.Location = new System.Drawing.Point(244, 83);
             this.SearchTxtBox.Name = "SearchTxtBox";
             this.SearchTxtBox.Size = new System.Drawing.Size(227, 31);
             this.SearchTxtBox.TabIndex = 11;
@@ -217,7 +218,7 @@ namespace CKPaint
             this.groupBox1.Controls.Add(this.searchWOIDRb);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(379, 63);
+            this.groupBox1.Location = new System.Drawing.Point(14, 64);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(224, 49);
             this.groupBox1.TabIndex = 12;
@@ -255,9 +256,9 @@ namespace CKPaint
             this.searchButton.BackColor = System.Drawing.Color.DodgerBlue;
             this.searchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchButton.ForeColor = System.Drawing.Color.White;
-            this.searchButton.Location = new System.Drawing.Point(250, 83);
+            this.searchButton.Location = new System.Drawing.Point(476, 82);
             this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(123, 30);
+            this.searchButton.Size = new System.Drawing.Size(123, 33);
             this.searchButton.TabIndex = 11;
             this.searchButton.Text = "Search";
             this.searchButton.UseVisualStyleBackColor = false;
@@ -268,6 +269,7 @@ namespace CKPaint
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.debugLabel);
+            this.panel1.Controls.Add(this.refreshBtn);
             this.panel1.Location = new System.Drawing.Point(12, 810);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1315, 44);
@@ -278,13 +280,26 @@ namespace CKPaint
             this.button1.BackColor = System.Drawing.Color.Tomato;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(250, 48);
+            this.button1.Location = new System.Drawing.Point(605, 28);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(123, 30);
+            this.button1.Size = new System.Drawing.Size(123, 87);
             this.button1.TabIndex = 14;
             this.button1.Text = "Clear Search";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.clearSearchButton_Click);
+            // 
+            // getAllReworkButton
+            // 
+            this.getAllReworkButton.BackColor = System.Drawing.Color.Gold;
+            this.getAllReworkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.getAllReworkButton.ForeColor = System.Drawing.Color.Black;
+            this.getAllReworkButton.Location = new System.Drawing.Point(476, 28);
+            this.getAllReworkButton.Name = "getAllReworkButton";
+            this.getAllReworkButton.Size = new System.Drawing.Size(123, 51);
+            this.getAllReworkButton.TabIndex = 15;
+            this.getAllReworkButton.Text = "All Rework Parts";
+            this.getAllReworkButton.UseVisualStyleBackColor = false;
+            this.getAllReworkButton.Click += new System.EventHandler(this.getAllReworkButton_Click);
             // 
             // PartLoader
             // 
@@ -292,12 +307,12 @@ namespace CKPaint
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Highlight;
             this.ClientSize = new System.Drawing.Size(1339, 861);
+            this.Controls.Add(this.getAllReworkButton);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.SearchTxtBox);
-            this.Controls.Add(this.refreshBtn);
             this.Controls.Add(this.partsOnFloorLabel);
             this.Controls.Add(this.partsInlineLabel);
             this.Controls.Add(this.dataGridView2);
@@ -343,6 +358,7 @@ namespace CKPaint
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button getAllReworkButton;
     }
 }
 

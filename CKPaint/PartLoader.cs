@@ -328,33 +328,31 @@ namespace CKPaint
 
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            //foreach (DataGridViewRow row in dataGridView1.Rows)
-            //{
-            //    if (row.Cells[22].Value != System.DBNull.Value)
-            //    {
-            //        if (Convert.ToInt32(row.Cells[22].Value) == 1)
-            //        {
-            //            row.DefaultCellStyle.BackColor = Color.Yellow;
-            //        }
-            //        else
-            //        {
-            //            row.DefaultCellStyle.BackColor = Color.White;
-            //        }
-            //    }
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.Cells[22].Value != System.DBNull.Value)
+                {
+                    if (Convert.ToInt32(row.Cells[22].Value) == 1)
+                    {
+                        row.DefaultCellStyle.BackColor = Color.Yellow;
+                    }
+                    else
+                    {
+                        row.DefaultCellStyle.BackColor = Color.White;
+                    }
+                }
 
-            //}
-            
+            }
+
         }
 
         private void searchWOIDRb_CheckedChanged(object sender, EventArgs e)
         {
-            SearchTxtBox.Clear();
             RefreshTable();
         }
 
         private void searchJobNumRb_CheckedChanged(object sender, EventArgs e)
         {
-            SearchTxtBox.Clear();
             RefreshTable();
         }
 
@@ -384,6 +382,50 @@ namespace CKPaint
                     {
                         sqlCommand.CommandType = CommandType.StoredProcedure;
                         sqlCommand.Parameters.AddWithValue("@JobNumber", SearchTxtBox.Text.ToString());
+
+                        using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                        {
+                            sqlDataAdapter.Fill(floorPartsDataSet, "SecondaryScheduleFloorParts");
+                        }
+
+                        ThreadSafe(() => dataGridView1.DataSource = floorPartsDataSet);
+                        ThreadSafe(() => dataGridView1.DataMember = "SecondaryScheduleFloorParts");
+
+                    }
+
+                    //Close connection after table is filled
+                    sqlConnection.Close();
+
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Console.WriteLine(err);
+                }
+                Cursor.Current = Cursors.Default;
+
+            }
+        }
+
+        private void getAllReworkButton_Click(object sender, EventArgs e)
+        {
+
+            DataSet floorPartsDataSet = new DataSet();
+            DataSet inlinePartsDataSet = new DataSet();
+
+            //Series of sql calls to gather data
+            using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                try
+                {
+                    sqlConnection.Open();
+
+                    //Execute the stored procedure for Parts OnFloor
+                    //and update the data grid view
+                    using (SqlCommand sqlCommand = new SqlCommand("spGetOnFloorReworkParts", sqlConnection))
+                    {
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
 
                         using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
                         {
@@ -473,6 +515,5 @@ namespace CKPaint
             
         }
 
-       
     }
 }
