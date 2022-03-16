@@ -29,6 +29,7 @@ namespace CKPaint
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PartDisposition));
             this.title = new System.Windows.Forms.Label();
             this.partsOnFloorLabel = new System.Windows.Forms.Label();
             this.partsInlineLabel = new System.Windows.Forms.Label();
@@ -275,9 +276,10 @@ namespace CKPaint
             this.Controls.Add(this.controlPanel);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.title);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PartDisposition";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "PartDisposition";
+            this.Text = "CK Paint - Part Disposition";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PartDisposition_FormClosing);
             this.Load += new System.EventHandler(this.PartDisposition_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();

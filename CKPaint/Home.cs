@@ -17,6 +17,11 @@ namespace CKPaint
             InitializeComponent();
         }
 
+        private void Home_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void partLoaderBtn_Click(object sender, EventArgs e)
         {
             this.Hide();

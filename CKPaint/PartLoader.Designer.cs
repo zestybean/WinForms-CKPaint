@@ -29,6 +29,7 @@ namespace CKPaint
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PartLoader));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.title = new System.Windows.Forms.Label();
             this.debugLabel = new System.Windows.Forms.Label();
@@ -49,11 +50,13 @@ namespace CKPaint
             this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.getAllReworkButton = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.controlPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -301,12 +304,25 @@ namespace CKPaint
             this.getAllReworkButton.UseVisualStyleBackColor = false;
             this.getAllReworkButton.Click += new System.EventHandler(this.getAllReworkButton_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Image = global::CKPaint.Properties.Resources.ckt_logo_white300;
+            this.pictureBox1.Location = new System.Drawing.Point(1027, 31);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(300, 75);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 16;
+            this.pictureBox1.TabStop = false;
+            // 
             // PartLoader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Highlight;
             this.ClientSize = new System.Drawing.Size(1339, 861);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.getAllReworkButton);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
@@ -319,9 +335,10 @@ namespace CKPaint
             this.Controls.Add(this.controlPanel);
             this.Controls.Add(this.title);
             this.Controls.Add(this.dataGridView1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PartLoader";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CK-Paint";
+            this.Text = "CK Paint - Part Loader";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LandingPage_FormClosing);
             this.Load += new System.EventHandler(this.LandingPage_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -332,6 +349,7 @@ namespace CKPaint
             this.groupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -359,6 +377,7 @@ namespace CKPaint
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button getAllReworkButton;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
