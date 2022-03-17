@@ -63,6 +63,16 @@ namespace CKPaint.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap arial {
+            get {
+                object obj = ResourceManager.GetObject("arial", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ckt_logo_white300 {
             get {
                 object obj = ResourceManager.GetObject("ckt-logo-white300", resourceCulture);

@@ -453,13 +453,21 @@ namespace CKPaint
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            //LOAD DOUBLE CLICK
-            string arg = dataGridView1.Rows[e.RowIndex].Cells[17].Value.ToString();
+            bool RH = false;
 
-            Console.WriteLine(arg);
-            debugLabel.Text = arg;
+            //LOAD DOUBLE CLICK
+            string woidString = dataGridView1.Rows[e.RowIndex].Cells[17].Value.ToString();
+            string woidStringRH = dataGridView1.Rows[e.RowIndex].Cells[18].Value.ToString();
+            if (!string.IsNullOrEmpty(woidStringRH) && (woidString != woidStringRH))
+            {
+                RH = true;
+            }
+
+            Console.WriteLine(woidString);
+            debugLabel.Text = woidString;
 
             SecondarySchedule SecondarySchedule_Part = new SecondarySchedule();
+            
 
             //Series of sql calls to gather data
             using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
@@ -472,7 +480,7 @@ namespace CKPaint
                     using (SqlCommand sqlCommand = new SqlCommand("spGetPartAndUpdateToInline", sqlConnection))
                     {
                         sqlCommand.CommandType = CommandType.StoredProcedure;
-                        sqlCommand.Parameters.AddWithValue("@WOID", arg);
+                        sqlCommand.Parameters.AddWithValue("@WOID", woidString);
                         var sqlReader = sqlCommand.ExecuteReader();
 
                         sqlReader.Read();
@@ -480,7 +488,7 @@ namespace CKPaint
                         {
                             SecondarySchedule_Part.JobNumber = sqlReader.GetString(1);
                             SecondarySchedule_Part.SetNumber = sqlReader.GetString(2);
-                            SecondarySchedule_Part.PartNumber = sqlReader.GetString(3);
+                            SecondarySchedule_Part.PartNumber = sqlReader.GetString(3); 
                             SecondarySchedule_Part.ColorCode = sqlReader.GetString(5);
                             SecondarySchedule_Part.Description = sqlReader.GetString(9);
                             SecondarySchedule_Part.RackCode = sqlReader.GetString(11);
@@ -491,6 +499,16 @@ namespace CKPaint
 
                             //PRINTING WILL OCCURR HERE!
                             PrintToZebraHelper.PrintToZebra(SecondarySchedule_Part);
+
+                            if (RH)
+                            {
+                                SecondarySchedule_Part.PartNumberRH = sqlReader.GetString(4);
+                                SecondarySchedule_Part.DescriptionRH = sqlReader.GetString(10);
+                                SecondarySchedule_Part.RackPositionRH = sqlReader.GetString(13);
+                                SecondarySchedule_Part.WOIDRH = sqlReader.GetString(18);
+
+                                PrintToZebraHelper.PrintToZebra(SecondarySchedule_Part, RH);
+                            }
                           
                         }
                         else
