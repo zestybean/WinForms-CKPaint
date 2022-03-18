@@ -13,7 +13,7 @@ public static class PrintToZebraHelper
 {
     public static void PrintToZebra(CKPaint.SecondarySchedule secondarySchedule_Part, bool RH = false)
     {
-        string IPADDRESS = "CKBFLEX1LZEBRA";
+        string IPADDRESS = CKPaint.Properties.Settings.Default["Printer"].ToString();
         int PORT = 9100;
 
         string labelPath = @"\\hail\Manufacturing Engineering\Secondary Equipment\CK_Supervisor\Label Formats\ILVS Navistar.txt";

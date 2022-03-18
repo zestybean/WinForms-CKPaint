@@ -12,7 +12,7 @@ namespace CKPaint
 {
     public partial class ConfirmActionWindow : Form
     {
-        public int actionState = 1;
+        public int actionState = 0;
 
         public ConfirmActionWindow()
         {

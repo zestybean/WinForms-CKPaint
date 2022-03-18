@@ -35,6 +35,9 @@ namespace CKPaint
             this.partLoaderBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.settingsButton = new System.Windows.Forms.Button();
+            this.plantLabel = new System.Windows.Forms.Label();
+            this.siteLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -96,12 +99,50 @@ namespace CKPaint
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             // 
+            // settingsButton
+            // 
+            this.settingsButton.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.settingsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.settingsButton.ForeColor = System.Drawing.Color.White;
+            this.settingsButton.Location = new System.Drawing.Point(311, 304);
+            this.settingsButton.Name = "settingsButton";
+            this.settingsButton.Size = new System.Drawing.Size(187, 37);
+            this.settingsButton.TabIndex = 8;
+            this.settingsButton.Text = "Settings";
+            this.settingsButton.UseVisualStyleBackColor = false;
+            this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
+            // 
+            // plantLabel
+            // 
+            this.plantLabel.AutoSize = true;
+            this.plantLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.plantLabel.ForeColor = System.Drawing.Color.White;
+            this.plantLabel.Location = new System.Drawing.Point(9, 26);
+            this.plantLabel.Name = "plantLabel";
+            this.plantLabel.Size = new System.Drawing.Size(41, 16);
+            this.plantLabel.TabIndex = 9;
+            this.plantLabel.Text = "Plant:";
+            // 
+            // siteLabel
+            // 
+            this.siteLabel.AutoSize = true;
+            this.siteLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.siteLabel.ForeColor = System.Drawing.Color.White;
+            this.siteLabel.Location = new System.Drawing.Point(9, 43);
+            this.siteLabel.Name = "siteLabel";
+            this.siteLabel.Size = new System.Drawing.Size(34, 16);
+            this.siteLabel.TabIndex = 10;
+            this.siteLabel.Text = "Site:";
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Highlight;
             this.ClientSize = new System.Drawing.Size(800, 387);
+            this.Controls.Add(this.siteLabel);
+            this.Controls.Add(this.plantLabel);
+            this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.partLoaderBtn);
             this.Controls.Add(this.partDispositionBtn);
@@ -129,5 +170,8 @@ namespace CKPaint
         private System.Windows.Forms.Button partLoaderBtn;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button settingsButton;
+        private System.Windows.Forms.Label plantLabel;
+        private System.Windows.Forms.Label siteLabel;
     }
 }
