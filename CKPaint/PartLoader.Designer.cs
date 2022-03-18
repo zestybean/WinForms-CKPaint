@@ -37,9 +37,6 @@ namespace CKPaint
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.title = new System.Windows.Forms.Label();
             this.debugLabel = new System.Windows.Forms.Label();
-            this.printLabelButton = new System.Windows.Forms.Button();
-            this.WOIDTxtBox = new System.Windows.Forms.TextBox();
-            this.WOIDLabel = new System.Windows.Forms.Label();
             this.controlPanel = new System.Windows.Forms.Panel();
             this.errorLabel = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
@@ -114,57 +111,22 @@ namespace CKPaint
             this.debugLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.debugLabel.AutoSize = true;
             this.debugLabel.ForeColor = System.Drawing.Color.White;
-            this.debugLabel.Location = new System.Drawing.Point(5, 0);
+            this.debugLabel.Location = new System.Drawing.Point(5, 3);
             this.debugLabel.Name = "debugLabel";
             this.debugLabel.Size = new System.Drawing.Size(57, 13);
             this.debugLabel.TabIndex = 2;
             this.debugLabel.Text = "Debugger:";
-            // 
-            // printLabelButton
-            // 
-            this.printLabelButton.BackColor = System.Drawing.Color.DodgerBlue;
-            this.printLabelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.printLabelButton.ForeColor = System.Drawing.Color.White;
-            this.printLabelButton.Location = new System.Drawing.Point(309, 10);
-            this.printLabelButton.Name = "printLabelButton";
-            this.printLabelButton.Size = new System.Drawing.Size(123, 30);
-            this.printLabelButton.TabIndex = 3;
-            this.printLabelButton.Text = "Print Label";
-            this.printLabelButton.UseVisualStyleBackColor = false;
-            this.printLabelButton.Click += new System.EventHandler(this.printLabelButton_Click);
-            // 
-            // WOIDTxtBox
-            // 
-            this.WOIDTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WOIDTxtBox.Location = new System.Drawing.Point(76, 10);
-            this.WOIDTxtBox.Name = "WOIDTxtBox";
-            this.WOIDTxtBox.Size = new System.Drawing.Size(227, 31);
-            this.WOIDTxtBox.TabIndex = 4;
-            this.WOIDTxtBox.TextChanged += new System.EventHandler(this.WOIDTxtBox_TextChanged);
-            // 
-            // WOIDLabel
-            // 
-            this.WOIDLabel.AutoSize = true;
-            this.WOIDLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WOIDLabel.Location = new System.Drawing.Point(3, 13);
-            this.WOIDLabel.Name = "WOIDLabel";
-            this.WOIDLabel.Size = new System.Drawing.Size(79, 25);
-            this.WOIDLabel.TabIndex = 5;
-            this.WOIDLabel.Text = "WOID:";
             // 
             // controlPanel
             // 
             this.controlPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.controlPanel.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.controlPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.controlPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.controlPanel.Controls.Add(this.errorLabel);
-            this.controlPanel.Controls.Add(this.printLabelButton);
-            this.controlPanel.Controls.Add(this.WOIDTxtBox);
-            this.controlPanel.Controls.Add(this.WOIDLabel);
             this.controlPanel.Location = new System.Drawing.Point(12, 480);
             this.controlPanel.Name = "controlPanel";
-            this.controlPanel.Size = new System.Drawing.Size(1315, 51);
+            this.controlPanel.Size = new System.Drawing.Size(1315, 54);
             this.controlPanel.TabIndex = 6;
             // 
             // errorLabel
@@ -396,9 +358,6 @@ namespace CKPaint
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label title;
         private System.Windows.Forms.Label debugLabel;
-        private System.Windows.Forms.Button printLabelButton;
-        private System.Windows.Forms.TextBox WOIDTxtBox;
-        private System.Windows.Forms.Label WOIDLabel;
         private System.Windows.Forms.Panel controlPanel;
         private System.Windows.Forms.Label partsInlineLabel;
         private System.Windows.Forms.DataGridView dataGridView2;

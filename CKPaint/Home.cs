@@ -19,8 +19,7 @@ namespace CKPaint
 
         private void Home_Load(object sender, EventArgs e)
         {
-            plantLabel.Text = "Plant:   " + CKPaint.Properties.Settings.Default["Plant"];
-            siteLabel.Text = "Site:     " + CKPaint.Properties.Settings.Default["Site"];
+            setPlantSiteLabels();
         }
 
         private void partLoaderBtn_Click(object sender, EventArgs e)
@@ -44,6 +43,13 @@ namespace CKPaint
         {
             Form settingsWindow = new SettingsWindow();
             settingsWindow.ShowDialog();
+            setPlantSiteLabels();
+        }
+
+        private void setPlantSiteLabels()
+        {
+            plantLabel.Text = "Plant:   " + CKPaint.Properties.Settings.Default["Plant"];
+            siteLabel.Text = "Site:     " + CKPaint.Properties.Settings.Default["Site"];
         }
     }
 }

@@ -43,6 +43,7 @@ namespace CKPaint
             // 
             // title
             // 
+            this.title.BackColor = System.Drawing.SystemColors.HotTrack;
             this.title.Dock = System.Windows.Forms.DockStyle.Top;
             this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.title.ForeColor = System.Drawing.Color.White;
@@ -115,6 +116,7 @@ namespace CKPaint
             // plantLabel
             // 
             this.plantLabel.AutoSize = true;
+            this.plantLabel.BackColor = System.Drawing.SystemColors.HotTrack;
             this.plantLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.plantLabel.ForeColor = System.Drawing.Color.White;
             this.plantLabel.Location = new System.Drawing.Point(9, 26);
@@ -126,6 +128,7 @@ namespace CKPaint
             // siteLabel
             // 
             this.siteLabel.AutoSize = true;
+            this.siteLabel.BackColor = System.Drawing.SystemColors.HotTrack;
             this.siteLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.siteLabel.ForeColor = System.Drawing.Color.White;
             this.siteLabel.Location = new System.Drawing.Point(9, 43);
