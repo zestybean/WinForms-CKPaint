@@ -296,47 +296,77 @@ namespace CKPaint
 
         private void searchButton_Click(object sender, EventArgs e)
         {
+            SearchTxtBox.Text = SearchTxtBox.Text.Trim();
+
+            if (String.IsNullOrEmpty(SearchTxtBox.Text))
+            {
+                SearchTxtBox.Clear();
+                RefreshTable();
+                return;
+            }
+
 
             DataSet floorPartsDataSet = new DataSet();
             DataSet inlinePartsDataSet = new DataSet();
-
-            //Series of sql calls to gather data
-            using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
-            {
-                Cursor.Current = Cursors.WaitCursor;
-                try
+           
+                //Series of sql calls to gather data
+                using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
                 {
-                    sqlConnection.Open();
-
-                    //Execute the stored procedure for Parts OnFloor
-                    //and update the data grid view
-                    using (SqlCommand sqlCommand = new SqlCommand("spSearchOnFloorParts", sqlConnection))
+                    Cursor.Current = Cursors.WaitCursor;
+                    try
                     {
-                        sqlCommand.CommandType = CommandType.StoredProcedure;
-                        sqlCommand.Parameters.AddWithValue("@JobNumber", SearchTxtBox.Text.ToString());
-
-                        using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                        sqlConnection.Open();
+                    if (searchJobNumRb.Checked)
+                    {
+                        //Execute the stored procedure for Parts OnFloor
+                        //and update the data grid view
+                        using (SqlCommand sqlCommand = new SqlCommand("spSearchOnFloorPartsByJobNumber", sqlConnection))
                         {
-                            sqlDataAdapter.Fill(floorPartsDataSet, "SecondaryScheduleFloorParts");
-                        }
+                            sqlCommand.CommandType = CommandType.StoredProcedure;
+                            sqlCommand.Parameters.AddWithValue("@JobNumber", SearchTxtBox.Text.ToString());
 
-                        ThreadSafe(() => dataGridView1.DataSource = floorPartsDataSet);
-                        ThreadSafe(() => dataGridView1.DataMember = "SecondaryScheduleFloorParts");
+                            using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                            {
+                                sqlDataAdapter.Fill(floorPartsDataSet, "SecondaryScheduleFloorParts");
+                            }
+
+                            ThreadSafe(() => dataGridView1.DataSource = floorPartsDataSet);
+                            ThreadSafe(() => dataGridView1.DataMember = "SecondaryScheduleFloorParts");
+
+                        }
+                    } else
+                    {
+                        //Execute the stored procedure for Parts OnFloor
+                        //and update the data grid view
+                        using (SqlCommand sqlCommand = new SqlCommand("spSearchOnFloorPartsByWOID", sqlConnection))
+                        {
+                            sqlCommand.CommandType = CommandType.StoredProcedure;
+                            sqlCommand.Parameters.AddWithValue("@WOID", SearchTxtBox.Text.ToString());
+
+                            using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                            {
+                                sqlDataAdapter.Fill(floorPartsDataSet, "SecondaryScheduleFloorParts");
+                            }
+
+                            ThreadSafe(() => dataGridView1.DataSource = floorPartsDataSet);
+                            ThreadSafe(() => dataGridView1.DataMember = "SecondaryScheduleFloorParts");
+
+                        }
+                    }
+                        //Close connection after table is filled
+                        sqlConnection.Close();
 
                     }
-
-                    //Close connection after table is filled
-                    sqlConnection.Close();
+                    catch (Exception err)
+                    {
+                        MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Console.WriteLine(err);
+                    }
+                    Cursor.Current = Cursors.Default;
 
                 }
-                catch (Exception err)
-                {
-                    MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Console.WriteLine(err);
-                }
-                Cursor.Current = Cursors.Default;
-
-            }
+            
+          
         }
 
         private void getAllReworkButton_Click(object sender, EventArgs e)
@@ -390,80 +420,85 @@ namespace CKPaint
             //LOAD DOUBLE CLICK
             string woidString = dataGridView1.Rows[e.RowIndex].Cells[17].Value.ToString();
             string woidStringRH = dataGridView1.Rows[e.RowIndex].Cells[18].Value.ToString();
+            string partNumberString = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString(); 
+
+            ConfirmActionWindow confirmActionWindow = new ConfirmActionWindow();
+            confirmActionWindow.partWOID = woidString;
+            confirmActionWindow.partJobNumber = partNumberString;
+
             if (!string.IsNullOrEmpty(woidStringRH) && (woidString != woidStringRH))
             {
                 RH = true;
             }
 
-            Console.WriteLine(woidString);
-            debugLabel.Text = woidString;
-
             SecondarySchedule SecondarySchedule_Part = new SecondarySchedule();
-            
 
-            //Series of sql calls to gather data
-            using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
+            confirmActionWindow.ShowDialog();
+            if (confirmActionWindow.confirmActionButtonSelected)
             {
-
-                Cursor.Current = Cursors.WaitCursor;
-                try
+                //Series of sql calls to gather data
+                using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
                 {
-                    sqlConnection.Open();
-                    using (SqlCommand sqlCommand = new SqlCommand("spGetPartAndUpdateToInline", sqlConnection))
+
+                    Cursor.Current = Cursors.WaitCursor;
+                    try
                     {
-                        sqlCommand.CommandType = CommandType.StoredProcedure;
-                        sqlCommand.Parameters.AddWithValue("@WOID", woidString);
-                        var sqlReader = sqlCommand.ExecuteReader();
-
-                        sqlReader.Read();
-                        if (sqlReader.HasRows)
+                        sqlConnection.Open();
+                        using (SqlCommand sqlCommand = new SqlCommand("spGetPartAndUpdateToInline", sqlConnection))
                         {
-                            SecondarySchedule_Part.JobNumber = sqlReader.GetString(1);
-                            SecondarySchedule_Part.SetNumber = sqlReader.GetString(2);
-                            SecondarySchedule_Part.PartNumber = sqlReader.GetString(3); 
-                            SecondarySchedule_Part.ColorCode = sqlReader.GetString(5);
-                            SecondarySchedule_Part.Description = sqlReader.GetString(9);
-                            SecondarySchedule_Part.RackCode = sqlReader.GetString(11);
-                            SecondarySchedule_Part.RackPosition = sqlReader.GetString(12);
-                            SecondarySchedule_Part.PaintBlock = sqlReader.GetString(16);
-                            SecondarySchedule_Part.WOID = sqlReader.GetString(17);
+                            sqlCommand.CommandType = CommandType.StoredProcedure;
+                            sqlCommand.Parameters.AddWithValue("@WOID", woidString);
+                            var sqlReader = sqlCommand.ExecuteReader();
 
-
-                            //PRINTING WILL OCCURR HERE!
-                            PrintToZebraHelper.PrintToZebra(SecondarySchedule_Part);
-
-                            if (RH)
+                            sqlReader.Read();
+                            if (sqlReader.HasRows)
                             {
-                                SecondarySchedule_Part.PartNumberRH = sqlReader.GetString(4);
-                                SecondarySchedule_Part.DescriptionRH = sqlReader.GetString(10);
-                                SecondarySchedule_Part.RackPositionRH = sqlReader.GetString(13);
-                                SecondarySchedule_Part.WOIDRH = sqlReader.GetString(18);
+                                SecondarySchedule_Part.JobNumber = sqlReader.GetString(1);
+                                SecondarySchedule_Part.SetNumber = sqlReader.GetString(2);
+                                SecondarySchedule_Part.PartNumber = sqlReader.GetString(3);
+                                SecondarySchedule_Part.ColorCode = sqlReader.GetString(5);
+                                SecondarySchedule_Part.Description = sqlReader.GetString(9);
+                                SecondarySchedule_Part.RackCode = sqlReader.GetString(11);
+                                SecondarySchedule_Part.RackPosition = sqlReader.GetString(12);
+                                SecondarySchedule_Part.PaintBlock = sqlReader.GetString(16);
+                                SecondarySchedule_Part.WOID = sqlReader.GetString(17);
 
-                                PrintToZebraHelper.PrintToZebra(SecondarySchedule_Part, RH);
+
+                                //PRINTING WILL OCCURR HERE!
+
+                                PrintToZebraHelper.PrintToZebra(SecondarySchedule_Part);
+
+                                if (RH)
+                                {
+                                    SecondarySchedule_Part.PartNumberRH = sqlReader.GetString(4);
+                                    SecondarySchedule_Part.DescriptionRH = sqlReader.GetString(10);
+                                    SecondarySchedule_Part.RackPositionRH = sqlReader.GetString(13);
+                                    SecondarySchedule_Part.WOIDRH = sqlReader.GetString(18);
+
+                                    PrintToZebraHelper.PrintToZebra(SecondarySchedule_Part, RH);
+                                }
+
                             }
-                          
-                        }
-                        else
-                        {
-                            debugLabel.Text = "Part does not exist or is inline!";
+                            else
+                            {
+                                debugLabel.Text = "Part does not exist or is inline!";
+                            }
+
+                            sqlCommand.Dispose();
+                            sqlReader.Close();
                         }
 
-                        sqlCommand.Dispose();
-                        sqlReader.Close();
+                    }
+                    catch (Exception err)
+                    {
+                        MessageBox.Show(err.Message, "Print Label OnClick Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Console.WriteLine(err);
                     }
 
-                }
-                catch (Exception err)
-                {
-                    MessageBox.Show(err.Message, "Print Label OnClick Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Console.WriteLine(err);
-                }
+                    Cursor.Current = Cursors.Default;
 
-                Cursor.Current = Cursors.Default;
-                
+                }
             }
-            
         }
-
     }
 }

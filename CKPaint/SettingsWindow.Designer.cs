@@ -79,13 +79,13 @@ namespace CKPaint
             // settingsDescriptionLabel
             // 
             this.settingsDescriptionLabel.AutoSize = true;
-            this.settingsDescriptionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.settingsDescriptionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.settingsDescriptionLabel.ForeColor = System.Drawing.Color.White;
-            this.settingsDescriptionLabel.Location = new System.Drawing.Point(79, 69);
+            this.settingsDescriptionLabel.Location = new System.Drawing.Point(129, 60);
             this.settingsDescriptionLabel.Name = "settingsDescriptionLabel";
-            this.settingsDescriptionLabel.Size = new System.Drawing.Size(214, 25);
+            this.settingsDescriptionLabel.Size = new System.Drawing.Size(329, 48);
             this.settingsDescriptionLabel.TabIndex = 9;
-            this.settingsDescriptionLabel.Text = "Please select from ";
+            this.settingsDescriptionLabel.Text = "Please select or edit the following \r\nsettings for the application.";
             // 
             // printerLabel
             // 
@@ -113,7 +113,7 @@ namespace CKPaint
             this.cancelButton.BackColor = System.Drawing.Color.Tomato;
             this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelButton.ForeColor = System.Drawing.Color.White;
-            this.cancelButton.Location = new System.Drawing.Point(341, 605);
+            this.cancelButton.Location = new System.Drawing.Point(341, 454);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(134, 44);
             this.cancelButton.TabIndex = 15;
@@ -128,7 +128,7 @@ namespace CKPaint
             this.saveButton.BackColor = System.Drawing.SystemColors.HotTrack;
             this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saveButton.ForeColor = System.Drawing.Color.White;
-            this.saveButton.Location = new System.Drawing.Point(75, 605);
+            this.saveButton.Location = new System.Drawing.Point(75, 454);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(134, 44);
             this.saveButton.TabIndex = 14;
@@ -187,7 +187,7 @@ namespace CKPaint
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Highlight;
-            this.ClientSize = new System.Drawing.Size(584, 661);
+            this.ClientSize = new System.Drawing.Size(584, 510);
             this.Controls.Add(this.siteLabel);
             this.Controls.Add(this.siteTextBox);
             this.Controls.Add(this.plantComboBox);

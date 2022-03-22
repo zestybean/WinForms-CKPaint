@@ -347,5 +347,10 @@ namespace CKPaint
 
             WOIDTxtBox.Text = arg;
         }
+
+        private void dataGridView2_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
