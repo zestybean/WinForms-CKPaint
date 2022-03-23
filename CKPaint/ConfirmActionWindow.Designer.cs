@@ -31,7 +31,6 @@ namespace CKPaint
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfirmActionWindow));
             this.warningPanel = new System.Windows.Forms.Panel();
-            this.warningLogo = new System.Windows.Forms.PictureBox();
             this.warningLabel = new System.Windows.Forms.Label();
             this.jobNumberLbl = new System.Windows.Forms.Label();
             this.confirmButton = new System.Windows.Forms.Button();
@@ -42,6 +41,10 @@ namespace CKPaint
             this.woidLbl = new System.Windows.Forms.Label();
             this.woidTxtLbl = new System.Windows.Forms.Label();
             this.jobNumTxtLbl = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.warningLogo = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.warningPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.warningLogo)).BeginInit();
             this.SuspendLayout();
@@ -54,17 +57,6 @@ namespace CKPaint
             this.warningPanel.Name = "warningPanel";
             this.warningPanel.Size = new System.Drawing.Size(513, 104);
             this.warningPanel.TabIndex = 1;
-            // 
-            // warningLogo
-            // 
-            this.warningLogo.BackColor = System.Drawing.Color.Gold;
-            this.warningLogo.Image = global::CKPaint.Properties.Resources.warning;
-            this.warningLogo.Location = new System.Drawing.Point(219, 14);
-            this.warningLogo.Name = "warningLogo";
-            this.warningLogo.Size = new System.Drawing.Size(82, 78);
-            this.warningLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.warningLogo.TabIndex = 0;
-            this.warningLogo.TabStop = false;
             // 
             // warningLabel
             // 
@@ -82,7 +74,7 @@ namespace CKPaint
             this.jobNumberLbl.AutoSize = true;
             this.jobNumberLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.jobNumberLbl.ForeColor = System.Drawing.Color.White;
-            this.jobNumberLbl.Location = new System.Drawing.Point(159, 168);
+            this.jobNumberLbl.Location = new System.Drawing.Point(4, 195);
             this.jobNumberLbl.Name = "jobNumberLbl";
             this.jobNumberLbl.Size = new System.Drawing.Size(152, 25);
             this.jobNumberLbl.TabIndex = 3;
@@ -93,7 +85,7 @@ namespace CKPaint
             this.confirmButton.BackColor = System.Drawing.SystemColors.HotTrack;
             this.confirmButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.confirmButton.ForeColor = System.Drawing.Color.White;
-            this.confirmButton.Location = new System.Drawing.Point(56, 394);
+            this.confirmButton.Location = new System.Drawing.Point(56, 375);
             this.confirmButton.Name = "confirmButton";
             this.confirmButton.Size = new System.Drawing.Size(134, 44);
             this.confirmButton.TabIndex = 4;
@@ -106,7 +98,7 @@ namespace CKPaint
             this.cancelButton.BackColor = System.Drawing.Color.Tomato;
             this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelButton.ForeColor = System.Drawing.Color.White;
-            this.cancelButton.Location = new System.Drawing.Point(322, 394);
+            this.cancelButton.Location = new System.Drawing.Point(322, 375);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(134, 44);
             this.cancelButton.TabIndex = 5;
@@ -117,18 +109,18 @@ namespace CKPaint
             // codeDescriptionLabel
             // 
             this.codeDescriptionLabel.AutoSize = true;
-            this.codeDescriptionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.codeDescriptionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.codeDescriptionLabel.ForeColor = System.Drawing.Color.White;
-            this.codeDescriptionLabel.Location = new System.Drawing.Point(64, 291);
+            this.codeDescriptionLabel.Location = new System.Drawing.Point(89, 274);
             this.codeDescriptionLabel.Name = "codeDescriptionLabel";
-            this.codeDescriptionLabel.Size = new System.Drawing.Size(392, 25);
+            this.codeDescriptionLabel.Size = new System.Drawing.Size(346, 24);
             this.codeDescriptionLabel.TabIndex = 6;
             this.codeDescriptionLabel.Text = "Please enter code to confirm action:";
             // 
             // codeTextBox
             // 
             this.codeTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.codeTextBox.Location = new System.Drawing.Point(122, 348);
+            this.codeTextBox.Location = new System.Drawing.Point(126, 326);
             this.codeTextBox.Name = "codeTextBox";
             this.codeTextBox.Size = new System.Drawing.Size(263, 29);
             this.codeTextBox.TabIndex = 7;
@@ -136,11 +128,11 @@ namespace CKPaint
             // codeLabel
             // 
             this.codeLabel.AutoSize = true;
-            this.codeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.codeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.codeLabel.ForeColor = System.Drawing.Color.White;
-            this.codeLabel.Location = new System.Drawing.Point(117, 320);
+            this.codeLabel.Location = new System.Drawing.Point(122, 299);
             this.codeLabel.Name = "codeLabel";
-            this.codeLabel.Size = new System.Drawing.Size(74, 25);
+            this.codeLabel.Size = new System.Drawing.Size(66, 24);
             this.codeLabel.TabIndex = 8;
             this.codeLabel.Text = "Code:";
             // 
@@ -149,7 +141,7 @@ namespace CKPaint
             this.woidLbl.AutoSize = true;
             this.woidLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.woidLbl.ForeColor = System.Drawing.Color.White;
-            this.woidLbl.Location = new System.Drawing.Point(159, 226);
+            this.woidLbl.Location = new System.Drawing.Point(162, 195);
             this.woidLbl.Name = "woidLbl";
             this.woidLbl.Size = new System.Drawing.Size(79, 25);
             this.woidLbl.TabIndex = 9;
@@ -162,7 +154,7 @@ namespace CKPaint
             this.woidTxtLbl.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.woidTxtLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.woidTxtLbl.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.woidTxtLbl.Location = new System.Drawing.Point(214, 251);
+            this.woidTxtLbl.Location = new System.Drawing.Point(217, 220);
             this.woidTxtLbl.Name = "woidTxtLbl";
             this.woidTxtLbl.Size = new System.Drawing.Size(99, 31);
             this.woidTxtLbl.TabIndex = 10;
@@ -175,18 +167,70 @@ namespace CKPaint
             this.jobNumTxtLbl.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.jobNumTxtLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.jobNumTxtLbl.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.jobNumTxtLbl.Location = new System.Drawing.Point(214, 193);
+            this.jobNumTxtLbl.Location = new System.Drawing.Point(59, 220);
             this.jobNumTxtLbl.Name = "jobNumTxtLbl";
             this.jobNumTxtLbl.Size = new System.Drawing.Size(99, 31);
             this.jobNumTxtLbl.TabIndex = 11;
             this.jobNumTxtLbl.Text = "000000";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label2.Location = new System.Drawing.Point(372, 220);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(99, 31);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "000000";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(317, 195);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(118, 25);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "WOID RH:";
+            // 
+            // warningLogo
+            // 
+            this.warningLogo.BackColor = System.Drawing.Color.Gold;
+            this.warningLogo.Image = global::CKPaint.Properties.Resources.warning;
+            this.warningLogo.Location = new System.Drawing.Point(219, 14);
+            this.warningLogo.Name = "warningLogo";
+            this.warningLogo.Size = new System.Drawing.Size(82, 78);
+            this.warningLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.warningLogo.TabIndex = 0;
+            this.warningLogo.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Tomato;
+            this.label1.Location = new System.Drawing.Point(185, 297);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(78, 26);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "000000";
+            this.label1.Visible = false;
             // 
             // ConfirmActionWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Highlight;
-            this.ClientSize = new System.Drawing.Size(513, 450);
+            this.ClientSize = new System.Drawing.Size(513, 442);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.jobNumTxtLbl);
             this.Controls.Add(this.woidTxtLbl);
             this.Controls.Add(this.woidLbl);
@@ -227,5 +271,8 @@ namespace CKPaint
         private System.Windows.Forms.Label woidLbl;
         private System.Windows.Forms.Label woidTxtLbl;
         private System.Windows.Forms.Label jobNumTxtLbl;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label1;
     }
 }

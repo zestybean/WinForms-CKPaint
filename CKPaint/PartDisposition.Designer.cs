@@ -142,6 +142,7 @@ namespace CKPaint
             this.controlPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.controlPanel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.controlPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.controlPanel.Controls.Add(this.defectCombo);
             this.controlPanel.Controls.Add(this.dispositionCombo);
             this.controlPanel.Controls.Add(this.dpuNumBox);

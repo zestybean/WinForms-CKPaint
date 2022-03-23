@@ -92,6 +92,12 @@
     <Compile Include="Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
+    <Compile Include="PartDispositionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PartDispositionForm.Designer.cs">
+      <DependentUpon>PartDispositionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PartDispositionHistory.cs" />
     <Compile Include="PartLoader.cs">
       <SubType>Form</SubType>
@@ -128,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PartDisposition.resx">
       <DependentUpon>PartDisposition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PartDispositionForm.resx">
+      <DependentUpon>PartDispositionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PartLoader.resx">
       <DependentUpon>PartLoader.cs</DependentUpon>
