@@ -86,8 +86,8 @@ namespace CKPaint
             //This function fills the datagridview from the current data in the
             //db, because the table is using SQL dependency multi-threading needs
             //to be called in order to properly execute commands
-            DataSet floorPartsDataSet = new DataSet();
             DataSet inlinePartsDataSet = new DataSet();
+            DataSet dispositionHistoryDataSet = new DataSet();
 
             //Series of sql calls to gather data
             using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
@@ -105,10 +105,10 @@ namespace CKPaint
 
                         using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
                         {
-                            sqlDataAdapter.Fill(floorPartsDataSet, "SecondarySchedule");
+                            sqlDataAdapter.Fill(inlinePartsDataSet, "SecondarySchedule");
                         }
 
-                        ThreadSafe(() => dataGridView1.DataSource = floorPartsDataSet);
+                        ThreadSafe(() => dataGridView1.DataSource = inlinePartsDataSet);
                         ThreadSafe(() => dataGridView1.DataMember = "SecondarySchedule");
 
                     }
@@ -122,10 +122,10 @@ namespace CKPaint
 
                         using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
                         {
-                            sqlDataAdapter.Fill(inlinePartsDataSet, "SecondarySchedule");
+                            sqlDataAdapter.Fill(dispositionHistoryDataSet, "SecondarySchedule");
                         }
 
-                        ThreadSafe(() => dataGridView2.DataSource = inlinePartsDataSet);
+                        ThreadSafe(() => dataGridView2.DataSource = dispositionHistoryDataSet);
                         ThreadSafe(() => dataGridView2.DataMember = "SecondarySchedule");
 
                     }
@@ -250,102 +250,113 @@ namespace CKPaint
         private void disposePartButton_Click(object sender, EventArgs e)
         {
             
-            //SecondarySchedule SecondarySchedule_Part = new SecondarySchedule();
-            PartDispositionHistory PartDispositionHistory_Part = new PartDispositionHistory();
-            
-            //Series of sql calls to gather data
-            using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
-            {
-
-                Cursor.Current = Cursors.WaitCursor;
-                try
-                {
-                    sqlConnection.Open();
-                    using (SqlCommand sqlCommand = new SqlCommand("spDisposePartByWOID", sqlConnection))
-                    {
-                        sqlCommand.CommandType = CommandType.StoredProcedure;
-                        sqlCommand.Parameters.AddWithValue("@WOID", WOIDTxtBox.Text.ToString());
-                        sqlCommand.Parameters.AddWithValue("@DISPOSITION", dispositionCombo.SelectedItem.ToString().ToUpper());
-                        var sqlReader = sqlCommand.ExecuteReader();
-
-                        sqlReader.Read();
-                        if (sqlReader.HasRows)
-                        {
-                            PartDispositionHistory_Part.InspectorName = InspectorTxtBox.Text.ToString().ToUpper();
-                            PartDispositionHistory_Part.JobNumber = sqlReader.GetString(1);
-                            PartDispositionHistory_Part.PartNumber = sqlReader.GetString(3);
-                            PartDispositionHistory_Part.PartColor = sqlReader.GetString(5);
-                            PartDispositionHistory_Part.InspectorID = "000000";
-                            PartDispositionHistory_Part.Machine = "Mainline";
-                            PartDispositionHistory_Part.PartProcess = "Placeholder";
-                            PartDispositionHistory_Part.PartType = sqlReader.GetString(9);
-                            PartDispositionHistory_Part.WOID = sqlReader.GetString(17);
-                            PartDispositionHistory_Part.PartDefect = defectCombo.SelectedItem.ToString().ToUpper();
-                            PartDispositionHistory_Part.DPUCount = Convert.ToInt16(dpuNumBox.Value);
-                            PartDispositionHistory_Part.PartDisposition = dispositionCombo.SelectedItem.ToString().ToUpper();
-                            PartDispositionHistory_Part.PartDescription = "Placeholder";
-                            PartDispositionHistory_Part.DispositionDate = DateTime.Now;
-
-                            Console.WriteLine(PartDispositionHistory_Part.DispositionDate);
-                        }
-                        else
-                        {
-                           Console.WriteLine("Part does not exist or is inline!");
-                        }
-
-                        sqlCommand.Dispose();
-                        sqlReader.Close();
-                    }
-
-                    //THIS NEEDS A BOUNDARY CHECK
-                    using (SqlCommand sqlCommand = new SqlCommand("spInsertDispositionHistory", sqlConnection))
-                    {
-                        Console.WriteLine(PartDispositionHistory_Part.InspectorName);
-                        
-                        sqlCommand.CommandType = CommandType.StoredProcedure;
-                        sqlCommand.Parameters.AddWithValue("@INSPECTORNAME", PartDispositionHistory_Part.InspectorName);
-                        sqlCommand.Parameters.AddWithValue("@JOBNUMBER", PartDispositionHistory_Part.JobNumber);
-                        sqlCommand.Parameters.AddWithValue("@PARTNUMBER", PartDispositionHistory_Part.PartNumber);
-                        sqlCommand.Parameters.AddWithValue("@PARTCOLOR", PartDispositionHistory_Part.PartColor);
-                        sqlCommand.Parameters.AddWithValue("@PARTTYPE", PartDispositionHistory_Part.PartColor);
-                        sqlCommand.Parameters.AddWithValue("@INSPECTORID", PartDispositionHistory_Part.InspectorID);
-                        sqlCommand.Parameters.AddWithValue("@MACHINE", PartDispositionHistory_Part.Machine);
-                        sqlCommand.Parameters.AddWithValue("@PARTPROCESS", PartDispositionHistory_Part.PartProcess);
-                        sqlCommand.Parameters.AddWithValue("@WOID", PartDispositionHistory_Part.WOID);
-                        sqlCommand.Parameters.AddWithValue("@PARTDEFECT", PartDispositionHistory_Part.PartDefect);
-                        sqlCommand.Parameters.AddWithValue("@DPUCOUNT", PartDispositionHistory_Part.DPUCount);
-                        sqlCommand.Parameters.AddWithValue("@PARTDISPOSITION", PartDispositionHistory_Part.PartDisposition);
-                        sqlCommand.Parameters.AddWithValue("@PARTDESCRIPTION", PartDispositionHistory_Part.PartDescription);
-                        sqlCommand.Parameters.AddWithValue("@DISPOSITIONDATE", PartDispositionHistory_Part.DispositionDate);
-                        
-                        sqlCommand.ExecuteNonQuery();
-                        
-
-                        sqlCommand.Dispose();
-                        
-                    }
-
-
-                    sqlConnection.Close();
-
-                }
-                catch (Exception err)
-                {
-                    MessageBox.Show(err.Message, "Print Label OnClick Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Console.WriteLine(err);
-                }
-
-                Cursor.Current = Cursors.Default;
-
-            }
+           
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            //DISPOSITION DOUBLE CLICK
-            string arg = dataGridView1.Rows[e.RowIndex].Cells[17].Value.ToString();
+            if (e.RowIndex == -1)
+                return;
 
-            WOIDTxtBox.Text = arg;
+            //DISPOSITION DOUBLE CLICK
+            string partWOID = dataGridView1.Rows[e.RowIndex].Cells[17].Value.ToString();
+            
+
+            PartDispositionForm partDispositionForm = new PartDispositionForm();
+            partDispositionForm.disposePartWOID = partWOID;
+            
+
+            partDispositionForm.ShowDialog();
+            if (partDispositionForm.disposeActionButtonSelected)
+            {
+                //SecondarySchedule SecondarySchedule_Part = new SecondarySchedule();
+                PartDispositionHistory PartDispositionHistory_Part = new PartDispositionHistory();
+
+                //Series of sql calls to gather data
+                using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
+                {
+
+                    Cursor.Current = Cursors.WaitCursor;
+                    try
+                    {
+                        sqlConnection.Open();
+                        using (SqlCommand sqlCommand = new SqlCommand("spDisposePartByWOID", sqlConnection))
+                        {
+                            sqlCommand.CommandType = CommandType.StoredProcedure;
+                            sqlCommand.Parameters.AddWithValue("@WOID", partDispositionForm.disposePartWOID);
+                            sqlCommand.Parameters.AddWithValue("@DISPOSITION", partDispositionForm.dispositionResult.ToString().ToUpper());
+                            var sqlReader = sqlCommand.ExecuteReader();
+
+                            sqlReader.Read();
+                            if (sqlReader.HasRows)
+                            {
+                                PartDispositionHistory_Part.InspectorName = partDispositionForm.dispositionInspectorName.ToString().ToUpper();
+                                PartDispositionHistory_Part.JobNumber = sqlReader.GetString(1);
+                                PartDispositionHistory_Part.PartNumber = sqlReader.GetString(3);
+                                PartDispositionHistory_Part.PartColor = sqlReader.GetString(5);
+                                PartDispositionHistory_Part.InspectorID = "000000";
+                                PartDispositionHistory_Part.Machine = "Mainline";
+                                PartDispositionHistory_Part.PartProcess = "Placeholder";
+                                PartDispositionHistory_Part.PartType = sqlReader.GetString(9);
+                                PartDispositionHistory_Part.WOID = sqlReader.GetString(17);
+                                PartDispositionHistory_Part.PartDefect = partDispositionForm.dispositionPartDefect.ToString().ToUpper();
+                                PartDispositionHistory_Part.DPUCount = Convert.ToInt16(partDispositionForm.dispositionDPUNum);
+                                PartDispositionHistory_Part.PartDisposition = partDispositionForm.dispositionResult.ToString().ToUpper();
+                                PartDispositionHistory_Part.PartDescription = "Placeholder";
+                                PartDispositionHistory_Part.DispositionDate = DateTime.Now;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Part does not exist or is inline!");
+                            }
+
+                            sqlCommand.Dispose();
+                            sqlReader.Close();
+                        }
+
+                        //THIS NEEDS A BOUNDARY CHECK
+                        using (SqlCommand sqlCommand = new SqlCommand("spInsertDispositionHistory", sqlConnection))
+                        {
+                            Console.WriteLine(PartDispositionHistory_Part.InspectorName);
+
+                            sqlCommand.CommandType = CommandType.StoredProcedure;
+                            sqlCommand.Parameters.AddWithValue("@INSPECTORNAME", PartDispositionHistory_Part.InspectorName);
+                            sqlCommand.Parameters.AddWithValue("@JOBNUMBER", PartDispositionHistory_Part.JobNumber);
+                            sqlCommand.Parameters.AddWithValue("@PARTNUMBER", PartDispositionHistory_Part.PartNumber);
+                            sqlCommand.Parameters.AddWithValue("@PARTCOLOR", PartDispositionHistory_Part.PartColor);
+                            sqlCommand.Parameters.AddWithValue("@PARTTYPE", PartDispositionHistory_Part.PartColor);
+                            sqlCommand.Parameters.AddWithValue("@INSPECTORID", PartDispositionHistory_Part.InspectorID);
+                            sqlCommand.Parameters.AddWithValue("@MACHINE", PartDispositionHistory_Part.Machine);
+                            sqlCommand.Parameters.AddWithValue("@PARTPROCESS", PartDispositionHistory_Part.PartProcess);
+                            sqlCommand.Parameters.AddWithValue("@WOID", PartDispositionHistory_Part.WOID);
+                            sqlCommand.Parameters.AddWithValue("@PARTDEFECT", PartDispositionHistory_Part.PartDefect);
+                            sqlCommand.Parameters.AddWithValue("@DPUCOUNT", PartDispositionHistory_Part.DPUCount);
+                            sqlCommand.Parameters.AddWithValue("@PARTDISPOSITION", PartDispositionHistory_Part.PartDisposition);
+                            sqlCommand.Parameters.AddWithValue("@PARTDESCRIPTION", PartDispositionHistory_Part.PartDescription);
+                            sqlCommand.Parameters.AddWithValue("@DISPOSITIONDATE", PartDispositionHistory_Part.DispositionDate);
+
+                            sqlCommand.ExecuteNonQuery();
+
+
+                            sqlCommand.Dispose();
+
+                        }
+
+
+                        sqlConnection.Close();
+
+                    }
+                    catch (Exception err)
+                    {
+                        MessageBox.Show(err.Message, "Print Label OnClick Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Console.WriteLine(err);
+                    }
+
+                    Cursor.Current = Cursors.Default;
+
+                }
+            }
+
         }
 
         private void dataGridView2_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

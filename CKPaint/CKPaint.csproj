@@ -171,6 +171,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="logo.ico" />
+    <None Include="Resources\sample.png" />
+    <None Include="Resources\verifyInfo.jpg" />
     <None Include="Resources\arial.jpg" />
     <None Include="Resources\warning.png" />
   </ItemGroup>

@@ -415,16 +415,23 @@ namespace CKPaint
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            //REALLY?
+            if (e.RowIndex == -1)
+                return;
+
             bool RH = false;
 
             //LOAD DOUBLE CLICK
             string woidString = dataGridView1.Rows[e.RowIndex].Cells[17].Value.ToString();
             string woidStringRH = dataGridView1.Rows[e.RowIndex].Cells[18].Value.ToString();
-            string partNumberString = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString(); 
+            string partNumberString = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+            string partNumberRHString = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
 
             ConfirmActionWindow confirmActionWindow = new ConfirmActionWindow();
             confirmActionWindow.partWOID = woidString;
-            confirmActionWindow.partJobNumber = partNumberString;
+            confirmActionWindow.partNumber = partNumberString;
+            confirmActionWindow.partWOIDRH = woidStringRH;
+            confirmActionWindow.partNumberRH = partNumberRHString;
 
             if (!string.IsNullOrEmpty(woidStringRH) && (woidString != woidStringRH))
             {

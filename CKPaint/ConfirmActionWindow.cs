@@ -19,7 +19,10 @@ namespace CKPaint
         public int actionState = 0;
         public bool confirmActionButtonSelected = false;
         public string partWOID = "";
-        public string partJobNumber = "";
+        public string partNumber = "";
+
+        public string partWOIDRH = "";
+        public string partNumberRH = "";
 
         public ConfirmActionWindow()
         {
@@ -29,7 +32,11 @@ namespace CKPaint
         private void ConfirmActionWindow_Load(object sender, EventArgs e)
         {
             woidTxtLbl.Text = partWOID;
-            jobNumTxtLbl.Text = partJobNumber;
+            partNumTxtLbl.Text = partNumber;
+
+            woidRHTxtLbl.Text = partWOIDRH;
+            partNumRHTxtLbl.Text = partNumberRH;
+
 
             if (actionState == 0)
             {
@@ -39,6 +46,7 @@ namespace CKPaint
                 codeLabel.Visible = false;
                 codeTextBox.Visible = false;
                 confirmButton.Text = "Print Label";
+
             } else if(actionState == 1)
             {
                 warningPanel.BackColor = Color.Tomato;
@@ -46,6 +54,7 @@ namespace CKPaint
                 codeDescriptionLabel.Visible = true;
                 codeLabel.Visible = true;
                 codeTextBox.Visible = true;
+                instructionBox.Visible = false;
                 confirmButton.Text = "Confirm";
                 confirmButton.BackColor = Color.ForestGreen;
             } else

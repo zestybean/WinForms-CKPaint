@@ -39,19 +39,8 @@ namespace CKPaint
             this.partsInlineLabel = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.controlPanel = new System.Windows.Forms.Panel();
-            this.defectCombo = new System.Windows.Forms.ComboBox();
-            this.dispositionCombo = new System.Windows.Forms.ComboBox();
-            this.dpuNumBox = new System.Windows.Forms.NumericUpDown();
-            this.InspectorTxtBox = new System.Windows.Forms.TextBox();
-            this.inspectorTitle = new System.Windows.Forms.Label();
             this.errorLabel = new System.Windows.Forms.Label();
-            this.WOIDTxtBox = new System.Windows.Forms.TextBox();
-            this.WOIDTitle = new System.Windows.Forms.Label();
-            this.dpuTitle = new System.Windows.Forms.Label();
-            this.dispositionTitle = new System.Windows.Forms.Label();
-            this.defectTitle = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.disposePartButton = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.getAllReworkButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -62,7 +51,6 @@ namespace CKPaint
             this.SearchTxtBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.controlPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dpuNumBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -129,11 +117,11 @@ namespace CKPaint
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView2.Location = new System.Drawing.Point(12, 487);
+            this.dataGridView2.Location = new System.Drawing.Point(12, 467);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(1315, 340);
+            this.dataGridView2.Size = new System.Drawing.Size(1315, 360);
             this.dataGridView2.TabIndex = 12;
             this.dataGridView2.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellDoubleClick);
             // 
@@ -143,72 +131,11 @@ namespace CKPaint
             | System.Windows.Forms.AnchorStyles.Right)));
             this.controlPanel.BackColor = System.Drawing.SystemColors.ControlLight;
             this.controlPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.controlPanel.Controls.Add(this.defectCombo);
-            this.controlPanel.Controls.Add(this.dispositionCombo);
-            this.controlPanel.Controls.Add(this.dpuNumBox);
-            this.controlPanel.Controls.Add(this.InspectorTxtBox);
-            this.controlPanel.Controls.Add(this.inspectorTitle);
             this.controlPanel.Controls.Add(this.errorLabel);
-            this.controlPanel.Controls.Add(this.WOIDTxtBox);
-            this.controlPanel.Controls.Add(this.WOIDTitle);
-            this.controlPanel.Controls.Add(this.dpuTitle);
-            this.controlPanel.Controls.Add(this.dispositionTitle);
-            this.controlPanel.Controls.Add(this.defectTitle);
-            this.controlPanel.Location = new System.Drawing.Point(12, 377);
+            this.controlPanel.Location = new System.Drawing.Point(12, 405);
             this.controlPanel.Name = "controlPanel";
-            this.controlPanel.Size = new System.Drawing.Size(1315, 51);
+            this.controlPanel.Size = new System.Drawing.Size(1315, 31);
             this.controlPanel.TabIndex = 11;
-            // 
-            // defectCombo
-            // 
-            this.defectCombo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.defectCombo.FormattingEnabled = true;
-            this.defectCombo.Items.AddRange(new object[] {
-            "Paint Run",
-            "Dirt"});
-            this.defectCombo.Location = new System.Drawing.Point(740, 8);
-            this.defectCombo.Name = "defectCombo";
-            this.defectCombo.Size = new System.Drawing.Size(136, 28);
-            this.defectCombo.TabIndex = 6;
-            // 
-            // dispositionCombo
-            // 
-            this.dispositionCombo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dispositionCombo.FormattingEnabled = true;
-            this.dispositionCombo.Items.AddRange(new object[] {
-            "Approved",
-            "Finnesse",
-            "Rework"});
-            this.dispositionCombo.Location = new System.Drawing.Point(1167, 8);
-            this.dispositionCombo.Name = "dispositionCombo";
-            this.dispositionCombo.Size = new System.Drawing.Size(136, 28);
-            this.dispositionCombo.TabIndex = 8;
-            // 
-            // dpuNumBox
-            // 
-            this.dpuNumBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dpuNumBox.Location = new System.Drawing.Point(962, 7);
-            this.dpuNumBox.Name = "dpuNumBox";
-            this.dpuNumBox.Size = new System.Drawing.Size(66, 29);
-            this.dpuNumBox.TabIndex = 7;
-            // 
-            // InspectorTxtBox
-            // 
-            this.InspectorTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.InspectorTxtBox.Location = new System.Drawing.Point(424, 7);
-            this.InspectorTxtBox.Name = "InspectorTxtBox";
-            this.InspectorTxtBox.Size = new System.Drawing.Size(227, 31);
-            this.InspectorTxtBox.TabIndex = 5;
-            // 
-            // inspectorTitle
-            // 
-            this.inspectorTitle.AutoSize = true;
-            this.inspectorTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.inspectorTitle.Location = new System.Drawing.Point(310, 10);
-            this.inspectorTitle.Name = "inspectorTitle";
-            this.inspectorTitle.Size = new System.Drawing.Size(116, 25);
-            this.inspectorTitle.TabIndex = 11;
-            this.inspectorTitle.Text = "Inspector:";
             // 
             // errorLabel
             // 
@@ -219,54 +146,6 @@ namespace CKPaint
             this.errorLabel.Name = "errorLabel";
             this.errorLabel.Size = new System.Drawing.Size(0, 13);
             this.errorLabel.TabIndex = 10;
-            // 
-            // WOIDTxtBox
-            // 
-            this.WOIDTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WOIDTxtBox.Location = new System.Drawing.Point(77, 7);
-            this.WOIDTxtBox.Name = "WOIDTxtBox";
-            this.WOIDTxtBox.Size = new System.Drawing.Size(227, 31);
-            this.WOIDTxtBox.TabIndex = 4;
-            // 
-            // WOIDTitle
-            // 
-            this.WOIDTitle.AutoSize = true;
-            this.WOIDTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WOIDTitle.Location = new System.Drawing.Point(3, 10);
-            this.WOIDTitle.Name = "WOIDTitle";
-            this.WOIDTitle.Size = new System.Drawing.Size(79, 25);
-            this.WOIDTitle.TabIndex = 5;
-            this.WOIDTitle.Text = "WOID:";
-            // 
-            // dpuTitle
-            // 
-            this.dpuTitle.AutoSize = true;
-            this.dpuTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dpuTitle.Location = new System.Drawing.Point(882, 10);
-            this.dpuTitle.Name = "dpuTitle";
-            this.dpuTitle.Size = new System.Drawing.Size(83, 25);
-            this.dpuTitle.TabIndex = 16;
-            this.dpuTitle.Text = "DPU\'s:";
-            // 
-            // dispositionTitle
-            // 
-            this.dispositionTitle.AutoSize = true;
-            this.dispositionTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dispositionTitle.Location = new System.Drawing.Point(1034, 10);
-            this.dispositionTitle.Name = "dispositionTitle";
-            this.dispositionTitle.Size = new System.Drawing.Size(136, 25);
-            this.dispositionTitle.TabIndex = 19;
-            this.dispositionTitle.Text = "Disposition:";
-            // 
-            // defectTitle
-            // 
-            this.defectTitle.AutoSize = true;
-            this.defectTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.defectTitle.Location = new System.Drawing.Point(657, 10);
-            this.defectTitle.Name = "defectTitle";
-            this.defectTitle.Size = new System.Drawing.Size(87, 25);
-            this.defectTitle.TabIndex = 13;
-            this.defectTitle.Text = "Defect:";
             // 
             // dataGridView1
             // 
@@ -296,23 +175,9 @@ namespace CKPaint
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1315, 275);
+            this.dataGridView1.Size = new System.Drawing.Size(1315, 303);
             this.dataGridView1.TabIndex = 10;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
-            // 
-            // disposePartButton
-            // 
-            this.disposePartButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.disposePartButton.BackColor = System.Drawing.Color.SeaGreen;
-            this.disposePartButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.disposePartButton.ForeColor = System.Drawing.Color.White;
-            this.disposePartButton.Location = new System.Drawing.Point(1051, 431);
-            this.disposePartButton.Name = "disposePartButton";
-            this.disposePartButton.Size = new System.Drawing.Size(276, 50);
-            this.disposePartButton.TabIndex = 15;
-            this.disposePartButton.Text = "Dispose Part";
-            this.disposePartButton.UseVisualStyleBackColor = false;
-            this.disposePartButton.Click += new System.EventHandler(this.disposePartButton_Click);
             // 
             // pictureBox1
             // 
@@ -420,7 +285,6 @@ namespace CKPaint
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.SearchTxtBox);
-            this.Controls.Add(this.disposePartButton);
             this.Controls.Add(this.partsOnFloorLabel);
             this.Controls.Add(this.partsInlineLabel);
             this.Controls.Add(this.dataGridView2);
@@ -437,7 +301,6 @@ namespace CKPaint
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.controlPanel.ResumeLayout(false);
             this.controlPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dpuNumBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -455,18 +318,7 @@ namespace CKPaint
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Panel controlPanel;
         private System.Windows.Forms.Label errorLabel;
-        private System.Windows.Forms.TextBox WOIDTxtBox;
-        private System.Windows.Forms.Label WOIDTitle;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.NumericUpDown dpuNumBox;
-        private System.Windows.Forms.Label defectTitle;
-        private System.Windows.Forms.TextBox InspectorTxtBox;
-        private System.Windows.Forms.Label inspectorTitle;
-        private System.Windows.Forms.ComboBox defectCombo;
-        private System.Windows.Forms.ComboBox dispositionCombo;
-        private System.Windows.Forms.Label dpuTitle;
-        private System.Windows.Forms.Label dispositionTitle;
-        private System.Windows.Forms.Button disposePartButton;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button getAllReworkButton;
         private System.Windows.Forms.Button button1;
