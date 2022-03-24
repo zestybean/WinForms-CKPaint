@@ -21,6 +21,13 @@ public static class PrintToZebraHelper
         System.IO.StreamReader fileReader = new System.IO.StreamReader(labelPath);
         string fileContent = fileReader.ReadToEnd().ToString();
 
+        string reworkPart = "";
+
+        if (secondarySchedule_Part.PartRework == 1)
+        {
+            reworkPart = "RP";
+        }
+
         if (RH)
         {
             fileContent = fileContent.Replace("@JN", secondarySchedule_Part.JobNumber).Replace("@LS", secondarySchedule_Part.SetNumber)
@@ -28,6 +35,7 @@ public static class PrintToZebraHelper
            .Replace("@DES", secondarySchedule_Part.DescriptionRH).Replace("@RC", secondarySchedule_Part.RackCode)
            .Replace("@RP", secondarySchedule_Part.RackPositionRH).Replace("@BLK", secondarySchedule_Part.PaintBlock)
            .Replace("@WOID", secondarySchedule_Part.WOIDRH).Replace("@DT", System.DateTime.Now.ToString())
+           .Replace("@DIS", reworkPart)
            .Replace("@REV", CKPaint.Properties.Settings.Default["Station"].ToString())
            .Replace("@LP", CKPaint.Properties.Settings.Default["Plant"].ToString());
         } else
@@ -37,6 +45,7 @@ public static class PrintToZebraHelper
            .Replace("@DES", secondarySchedule_Part.Description).Replace("@RC", secondarySchedule_Part.RackCode)
            .Replace("@RP", secondarySchedule_Part.RackPosition).Replace("@BLK", secondarySchedule_Part.PaintBlock)
            .Replace("@WOID", secondarySchedule_Part.WOID).Replace("@DT", System.DateTime.Now.ToString())
+           .Replace("@DIS", reworkPart.ToString())
            .Replace("@REV", CKPaint.Properties.Settings.Default["Station"].ToString())
            .Replace("@LP", CKPaint.Properties.Settings.Default["Plant"].ToString());
         }

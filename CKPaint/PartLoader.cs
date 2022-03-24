@@ -462,6 +462,7 @@ namespace CKPaint
                                 SecondarySchedule_Part.RackPosition = sqlReader.GetString(12);
                                 SecondarySchedule_Part.PaintBlock = sqlReader.GetString(16);
                                 SecondarySchedule_Part.WOID = sqlReader.GetString(17);
+                                SecondarySchedule_Part.PartRework = sqlReader.GetInt16(22);
 
 
                                 //PRINTING WILL OCCURR HERE!
