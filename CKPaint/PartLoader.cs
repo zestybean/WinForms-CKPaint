@@ -508,5 +508,12 @@ namespace CKPaint
                 }
             }
         }
+
+        private void dataGridView2_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //REALLY?
+            if (e.RowIndex == -1)
+                return;
+        }
     }
 }

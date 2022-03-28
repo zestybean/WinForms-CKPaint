@@ -337,7 +337,6 @@ namespace CKPaint
 
                             sqlCommand.ExecuteNonQuery();
 
-
                             sqlCommand.Dispose();
 
                         }
