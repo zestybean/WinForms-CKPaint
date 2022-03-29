@@ -13,7 +13,7 @@ namespace CKPaint
         {
             bool result;
 
-            var mutex = new System.Threading.Mutex(true, "UniqueAppId", out result);
+            var mutex = new System.Threading.Mutex(true, "CKPaint", out result);
 
             if (!result)
             {

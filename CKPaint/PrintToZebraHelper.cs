@@ -16,7 +16,7 @@ public static class PrintToZebraHelper
         string IPADDRESS = CKPaint.Properties.Settings.Default["Printer"].ToString();
         int PORT = 9100;
 
-        string labelPath = @"C:\Users\brando.lugo\Desktop\CK Paint Label.txt";
+        string labelPath = @"\\hail\Shared\Pace Board\CK Paint Label Format\CK Paint Label.txt";
 
         System.IO.StreamReader fileReader = new System.IO.StreamReader(labelPath);
         string fileContent = fileReader.ReadToEnd().ToString();
