@@ -31,6 +31,7 @@ namespace CKPaint
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfirmActionWindow));
             this.warningPanel = new System.Windows.Forms.Panel();
+            this.warningLogo = new System.Windows.Forms.PictureBox();
             this.warningLabel = new System.Windows.Forms.Label();
             this.jobNumberLbl = new System.Windows.Forms.Label();
             this.confirmButton = new System.Windows.Forms.Button();
@@ -43,14 +44,12 @@ namespace CKPaint
             this.partNumTxtLbl = new System.Windows.Forms.Label();
             this.woidRHTxtLbl = new System.Windows.Forms.Label();
             this.woidRHLbl = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.partNumRHTxtLbl = new System.Windows.Forms.Label();
             this.instructionBox = new System.Windows.Forms.PictureBox();
-            this.warningLogo = new System.Windows.Forms.PictureBox();
             this.warningPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.instructionBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.warningLogo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.instructionBox)).BeginInit();
             this.SuspendLayout();
             // 
             // warningPanel
@@ -61,6 +60,17 @@ namespace CKPaint
             this.warningPanel.Name = "warningPanel";
             this.warningPanel.Size = new System.Drawing.Size(513, 104);
             this.warningPanel.TabIndex = 1;
+            // 
+            // warningLogo
+            // 
+            this.warningLogo.BackColor = System.Drawing.Color.Gold;
+            this.warningLogo.Image = global::CKPaint.Properties.Resources.warning;
+            this.warningLogo.Location = new System.Drawing.Point(219, 14);
+            this.warningLogo.Name = "warningLogo";
+            this.warningLogo.Size = new System.Drawing.Size(82, 78);
+            this.warningLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.warningLogo.TabIndex = 0;
+            this.warningLogo.TabStop = false;
             // 
             // warningLabel
             // 
@@ -115,11 +125,11 @@ namespace CKPaint
             this.codeDescriptionLabel.AutoSize = true;
             this.codeDescriptionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.codeDescriptionLabel.ForeColor = System.Drawing.Color.White;
-            this.codeDescriptionLabel.Location = new System.Drawing.Point(93, 389);
+            this.codeDescriptionLabel.Location = new System.Drawing.Point(72, 339);
             this.codeDescriptionLabel.Name = "codeDescriptionLabel";
-            this.codeDescriptionLabel.Size = new System.Drawing.Size(346, 24);
+            this.codeDescriptionLabel.Size = new System.Drawing.Size(384, 48);
             this.codeDescriptionLabel.TabIndex = 6;
-            this.codeDescriptionLabel.Text = "Please enter code to confirm action:";
+            this.codeDescriptionLabel.Text = "This is an elevated action please enter\r\nthe password to override the procedure.";
             // 
             // codeTextBox
             // 
@@ -136,9 +146,9 @@ namespace CKPaint
             this.codeLabel.ForeColor = System.Drawing.Color.White;
             this.codeLabel.Location = new System.Drawing.Point(126, 414);
             this.codeLabel.Name = "codeLabel";
-            this.codeLabel.Size = new System.Drawing.Size(66, 24);
+            this.codeLabel.Size = new System.Drawing.Size(106, 24);
             this.codeLabel.TabIndex = 8;
-            this.codeLabel.Text = "Code:";
+            this.codeLabel.Text = "Password:";
             // 
             // woidLbl
             // 
@@ -201,20 +211,6 @@ namespace CKPaint
             this.woidRHLbl.TabIndex = 13;
             this.woidRHLbl.Text = "WOID RH:";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Tomato;
-            this.label1.Location = new System.Drawing.Point(189, 412);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 26);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "000000";
-            this.label1.Visible = false;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -250,27 +246,14 @@ namespace CKPaint
             this.instructionBox.TabIndex = 18;
             this.instructionBox.TabStop = false;
             // 
-            // warningLogo
-            // 
-            this.warningLogo.BackColor = System.Drawing.Color.Gold;
-            this.warningLogo.Image = global::CKPaint.Properties.Resources.warning;
-            this.warningLogo.Location = new System.Drawing.Point(219, 14);
-            this.warningLogo.Name = "warningLogo";
-            this.warningLogo.Size = new System.Drawing.Size(82, 78);
-            this.warningLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.warningLogo.TabIndex = 0;
-            this.warningLogo.TabStop = false;
-            // 
             // ConfirmActionWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Highlight;
             this.ClientSize = new System.Drawing.Size(513, 589);
-            this.Controls.Add(this.instructionBox);
             this.Controls.Add(this.partNumRHTxtLbl);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.woidRHTxtLbl);
             this.Controls.Add(this.woidRHLbl);
             this.Controls.Add(this.partNumTxtLbl);
@@ -284,6 +267,7 @@ namespace CKPaint
             this.Controls.Add(this.jobNumberLbl);
             this.Controls.Add(this.warningLabel);
             this.Controls.Add(this.warningPanel);
+            this.Controls.Add(this.instructionBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -293,8 +277,8 @@ namespace CKPaint
             this.Text = "CK Paint - Confirm Action";
             this.Load += new System.EventHandler(this.ConfirmActionWindow_Load);
             this.warningPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.instructionBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.warningLogo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.instructionBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -316,7 +300,6 @@ namespace CKPaint
         private System.Windows.Forms.Label partNumTxtLbl;
         private System.Windows.Forms.Label woidRHTxtLbl;
         private System.Windows.Forms.Label woidRHLbl;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label partNumRHTxtLbl;
         private System.Windows.Forms.PictureBox instructionBox;

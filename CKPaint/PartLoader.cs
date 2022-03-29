@@ -531,6 +531,36 @@ namespace CKPaint
 
             confirmActionWindow.ShowDialog();
 
+            if (confirmActionWindow.confirmActionButtonSelected)
+            {
+                //Series of sql calls to gather data
+                using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
+                {
+
+                    Cursor.Current = Cursors.WaitCursor;
+                    try
+                    {
+                        sqlConnection.Open();
+                        using (SqlCommand sqlCommand = new SqlCommand("spResetPartByWOID", sqlConnection))
+                        {
+                            sqlCommand.CommandType = CommandType.StoredProcedure;
+                            sqlCommand.Parameters.AddWithValue("@WOID", woidString);
+                            sqlCommand.ExecuteNonQuery();
+                            sqlCommand.Dispose();
+                        }
+
+                    }
+                    catch (Exception err)
+                    {
+                        MessageBox.Show(err.Message, "Confirm Action Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Console.WriteLine(err);
+                    }
+
+                    Cursor.Current = Cursors.Default;
+
+                }
+            }
+
         }
 
 

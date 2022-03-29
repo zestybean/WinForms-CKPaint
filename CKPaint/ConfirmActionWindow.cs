@@ -49,7 +49,7 @@ namespace CKPaint
 
             } else if(actionState == 1)
             {
-                warningPanel.BackColor = Color.Tomato;
+                warningPanel.BackColor = Color.Red;
                 warningLogo.BackColor = Color.Transparent;
                 codeDescriptionLabel.Visible = true;
                 codeLabel.Visible = true;
@@ -57,6 +57,11 @@ namespace CKPaint
                 instructionBox.Visible = false;
                 confirmButton.Text = "Confirm";
                 confirmButton.BackColor = Color.ForestGreen;
+                partNumTxtLbl.ForeColor = Color.Black;
+                partNumRHTxtLbl.ForeColor = Color.Black;
+                woidTxtLbl.ForeColor = Color.Black;
+                woidRHTxtLbl.ForeColor = Color.Black;
+                this.BackColor = Color.Firebrick;
                 Blink();
             } else
             {
@@ -79,8 +84,8 @@ namespace CKPaint
         {
             while (true)
             {
-                await Task.Delay(500);
-                warningPanel.BackColor = warningPanel.BackColor == Color.OrangeRed ? Color.Tomato : Color.OrangeRed;
+                await Task.Delay(400);
+                warningPanel.BackColor = warningPanel.BackColor == Color.DarkRed ? Color.Red : Color.DarkRed;
             }
         }
     }
