@@ -514,6 +514,25 @@ namespace CKPaint
             //REALLY?
             if (e.RowIndex == -1)
                 return;
+
+            ConfirmActionWindow confirmActionWindow = new ConfirmActionWindow();
+            confirmActionWindow.actionState = 1;
+          
+            //LOAD DOUBLE CLICK
+            string woidString = dataGridView2.Rows[e.RowIndex].Cells[17].Value.ToString();
+            string woidStringRH = dataGridView2.Rows[e.RowIndex].Cells[18].Value.ToString();
+            string partNumberString = dataGridView2.Rows[e.RowIndex].Cells[3].Value.ToString();
+            string partNumberRHString = dataGridView2.Rows[e.RowIndex].Cells[4].Value.ToString();
+
+            confirmActionWindow.partWOID = woidString;
+            confirmActionWindow.partNumber = partNumberString;
+            confirmActionWindow.partWOIDRH = woidStringRH;
+            confirmActionWindow.partNumberRH = partNumberRHString;
+
+            confirmActionWindow.ShowDialog();
+
         }
+
+
     }
 }

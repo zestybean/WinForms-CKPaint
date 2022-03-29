@@ -41,7 +41,7 @@ namespace CKPaint
             if (actionState == 0)
             {
                 warningPanel.BackColor = Color.Gold;
-                warningLogo.BackColor = Color.Gold;
+                warningLogo.BackColor = Color.Transparent;
                 codeDescriptionLabel.Visible = false;
                 codeLabel.Visible = false;
                 codeTextBox.Visible = false;
@@ -50,13 +50,14 @@ namespace CKPaint
             } else if(actionState == 1)
             {
                 warningPanel.BackColor = Color.Tomato;
-                warningLogo.BackColor = Color.Tomato;
+                warningLogo.BackColor = Color.Transparent;
                 codeDescriptionLabel.Visible = true;
                 codeLabel.Visible = true;
                 codeTextBox.Visible = true;
                 instructionBox.Visible = false;
                 confirmButton.Text = "Confirm";
                 confirmButton.BackColor = Color.ForestGreen;
+                Blink();
             } else
             {
                 woidTxtLbl.Text = "MAJOR ERROR";
@@ -72,6 +73,15 @@ namespace CKPaint
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private async void Blink()
+        {
+            while (true)
+            {
+                await Task.Delay(500);
+                warningPanel.BackColor = warningPanel.BackColor == Color.OrangeRed ? Color.Tomato : Color.OrangeRed;
+            }
         }
     }
 }
