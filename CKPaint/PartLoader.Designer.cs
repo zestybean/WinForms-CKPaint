@@ -49,9 +49,10 @@ namespace CKPaint
             this.searchWOIDRb = new System.Windows.Forms.RadioButton();
             this.searchButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.clearSearchButton = new System.Windows.Forms.Button();
             this.getAllReworkButton = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.bumperSearchButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.controlPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -258,11 +259,11 @@ namespace CKPaint
             this.searchButton.BackColor = System.Drawing.Color.DodgerBlue;
             this.searchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchButton.ForeColor = System.Drawing.Color.White;
-            this.searchButton.Location = new System.Drawing.Point(476, 82);
+            this.searchButton.Location = new System.Drawing.Point(476, 28);
             this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(123, 33);
+            this.searchButton.Size = new System.Drawing.Size(123, 87);
             this.searchButton.TabIndex = 11;
-            this.searchButton.Text = "Search";
+            this.searchButton.Text = "Skirt \r\nSearch";
             this.searchButton.UseVisualStyleBackColor = false;
             this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
@@ -277,27 +278,27 @@ namespace CKPaint
             this.panel1.Size = new System.Drawing.Size(1315, 44);
             this.panel1.TabIndex = 13;
             // 
-            // button1
+            // clearSearchButton
             // 
-            this.button1.BackColor = System.Drawing.Color.Tomato;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(605, 28);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(123, 87);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Clear Search";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.clearSearchButton_Click);
+            this.clearSearchButton.BackColor = System.Drawing.Color.Tomato;
+            this.clearSearchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clearSearchButton.ForeColor = System.Drawing.Color.White;
+            this.clearSearchButton.Location = new System.Drawing.Point(734, 28);
+            this.clearSearchButton.Name = "clearSearchButton";
+            this.clearSearchButton.Size = new System.Drawing.Size(123, 87);
+            this.clearSearchButton.TabIndex = 14;
+            this.clearSearchButton.Text = "Clear Search";
+            this.clearSearchButton.UseVisualStyleBackColor = false;
+            this.clearSearchButton.Click += new System.EventHandler(this.clearSearchButton_Click);
             // 
             // getAllReworkButton
             // 
             this.getAllReworkButton.BackColor = System.Drawing.Color.Gold;
             this.getAllReworkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.getAllReworkButton.ForeColor = System.Drawing.Color.Black;
-            this.getAllReworkButton.Location = new System.Drawing.Point(476, 28);
+            this.getAllReworkButton.Location = new System.Drawing.Point(863, 28);
             this.getAllReworkButton.Name = "getAllReworkButton";
-            this.getAllReworkButton.Size = new System.Drawing.Size(123, 51);
+            this.getAllReworkButton.Size = new System.Drawing.Size(123, 87);
             this.getAllReworkButton.TabIndex = 15;
             this.getAllReworkButton.Text = "All Rework Parts";
             this.getAllReworkButton.UseVisualStyleBackColor = false;
@@ -314,15 +315,29 @@ namespace CKPaint
             this.pictureBox1.TabIndex = 16;
             this.pictureBox1.TabStop = false;
             // 
+            // bumperSearchButton
+            // 
+            this.bumperSearchButton.BackColor = System.Drawing.Color.MediumOrchid;
+            this.bumperSearchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bumperSearchButton.ForeColor = System.Drawing.Color.White;
+            this.bumperSearchButton.Location = new System.Drawing.Point(605, 28);
+            this.bumperSearchButton.Name = "bumperSearchButton";
+            this.bumperSearchButton.Size = new System.Drawing.Size(123, 87);
+            this.bumperSearchButton.TabIndex = 17;
+            this.bumperSearchButton.Text = "Bumper Search";
+            this.bumperSearchButton.UseVisualStyleBackColor = false;
+            this.bumperSearchButton.Click += new System.EventHandler(this.bumperSearchButton_Click);
+            // 
             // PartLoader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Highlight;
             this.ClientSize = new System.Drawing.Size(1339, 861);
+            this.Controls.Add(this.bumperSearchButton);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.getAllReworkButton);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.clearSearchButton);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.groupBox1);
@@ -371,9 +386,10 @@ namespace CKPaint
         private System.Windows.Forms.RadioButton searchWOIDRb;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button clearSearchButton;
         private System.Windows.Forms.Button getAllReworkButton;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button bumperSearchButton;
     }
 }
 

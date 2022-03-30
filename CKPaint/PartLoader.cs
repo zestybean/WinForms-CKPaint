@@ -365,8 +365,83 @@ namespace CKPaint
                     Cursor.Current = Cursors.Default;
 
                 }
-            
-          
+        }
+
+        //Bumper Search
+        private void bumperSearchButton_Click(object sender, EventArgs e)
+        {
+            SearchTxtBox.Text = SearchTxtBox.Text.Trim();
+
+            if (String.IsNullOrEmpty(SearchTxtBox.Text))
+            {
+                SearchTxtBox.Clear();
+                RefreshTable();
+                return;
+            }
+
+
+            DataSet floorPartsDataSet = new DataSet();
+            DataSet inlinePartsDataSet = new DataSet();
+
+            //Series of sql calls to gather data
+            using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                try
+                {
+                    sqlConnection.Open();
+                    if (searchJobNumRb.Checked)
+                    {
+                        //Execute the stored procedure for Parts OnFloor
+                        //and update the data grid view
+                        using (SqlCommand sqlCommand = new SqlCommand("spBumperSearchOnFloorPartsByJobNumber", sqlConnection))
+                        {
+                            sqlCommand.CommandType = CommandType.StoredProcedure;
+                            sqlCommand.Parameters.AddWithValue("@JobNumber", SearchTxtBox.Text.ToString());
+
+                            using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                            {
+                                sqlDataAdapter.Fill(floorPartsDataSet, "SecondaryScheduleFloorParts");
+                            }
+
+                            ThreadSafe(() => dataGridView1.DataSource = floorPartsDataSet);
+                            ThreadSafe(() => dataGridView1.DataMember = "SecondaryScheduleFloorParts");
+
+                        }
+                    }
+                    else
+                    {
+                        //Execute the stored procedure for Parts OnFloor
+                        //and update the data grid view
+                        using (SqlCommand sqlCommand = new SqlCommand("spBumperSearchOnFloorPartsByWOID", sqlConnection))
+                        {
+                            sqlCommand.CommandType = CommandType.StoredProcedure;
+                            sqlCommand.Parameters.AddWithValue("@WOID", SearchTxtBox.Text.ToString());
+
+                            using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                            {
+                                sqlDataAdapter.Fill(floorPartsDataSet, "SecondaryScheduleFloorParts");
+                            }
+
+                            ThreadSafe(() => dataGridView1.DataSource = floorPartsDataSet);
+                            ThreadSafe(() => dataGridView1.DataMember = "SecondaryScheduleFloorParts");
+
+                        }
+                    }
+                    //Close connection after table is filled
+                    sqlConnection.Close();
+
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Console.WriteLine(err);
+                }
+                Cursor.Current = Cursors.Default;
+
+            }
+
+
         }
 
         private void getAllReworkButton_Click(object sender, EventArgs e)
@@ -562,7 +637,6 @@ namespace CKPaint
             }
 
         }
-
 
     }
 }
