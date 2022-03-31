@@ -34,8 +34,9 @@ namespace CKPaint
         {
             //On the start of the program fill the table up from the DB
             //and initialiaze the SQL dependecy functions
-           
-            RefreshTable();
+
+            RefreshPartsOnFloorTable();
+            RefreshPartsInlineTable();
             StartSecondaryScheduleTableDependency();
             AdjustColumnOrder(dataGridView1);
             AdjustColumnOrder(dataGridView2);
@@ -83,7 +84,7 @@ namespace CKPaint
                 Console.WriteLine(err);
             }
         }
-
+        /*
         void RefreshTable()
         {
             DataSet floorPartsDataSet = new DataSet();
@@ -139,11 +140,88 @@ namespace CKPaint
                     MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Console.WriteLine(err);
                 }
-                Cursor.Current = Cursors.Default;
-                
+                Cursor.Current = Cursors.Default;   
             }
+        }*/
 
-           
+        public void RefreshPartsOnFloorTable()
+        {
+            DataSet floorPartsDataSet = new DataSet();
+
+            //Series of sql calls to gather data
+            using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                try
+                {
+                    sqlConnection.Open();
+
+                    //Execute the stored procedure for Parts OnFloor
+                    //and update the data grid view
+                    using (SqlCommand sqlCommand = new SqlCommand("spGetOnFloorParts", sqlConnection))
+                    {
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                        using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                        {
+                            sqlDataAdapter.Fill(floorPartsDataSet, "SecondaryScheduleFloorParts");
+                        }
+
+                        ThreadSafe(() => dataGridView1.DataSource = floorPartsDataSet);
+                        ThreadSafe(() => dataGridView1.DataMember = "SecondaryScheduleFloorParts");
+
+                    }
+
+                    //Close connection after table is filled
+                    sqlConnection.Close();
+
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Console.WriteLine(err);
+                }
+                Cursor.Current = Cursors.Default;
+            }
+        }
+     
+        public void RefreshPartsInlineTable()
+        {
+            DataSet inlinePartsDataSet = new DataSet();
+
+            //Series of sql calls to gather data
+            using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                try
+                {
+                    sqlConnection.Open();
+
+                    //Execute the stored procedure for Parts Inline
+                    //and update the data grid view
+                    using (SqlCommand sqlCommand = new SqlCommand("spGetInlineParts", sqlConnection))
+                    {
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                        using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                        {
+                            sqlDataAdapter.Fill(inlinePartsDataSet, "SecondaryScheduleInlineParts");
+                        }
+
+                        ThreadSafe(() => dataGridView2.DataSource = inlinePartsDataSet);
+                        ThreadSafe(() => dataGridView2.DataMember = "SecondaryScheduleInlineParts");
+
+                    }
+                    //Close connection after table is filled
+                    sqlConnection.Close();
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Console.WriteLine(err);
+                }
+                Cursor.Current = Cursors.Default;
+            }
         }
 
         public void ThreadSafe(MethodInvoker method)
@@ -225,19 +303,17 @@ namespace CKPaint
                 {
                     case ChangeType.Insert:
                         {
-                            RefreshTable();
-                            
+                            RefreshPartsInlineTable();
                         }
                         break;
                     case ChangeType.Update:
                         {
-                            RefreshTable();
-
+                            RefreshPartsInlineTable();
                         }
                         break;
                     case ChangeType.Delete:
                         {
-                            RefreshTable();
+                            RefreshPartsInlineTable();
                         }
                         break;
                     
@@ -254,7 +330,8 @@ namespace CKPaint
 
         private void button1_Click(object sender, EventArgs e)
         {
-            RefreshTable();
+            RefreshPartsOnFloorTable();
+            RefreshPartsInlineTable();
             StartSecondaryScheduleTableDependency();
         }
 
@@ -280,18 +357,21 @@ namespace CKPaint
 
         private void searchWOIDRb_CheckedChanged(object sender, EventArgs e)
         {
-            RefreshTable();
+            RefreshPartsOnFloorTable();
+            RefreshPartsInlineTable();
         }
 
         private void searchJobNumRb_CheckedChanged(object sender, EventArgs e)
         {
-            RefreshTable();
+            RefreshPartsOnFloorTable();
+            RefreshPartsInlineTable();
         }
 
         private void clearSearchButton_Click(object sender, EventArgs e)
         {
             SearchTxtBox.Clear();
-            RefreshTable();
+            RefreshPartsOnFloorTable();
+            RefreshPartsInlineTable();
         }
 
         private void searchButton_Click(object sender, EventArgs e)
@@ -301,10 +381,10 @@ namespace CKPaint
             if (String.IsNullOrEmpty(SearchTxtBox.Text))
             {
                 SearchTxtBox.Clear();
-                RefreshTable();
+                RefreshPartsOnFloorTable();
+                RefreshPartsInlineTable();
                 return;
             }
-
 
             DataSet floorPartsDataSet = new DataSet();
             DataSet inlinePartsDataSet = new DataSet();
@@ -363,8 +443,8 @@ namespace CKPaint
                         Console.WriteLine(err);
                     }
                     Cursor.Current = Cursors.Default;
-
-                }
+                  
+            }
         }
 
         //Bumper Search
@@ -375,10 +455,10 @@ namespace CKPaint
             if (String.IsNullOrEmpty(SearchTxtBox.Text))
             {
                 SearchTxtBox.Clear();
-                RefreshTable();
+                RefreshPartsOnFloorTable();
+                RefreshPartsInlineTable();
                 return;
             }
-
 
             DataSet floorPartsDataSet = new DataSet();
             DataSet inlinePartsDataSet = new DataSet();
@@ -438,11 +518,12 @@ namespace CKPaint
                     Console.WriteLine(err);
                 }
                 Cursor.Current = Cursors.Default;
-
+               
             }
-
+          
 
         }
+
 
         private void getAllReworkButton_Click(object sender, EventArgs e)
         {
@@ -579,7 +660,7 @@ namespace CKPaint
                     }
 
                     Cursor.Current = Cursors.Default;
-
+                    RefreshPartsOnFloorTable();
                 }
             }
         }
@@ -632,7 +713,7 @@ namespace CKPaint
                     }
 
                     Cursor.Current = Cursors.Default;
-
+                    RefreshPartsOnFloorTable();
                 }
             }
 

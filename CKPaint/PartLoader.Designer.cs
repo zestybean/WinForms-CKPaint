@@ -89,7 +89,7 @@ namespace CKPaint
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1315, 355);
+            this.dataGridView1.Size = new System.Drawing.Size(1315, 380);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
@@ -125,9 +125,9 @@ namespace CKPaint
             this.controlPanel.BackColor = System.Drawing.SystemColors.ControlLight;
             this.controlPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.controlPanel.Controls.Add(this.errorLabel);
-            this.controlPanel.Location = new System.Drawing.Point(12, 480);
+            this.controlPanel.Location = new System.Drawing.Point(12, 505);
             this.controlPanel.Name = "controlPanel";
-            this.controlPanel.Size = new System.Drawing.Size(1315, 54);
+            this.controlPanel.Size = new System.Drawing.Size(1315, 29);
             this.controlPanel.TabIndex = 6;
             // 
             // errorLabel
