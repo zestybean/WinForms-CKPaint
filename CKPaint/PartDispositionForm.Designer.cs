@@ -299,7 +299,7 @@ namespace CKPaint
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Highlight;
+            this.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.ClientSize = new System.Drawing.Size(555, 541);
             this.Controls.Add(this.warningLabel);
             this.Controls.Add(this.warningPanel);
@@ -316,6 +316,7 @@ namespace CKPaint
             this.Controls.Add(this.WOIDTitle);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.disposePartButton);
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PartDispositionForm";

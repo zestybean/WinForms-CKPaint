@@ -53,6 +53,7 @@ namespace CKPaint
             this.getAllReworkButton = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.bumperSearchButton = new System.Windows.Forms.Button();
+            this.peterbiltSearchButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.controlPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -89,7 +90,7 @@ namespace CKPaint
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1315, 380);
+            this.dataGridView1.Size = new System.Drawing.Size(1421, 380);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
@@ -102,7 +103,7 @@ namespace CKPaint
             this.title.ForeColor = System.Drawing.Color.White;
             this.title.Location = new System.Drawing.Point(0, 0);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(1339, 25);
+            this.title.Size = new System.Drawing.Size(1445, 25);
             this.title.TabIndex = 1;
             this.title.Text = "CK PAINT - PART LOADER";
             this.title.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -127,7 +128,7 @@ namespace CKPaint
             this.controlPanel.Controls.Add(this.errorLabel);
             this.controlPanel.Location = new System.Drawing.Point(12, 505);
             this.controlPanel.Name = "controlPanel";
-            this.controlPanel.Size = new System.Drawing.Size(1315, 29);
+            this.controlPanel.Size = new System.Drawing.Size(1421, 29);
             this.controlPanel.TabIndex = 6;
             // 
             // errorLabel
@@ -169,7 +170,7 @@ namespace CKPaint
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(1315, 239);
+            this.dataGridView2.Size = new System.Drawing.Size(1421, 239);
             this.dataGridView2.TabIndex = 7;
             this.dataGridView2.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellDoubleClick);
             // 
@@ -198,7 +199,7 @@ namespace CKPaint
             // refreshBtn
             // 
             this.refreshBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.refreshBtn.Location = new System.Drawing.Point(1141, 3);
+            this.refreshBtn.Location = new System.Drawing.Point(1247, 3);
             this.refreshBtn.Name = "refreshBtn";
             this.refreshBtn.Size = new System.Drawing.Size(171, 38);
             this.refreshBtn.TabIndex = 10;
@@ -263,7 +264,7 @@ namespace CKPaint
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(123, 87);
             this.searchButton.TabIndex = 11;
-            this.searchButton.Text = "Skirt \r\nSearch";
+            this.searchButton.Text = "Navistar \r\nSkirt \r\nSearch";
             this.searchButton.UseVisualStyleBackColor = false;
             this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
@@ -275,7 +276,7 @@ namespace CKPaint
             this.panel1.Controls.Add(this.refreshBtn);
             this.panel1.Location = new System.Drawing.Point(12, 810);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1315, 44);
+            this.panel1.Size = new System.Drawing.Size(1421, 44);
             this.panel1.TabIndex = 13;
             // 
             // clearSearchButton
@@ -283,7 +284,7 @@ namespace CKPaint
             this.clearSearchButton.BackColor = System.Drawing.Color.Tomato;
             this.clearSearchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clearSearchButton.ForeColor = System.Drawing.Color.White;
-            this.clearSearchButton.Location = new System.Drawing.Point(734, 28);
+            this.clearSearchButton.Location = new System.Drawing.Point(863, 28);
             this.clearSearchButton.Name = "clearSearchButton";
             this.clearSearchButton.Size = new System.Drawing.Size(123, 87);
             this.clearSearchButton.TabIndex = 14;
@@ -296,7 +297,7 @@ namespace CKPaint
             this.getAllReworkButton.BackColor = System.Drawing.Color.Gold;
             this.getAllReworkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.getAllReworkButton.ForeColor = System.Drawing.Color.Black;
-            this.getAllReworkButton.Location = new System.Drawing.Point(863, 28);
+            this.getAllReworkButton.Location = new System.Drawing.Point(992, 28);
             this.getAllReworkButton.Name = "getAllReworkButton";
             this.getAllReworkButton.Size = new System.Drawing.Size(123, 87);
             this.getAllReworkButton.TabIndex = 15;
@@ -308,7 +309,7 @@ namespace CKPaint
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Image = global::CKPaint.Properties.Resources.ckt_logo_white300;
-            this.pictureBox1.Location = new System.Drawing.Point(1027, 31);
+            this.pictureBox1.Location = new System.Drawing.Point(1133, 31);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(300, 75);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -324,16 +325,30 @@ namespace CKPaint
             this.bumperSearchButton.Name = "bumperSearchButton";
             this.bumperSearchButton.Size = new System.Drawing.Size(123, 87);
             this.bumperSearchButton.TabIndex = 17;
-            this.bumperSearchButton.Text = "Bumper Search";
+            this.bumperSearchButton.Text = "Navistar Bump/Fend Search";
             this.bumperSearchButton.UseVisualStyleBackColor = false;
             this.bumperSearchButton.Click += new System.EventHandler(this.bumperSearchButton_Click);
+            // 
+            // peterbiltSearchButton
+            // 
+            this.peterbiltSearchButton.BackColor = System.Drawing.Color.Crimson;
+            this.peterbiltSearchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.peterbiltSearchButton.ForeColor = System.Drawing.Color.White;
+            this.peterbiltSearchButton.Location = new System.Drawing.Point(734, 28);
+            this.peterbiltSearchButton.Name = "peterbiltSearchButton";
+            this.peterbiltSearchButton.Size = new System.Drawing.Size(123, 87);
+            this.peterbiltSearchButton.TabIndex = 18;
+            this.peterbiltSearchButton.Text = "Peterbilt\r\nParts\r\nSearch\r\n";
+            this.peterbiltSearchButton.UseVisualStyleBackColor = false;
+            this.peterbiltSearchButton.Click += new System.EventHandler(this.peterbiltSearchButton_Click);
             // 
             // PartLoader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Highlight;
-            this.ClientSize = new System.Drawing.Size(1339, 861);
+            this.ClientSize = new System.Drawing.Size(1445, 861);
+            this.Controls.Add(this.peterbiltSearchButton);
             this.Controls.Add(this.bumperSearchButton);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.getAllReworkButton);
@@ -390,6 +405,7 @@ namespace CKPaint
         private System.Windows.Forms.Button getAllReworkButton;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button bumperSearchButton;
+        private System.Windows.Forms.Button peterbiltSearchButton;
     }
 }
 
