@@ -8,6 +8,34 @@ namespace CKPaint
 {
     public class SecondarySchedule
     {
+        public SecondarySchedule()
+        {
+            ScheduleID = 0;
+            JobNumber = "";
+            SetNumber = "";
+            PartNumber = "";
+            PartNumberRH = "";
+            ColorCode = "";
+            Primer = 0;
+            ProductType = "";
+            ProductPlatform = "";
+            Description = "";
+            DescriptionRH = "";
+            RackCode = "";
+            RackPosition = "";
+            RackPositionRH = "";
+            AssembleDate = DateTime.Now;
+            PaintDate = DateTime.Now;
+            PaintBlock = "";
+            WOID = "";
+            WOIDRH = "";
+            ShipDate = DateTime.Now;
+            ImportDate = DateTime.Now;
+            PartInline = 0;
+            PartRework = 0;
+            PartDisposed = 0;
+        }
+
         //ORM DB Definition 
         public Decimal ScheduleID { get; set; }
         public string JobNumber { get; set; }

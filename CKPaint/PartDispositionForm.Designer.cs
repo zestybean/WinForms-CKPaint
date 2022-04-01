@@ -114,6 +114,7 @@ namespace CKPaint
             this.WOIDTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.WOIDTxtBox.Location = new System.Drawing.Point(205, 204);
             this.WOIDTxtBox.Name = "WOIDTxtBox";
+            this.WOIDTxtBox.ReadOnly = true;
             this.WOIDTxtBox.Size = new System.Drawing.Size(227, 31);
             this.WOIDTxtBox.TabIndex = 1;
             // 
@@ -214,7 +215,8 @@ namespace CKPaint
             this.dispositionCombo.Items.AddRange(new object[] {
             "Approved",
             "Finnesse",
-            "Rework"});
+            "Rework",
+            "Scrap"});
             this.dispositionCombo.Location = new System.Drawing.Point(205, 384);
             this.dispositionCombo.Name = "dispositionCombo";
             this.dispositionCombo.Size = new System.Drawing.Size(136, 28);

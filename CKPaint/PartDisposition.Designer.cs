@@ -58,13 +58,13 @@ namespace CKPaint
             // 
             // title
             // 
-            this.title.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.title.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.title.Dock = System.Windows.Forms.DockStyle.Top;
             this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.title.ForeColor = System.Drawing.Color.White;
             this.title.Location = new System.Drawing.Point(0, 0);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(1339, 93);
+            this.title.Size = new System.Drawing.Size(1339, 95);
             this.title.TabIndex = 2;
             this.title.Text = "CK PAINT - PART DISPOSITION";
             this.title.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -72,7 +72,7 @@ namespace CKPaint
             // partsOnFloorLabel
             // 
             this.partsOnFloorLabel.AutoSize = true;
-            this.partsOnFloorLabel.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.partsOnFloorLabel.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.partsOnFloorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.partsOnFloorLabel.ForeColor = System.Drawing.Color.White;
             this.partsOnFloorLabel.Location = new System.Drawing.Point(12, 9);
@@ -171,18 +171,18 @@ namespace CKPaint
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 96);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 98);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1315, 303);
+            this.dataGridView1.Size = new System.Drawing.Size(1315, 301);
             this.dataGridView1.TabIndex = 10;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
             // pictureBox1
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.pictureBox1.Image = global::CKPaint.Properties.Resources.ckt_logo_white300;
             this.pictureBox1.Location = new System.Drawing.Point(1027, 15);
             this.pictureBox1.Name = "pictureBox1";
@@ -229,7 +229,7 @@ namespace CKPaint
             // 
             // groupBox1
             // 
-            this.groupBox1.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.groupBox1.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.groupBox1.Controls.Add(this.searchJobNumRb);
             this.groupBox1.Controls.Add(this.searchWOIDRb);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -277,7 +277,7 @@ namespace CKPaint
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Highlight;
+            this.BackColor = System.Drawing.SystemColors.GrayText;
             this.ClientSize = new System.Drawing.Size(1339, 861);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.getAllReworkButton);

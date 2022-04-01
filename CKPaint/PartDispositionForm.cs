@@ -22,6 +22,9 @@ namespace CKPaint
         public PartDispositionForm()
         {
             InitializeComponent();
+
+            defectCombo.Text = "";
+            dispositionCombo.Text = "";
         }
 
         private void PartDispositionForm_Load(object sender, EventArgs e)
@@ -31,12 +34,10 @@ namespace CKPaint
 
         private void disposePartButton_Click(object sender, EventArgs e)
         {
+
+
+
             disposeActionButtonSelected = true;
-            Console.WriteLine(WOIDTxtBox.Text);
-            Console.WriteLine(dispositionInspectorName);
-            Console.WriteLine(dispositionPartDefect);
-            Console.WriteLine(dispositionDPUNum);
-            Console.WriteLine(dispositionResult);
             this.Close();
         }
 
