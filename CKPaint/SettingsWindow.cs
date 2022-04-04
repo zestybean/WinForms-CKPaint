@@ -22,7 +22,7 @@ namespace CKPaint
         private void SettingsWindow_Load(object sender, EventArgs e)
         {
             printerTextBox.Text = CKPaint.Properties.Settings.Default["Printer"].ToString().Trim().ToUpper();
-            stationTextBox.Text = CKPaint.Properties.Settings.Default["Station"].ToString().Trim().ToUpper();
+            stationComboBox.Text = CKPaint.Properties.Settings.Default["Station"].ToString().Trim().ToUpper();
             plantComboBox.Text = CKPaint.Properties.Settings.Default["Plant"].ToString().Trim().ToUpper();
 
             if(plantComboBox.Text == "BV")
@@ -41,7 +41,7 @@ namespace CKPaint
         private void saveButton_Click(object sender, EventArgs e)
         {
             CKPaint.Properties.Settings.Default["Printer"] = printerTextBox.Text.ToString().Trim().ToUpper();
-            CKPaint.Properties.Settings.Default["Station"] = stationTextBox.Text.ToString().Trim().ToUpper();
+            CKPaint.Properties.Settings.Default["Station"] = stationComboBox.Text.ToString().Trim().ToUpper();
             CKPaint.Properties.Settings.Default["Plant"] = plantComboBox.Text.ToString().Trim().ToUpper();
             CKPaint.Properties.Settings.Default["Site"] = siteTextBox.Text.ToString().Trim().ToUpper();
             Properties.Settings.Default.Save();

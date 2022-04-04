@@ -133,6 +133,7 @@ namespace CKPaint
      
         public void RefreshPartsInlineTable()
         {
+            string paintStation = CKPaint.Properties.Settings.Default["Station"].ToString().Trim().ToUpper();
             DataSet inlinePartsDataSet = new DataSet();
 
             //Series of sql calls to gather data
@@ -145,10 +146,10 @@ namespace CKPaint
 
                     //Execute the stored procedure for Parts Inline
                     //and update the data grid view
-                    using (SqlCommand sqlCommand = new SqlCommand("spGetInlineParts", sqlConnection))
+                    using (SqlCommand sqlCommand = new SqlCommand("spGetInlinePartsByStation", sqlConnection))
                     {
                         sqlCommand.CommandType = CommandType.StoredProcedure;
-
+                        sqlCommand.Parameters.AddWithValue("@PAINTSTATION", paintStation);
                         using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
                         {
                             sqlDataAdapter.Fill(inlinePartsDataSet, "SecondaryScheduleInlineParts");
@@ -156,7 +157,7 @@ namespace CKPaint
 
                         ThreadSafe(() => dataGridView2.DataSource = inlinePartsDataSet);
                         ThreadSafe(() => dataGridView2.DataMember = "SecondaryScheduleInlineParts");
-
+                       
                     }
                     //Close connection after table is filled
                     sqlConnection.Close();
@@ -166,6 +167,7 @@ namespace CKPaint
                     MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Console.WriteLine(err);
                 }
+              
                 Cursor.Current = Cursors.Default;
             }
         }
@@ -547,7 +549,7 @@ namespace CKPaint
                         using (SqlCommand sqlCommand = new SqlCommand("spSearchPeterbiltOnFloorPartsByJobNumber", sqlConnection))
                         {
                             sqlCommand.CommandType = CommandType.StoredProcedure;
-                            sqlCommand.Parameters.AddWithValue("@JobNumber", SearchTxtBox.Text.ToString());
+                            sqlCommand.Parameters.AddWithValue("@SEQUENCENUMBER", SearchTxtBox.Text.ToString());
 
                             using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
                             {

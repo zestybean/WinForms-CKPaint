@@ -236,10 +236,10 @@ namespace CKPaint
             this.searchJobNumRb.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchJobNumRb.Location = new System.Drawing.Point(6, 18);
             this.searchJobNumRb.Name = "searchJobNumRb";
-            this.searchJobNumRb.Size = new System.Drawing.Size(123, 24);
+            this.searchJobNumRb.Size = new System.Drawing.Size(134, 24);
             this.searchJobNumRb.TabIndex = 1;
             this.searchJobNumRb.TabStop = true;
-            this.searchJobNumRb.Text = "Job Number";
+            this.searchJobNumRb.Text = "Job/Seq Num";
             this.searchJobNumRb.UseVisualStyleBackColor = true;
             this.searchJobNumRb.CheckedChanged += new System.EventHandler(this.searchJobNumRb_CheckedChanged);
             // 

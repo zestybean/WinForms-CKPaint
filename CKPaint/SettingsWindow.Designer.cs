@@ -32,7 +32,6 @@ namespace CKPaint
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsWindow));
             this.settingsLabel = new System.Windows.Forms.Label();
             this.stationLabel = new System.Windows.Forms.Label();
-            this.stationTextBox = new System.Windows.Forms.TextBox();
             this.settingsDescriptionLabel = new System.Windows.Forms.Label();
             this.printerLabel = new System.Windows.Forms.Label();
             this.printerTextBox = new System.Windows.Forms.TextBox();
@@ -42,6 +41,7 @@ namespace CKPaint
             this.plantComboBox = new System.Windows.Forms.ComboBox();
             this.siteLabel = new System.Windows.Forms.Label();
             this.siteTextBox = new System.Windows.Forms.TextBox();
+            this.stationComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // settingsLabel
@@ -67,14 +67,6 @@ namespace CKPaint
             this.stationLabel.Size = new System.Drawing.Size(93, 25);
             this.stationLabel.TabIndex = 11;
             this.stationLabel.Text = "Station:";
-            // 
-            // stationTextBox
-            // 
-            this.stationTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stationTextBox.Location = new System.Drawing.Point(151, 161);
-            this.stationTextBox.Name = "stationTextBox";
-            this.stationTextBox.Size = new System.Drawing.Size(263, 29);
-            this.stationTextBox.TabIndex = 10;
             // 
             // settingsDescriptionLabel
             // 
@@ -182,12 +174,28 @@ namespace CKPaint
             this.siteTextBox.Size = new System.Drawing.Size(263, 29);
             this.siteTextBox.TabIndex = 19;
             // 
+            // stationComboBox
+            // 
+            this.stationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.stationComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stationComboBox.FormattingEnabled = true;
+            this.stationComboBox.Items.AddRange(new object[] {
+            "MAINLINE",
+            "SPOVEN 1",
+            "SPOVEN 2",
+            "SPOVEN 3"});
+            this.stationComboBox.Location = new System.Drawing.Point(151, 161);
+            this.stationComboBox.Name = "stationComboBox";
+            this.stationComboBox.Size = new System.Drawing.Size(263, 32);
+            this.stationComboBox.TabIndex = 21;
+            // 
             // SettingsWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Highlight;
             this.ClientSize = new System.Drawing.Size(584, 510);
+            this.Controls.Add(this.stationComboBox);
             this.Controls.Add(this.siteLabel);
             this.Controls.Add(this.siteTextBox);
             this.Controls.Add(this.plantComboBox);
@@ -197,7 +205,6 @@ namespace CKPaint
             this.Controls.Add(this.printerLabel);
             this.Controls.Add(this.printerTextBox);
             this.Controls.Add(this.stationLabel);
-            this.Controls.Add(this.stationTextBox);
             this.Controls.Add(this.settingsDescriptionLabel);
             this.Controls.Add(this.settingsLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -218,7 +225,6 @@ namespace CKPaint
 
         private System.Windows.Forms.Label settingsLabel;
         private System.Windows.Forms.Label stationLabel;
-        private System.Windows.Forms.TextBox stationTextBox;
         private System.Windows.Forms.Label settingsDescriptionLabel;
         private System.Windows.Forms.Label printerLabel;
         private System.Windows.Forms.TextBox printerTextBox;
@@ -228,5 +234,6 @@ namespace CKPaint
         private System.Windows.Forms.ComboBox plantComboBox;
         private System.Windows.Forms.Label siteLabel;
         private System.Windows.Forms.TextBox siteTextBox;
+        private System.Windows.Forms.ComboBox stationComboBox;
     }
 }
