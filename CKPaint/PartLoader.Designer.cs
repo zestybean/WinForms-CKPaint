@@ -233,23 +233,23 @@ namespace CKPaint
             // 
             this.searchJobNumRb.AutoSize = true;
             this.searchJobNumRb.Checked = true;
-            this.searchJobNumRb.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchJobNumRb.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchJobNumRb.Location = new System.Drawing.Point(6, 18);
             this.searchJobNumRb.Name = "searchJobNumRb";
-            this.searchJobNumRb.Size = new System.Drawing.Size(134, 24);
+            this.searchJobNumRb.Size = new System.Drawing.Size(133, 22);
             this.searchJobNumRb.TabIndex = 1;
             this.searchJobNumRb.TabStop = true;
-            this.searchJobNumRb.Text = "Job/Seq Num";
+            this.searchJobNumRb.Text = "Job/Sequence";
             this.searchJobNumRb.UseVisualStyleBackColor = true;
             this.searchJobNumRb.CheckedChanged += new System.EventHandler(this.searchJobNumRb_CheckedChanged);
             // 
             // searchWOIDRb
             // 
             this.searchWOIDRb.AutoSize = true;
-            this.searchWOIDRb.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchWOIDRb.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchWOIDRb.Location = new System.Drawing.Point(143, 18);
             this.searchWOIDRb.Name = "searchWOIDRb";
-            this.searchWOIDRb.Size = new System.Drawing.Size(75, 24);
+            this.searchWOIDRb.Size = new System.Drawing.Size(71, 22);
             this.searchWOIDRb.TabIndex = 0;
             this.searchWOIDRb.Text = "WOID";
             this.searchWOIDRb.UseVisualStyleBackColor = true;
