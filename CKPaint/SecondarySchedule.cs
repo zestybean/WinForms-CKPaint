@@ -11,6 +11,7 @@ namespace CKPaint
         public SecondarySchedule()
         {
             ScheduleID = 0;
+            SequenceNumber = "";
             JobNumber = "";
             SetNumber = "";
             PartNumber = "";
@@ -26,6 +27,7 @@ namespace CKPaint
             RackPositionRH = "";
             AssembleDate = DateTime.Now;
             PaintDate = DateTime.Now;
+            PaintStation = "";
             PaintBlock = "";
             WOID = "";
             WOIDRH = "";
@@ -34,10 +36,13 @@ namespace CKPaint
             PartInline = 0;
             PartRework = 0;
             PartDisposed = 0;
+            PartFinesse = 0;
+            PartScrap = 0;
         }
 
         //ORM DB Definition 
         public Decimal ScheduleID { get; set; }
+        public string SequenceNumber { get; set; }
         public string JobNumber { get; set; }
         public string SetNumber { get; set; }
         public string PartNumber { get; set; }
@@ -53,6 +58,7 @@ namespace CKPaint
         public string RackPositionRH { get; set; }
         public DateTime AssembleDate { get; set; }
         public DateTime PaintDate { get; set; }
+        public string PaintStation { get; set; }
         public string PaintBlock { get; set; }
         public string WOID { get; set; }
         public string WOIDRH { get; set; }
@@ -61,6 +67,8 @@ namespace CKPaint
         public Int16 PartInline { get; set; }
         public Int16 PartRework { get; set; }
         public Int16 PartDisposed { get; set; }
+        public Int16 PartFinesse { get; set; }
+        public Int16 PartScrap { get; set; }
 
     }
 }

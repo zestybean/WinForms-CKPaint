@@ -46,15 +46,18 @@ namespace CKPaint
         {
             //Rearrange data grid view columns columns
             dv.Columns["JobNumber"].DisplayIndex = 0;
-            dv.Columns["WOID"].DisplayIndex = 1;
-            dv.Columns["WOIDRH"].DisplayIndex = 2;
-            dv.Columns["PartNumber"].DisplayIndex = 3;
-            dv.Columns["PartNumberRH"].DisplayIndex = 4;
-            dv.Columns["ColorCode"].DisplayIndex = 5;
-            dv.Columns["SetNumber"].DisplayIndex = 6;
-            dv.Columns["PartInline"].DisplayIndex = 7;
-            dv.Columns["PartRework"].DisplayIndex = 8;
-            dv.Columns["PartDisposed"].DisplayIndex = 9;
+            dv.Columns["SequenceNumber"].DisplayIndex = 1;
+            dv.Columns["WOID"].DisplayIndex = 2;
+            dv.Columns["WOIDRH"].DisplayIndex = 3;
+            dv.Columns["PartNumber"].DisplayIndex = 4;
+            dv.Columns["PartNumberRH"].DisplayIndex = 5;
+            dv.Columns["ColorCode"].DisplayIndex = 6;
+            dv.Columns["SetNumber"].DisplayIndex = 7;
+            dv.Columns["PartInline"].DisplayIndex = 8;
+            dv.Columns["PartRework"].DisplayIndex = 9;
+            dv.Columns["PartDisposed"].DisplayIndex = 10;
+            dv.Columns["PaintDate"].DisplayIndex = 11;
+            dv.Columns["PaintStation"].DisplayIndex = 12;
 
             //Ignore these
             dv.Columns["ScheduleID"].Visible = false;
@@ -69,6 +72,8 @@ namespace CKPaint
             dv.Columns["PaintBlock"].Visible = false;
             dv.Columns["ShipDate"].Visible = false;
             dv.Columns["ImportDate"].Visible = false;
+            dv.Columns["PartFinesse"].Visible = false;
+            dv.Columns["PartScrap"].Visible = false;
         }
 
         private void LandingPage_FormClosing(object sender, FormClosingEventArgs e)
@@ -84,65 +89,6 @@ namespace CKPaint
                 Console.WriteLine(err);
             }
         }
-        /*
-        void RefreshTable()
-        {
-            DataSet floorPartsDataSet = new DataSet();
-            DataSet inlinePartsDataSet = new DataSet();
-
-            //Series of sql calls to gather data
-            using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
-            {
-                Cursor.Current = Cursors.WaitCursor;
-                try
-                {
-                    sqlConnection.Open();
-
-                    //Execute the stored procedure for Parts OnFloor
-                    //and update the data grid view
-                    using (SqlCommand sqlCommand = new SqlCommand("spGetOnFloorParts", sqlConnection))
-                    {
-                        sqlCommand.CommandType = CommandType.StoredProcedure;
-                        
-                        using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
-                        {
-                            sqlDataAdapter.Fill(floorPartsDataSet, "SecondaryScheduleFloorParts");
-                        }
-
-                        ThreadSafe(() => dataGridView1.DataSource = floorPartsDataSet);
-                        ThreadSafe(() => dataGridView1.DataMember = "SecondaryScheduleFloorParts");
-
-                    }
-
-                    //Execute the stored procedure for Parts Inline
-                    //and update the data grid view
-                    using (SqlCommand sqlCommand = new SqlCommand("spGetInlineParts", sqlConnection))
-                    {
-                        sqlCommand.CommandType = CommandType.StoredProcedure;
-
-                        using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
-                        {
-                            sqlDataAdapter.Fill(inlinePartsDataSet, "SecondaryScheduleInlineParts");
-                        }
-
-                        ThreadSafe(() => dataGridView2.DataSource = inlinePartsDataSet);
-                        ThreadSafe(() => dataGridView2.DataMember = "SecondaryScheduleInlineParts");
-
-                    }
-
-
-                    //Close connection after table is filled
-                    sqlConnection.Close();
-
-                }
-                catch (Exception err)
-                {
-                    MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Console.WriteLine(err);
-                }
-                Cursor.Current = Cursors.Default;   
-            }
-        }*/
 
         public void RefreshPartsOnFloorTable()
         {
@@ -335,13 +281,15 @@ namespace CKPaint
             StartSecondaryScheduleTableDependency();
         }
 
+        
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 if (row.Cells[22].Value != System.DBNull.Value)
                 {
-                    if (Convert.ToInt32(row.Cells[22].Value) == 1)
+                    if (Convert.ToInt32(row.Cells[24].Value) == 1)
                     {
                         row.DefaultCellStyle.BackColor = Color.Yellow;
                     }
@@ -646,6 +594,8 @@ namespace CKPaint
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            string paintStation = CKPaint.Properties.Settings.Default["Station"].ToString().Trim().ToUpper();
+
             //REALLY?
             if (e.RowIndex == -1)
                 return;
@@ -653,10 +603,10 @@ namespace CKPaint
             bool RH = false;
 
             //LOAD DOUBLE CLICK
-            string woidString = dataGridView1.Rows[e.RowIndex].Cells[17].Value.ToString();
-            string woidStringRH = dataGridView1.Rows[e.RowIndex].Cells[18].Value.ToString();
-            string partNumberString = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-            string partNumberRHString = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
+            string woidString = dataGridView1.Rows[e.RowIndex].Cells[19].Value.ToString();
+            string woidStringRH = dataGridView1.Rows[e.RowIndex].Cells[20].Value.ToString();
+            string partNumberString = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
+            string partNumberRHString = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
 
             ConfirmActionWindow confirmActionWindow = new ConfirmActionWindow();
             confirmActionWindow.partWOID = woidString;
@@ -686,21 +636,22 @@ namespace CKPaint
                         {
                             sqlCommand.CommandType = CommandType.StoredProcedure;
                             sqlCommand.Parameters.AddWithValue("@WOID", woidString);
+                            sqlCommand.Parameters.AddWithValue("@PAINTSTATION", paintStation);
                             var sqlReader = sqlCommand.ExecuteReader();
 
                             sqlReader.Read();
                             if (sqlReader.HasRows)
                             {
-                                SecondarySchedule_Part.JobNumber = sqlReader.GetString(1);
-                                SecondarySchedule_Part.SetNumber = sqlReader.GetString(2);
-                                SecondarySchedule_Part.PartNumber = sqlReader.GetString(3);
-                                SecondarySchedule_Part.ColorCode = sqlReader.GetString(5);
-                                SecondarySchedule_Part.Description = sqlReader.GetString(9);
-                                SecondarySchedule_Part.RackCode = sqlReader.GetString(11);
-                                SecondarySchedule_Part.RackPosition = sqlReader.GetString(12);
-                                SecondarySchedule_Part.PaintBlock = sqlReader.GetString(16);
-                                SecondarySchedule_Part.WOID = sqlReader.GetString(17);
-                                SecondarySchedule_Part.PartRework = sqlReader.GetInt16(22);
+                                SecondarySchedule_Part.JobNumber = sqlReader.GetString(2);
+                                SecondarySchedule_Part.SetNumber = sqlReader.GetString(3);
+                                SecondarySchedule_Part.PartNumber = sqlReader.GetString(4);
+                                SecondarySchedule_Part.ColorCode = sqlReader.GetString(6);
+                                SecondarySchedule_Part.Description = sqlReader.GetString(10);
+                                SecondarySchedule_Part.RackCode = sqlReader.GetString(12);
+                                SecondarySchedule_Part.RackPosition = sqlReader.GetString(13);
+                                SecondarySchedule_Part.PaintBlock = sqlReader.GetString(18);
+                                SecondarySchedule_Part.WOID = sqlReader.GetString(19);
+                                SecondarySchedule_Part.PartRework = sqlReader.GetInt16(24);
 
 
                                 //PRINTING WILL OCCURR HERE!
@@ -709,14 +660,15 @@ namespace CKPaint
 
                                 if (RH)
                                 {
-                                    SecondarySchedule_Part.PartNumberRH = sqlReader.GetString(4);
-                                    SecondarySchedule_Part.DescriptionRH = sqlReader.GetString(10);
-                                    SecondarySchedule_Part.RackPositionRH = sqlReader.GetString(13);
-                                    SecondarySchedule_Part.WOIDRH = sqlReader.GetString(18);
+                                    SecondarySchedule_Part.PartNumberRH = sqlReader.GetString(5);
+                                    SecondarySchedule_Part.DescriptionRH = sqlReader.GetString(11);
+                                    SecondarySchedule_Part.RackPositionRH = sqlReader.GetString(14);
+                                    SecondarySchedule_Part.WOIDRH = sqlReader.GetString(20);
 
                                     PrintToZebraHelper.PrintToZebra(SecondarySchedule_Part, RH);
                                 }
 
+                                debugLabel.Text = "Part moved to inline success!";
                             }
                             else
                             {
@@ -748,12 +700,12 @@ namespace CKPaint
 
             ConfirmActionWindow confirmActionWindow = new ConfirmActionWindow();
             confirmActionWindow.actionState = 1;
-          
+
             //LOAD DOUBLE CLICK
-            string woidString = dataGridView2.Rows[e.RowIndex].Cells[17].Value.ToString();
-            string woidStringRH = dataGridView2.Rows[e.RowIndex].Cells[18].Value.ToString();
-            string partNumberString = dataGridView2.Rows[e.RowIndex].Cells[3].Value.ToString();
-            string partNumberRHString = dataGridView2.Rows[e.RowIndex].Cells[4].Value.ToString();
+            string woidString = dataGridView2.Rows[e.RowIndex].Cells[19].Value.ToString();
+            string woidStringRH = dataGridView2.Rows[e.RowIndex].Cells[20].Value.ToString();
+            string partNumberString = dataGridView2.Rows[e.RowIndex].Cells[4].Value.ToString();
+            string partNumberRHString = dataGridView2.Rows[e.RowIndex].Cells[5].Value.ToString();
 
             confirmActionWindow.partWOID = woidString;
             confirmActionWindow.partNumber = partNumberString;

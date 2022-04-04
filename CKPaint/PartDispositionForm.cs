@@ -34,7 +34,12 @@ namespace CKPaint
 
         private void disposePartButton_Click(object sender, EventArgs e)
         {
+            dispositionResult = dispositionResult.Trim();
 
+            if (string.IsNullOrEmpty(dispositionResult))
+            {
+                return;
+            }
 
 
             disposeActionButtonSelected = true;
@@ -67,6 +72,7 @@ namespace CKPaint
 
         private void dispositionCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            dispositionCombo.BackColor = Color.White;
             dispositionResult = dispositionCombo.SelectedItem.ToString().ToUpper();
           
         }
