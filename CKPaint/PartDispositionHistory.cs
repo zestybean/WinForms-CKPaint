@@ -12,11 +12,13 @@ namespace CKPaint
         {
             InspectorName = "";
             PartNumber = "";
+            PartNumberRH = "";
             JobNumber = "";
             ColorCode = "";
             ProductType = "";
             InspectorID = "";
-            PaintMachine = "";
+            PaintStation = "";
+            PaintDate = DateTime.Now;
             PartProcess = "";
             WOID = "";
             WOIDRH = "";
@@ -31,11 +33,13 @@ namespace CKPaint
         //ORM DB Definition 
         public string InspectorName { get; set; }
         public string PartNumber { get; set; } //
+        public string PartNumberRH { get; set; }
         public string JobNumber { get; set; } //
         public string ColorCode { get; set; } //
         public string ProductType { get; set; } //
         public string InspectorID { get; set; } //NEED IMP
-        public string PaintMachine { get; set; } //NEED IMP
+        public string PaintStation { get; set; } //NEED IMP
+        public DateTime PaintDate { get; set; }
         public string PartProcess { get; set; }//HOw?
         public string WOID { get; set; }//
         public string WOIDRH { get; set; }//

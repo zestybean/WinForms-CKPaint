@@ -259,7 +259,7 @@ namespace CKPaint
                 return;
 
             //DISPOSITION DOUBLE CLICK
-            string partWOID = dataGridView1.Rows[e.RowIndex].Cells[17].Value.ToString();
+            string partWOID = dataGridView1.Rows[e.RowIndex].Cells[19].Value.ToString();
             
 
             PartDispositionForm partDispositionForm = new PartDispositionForm();
@@ -291,20 +291,22 @@ namespace CKPaint
                             if (sqlReader.HasRows)
                             {
                                 PartDispositionHistory_Part.InspectorName = partDispositionForm.dispositionInspectorName.ToString().ToUpper();
-                                PartDispositionHistory_Part.JobNumber = sqlReader.GetString(1);
-                                PartDispositionHistory_Part.PartNumber = sqlReader.GetString(3);
-                                PartDispositionHistory_Part.ColorCode = sqlReader.GetString(5);
-                                PartDispositionHistory_Part.InspectorID = "000000";
-                                PartDispositionHistory_Part.PaintMachine = "Mainline"; //Hast to come from new column
-                                PartDispositionHistory_Part.PartProcess = "Placeholder";
-                                PartDispositionHistory_Part.ProductType = sqlReader.GetString(7);
-                                PartDispositionHistory_Part.WOID = sqlReader.GetString(17);
-                                PartDispositionHistory_Part.WOIDRH = sqlReader.GetString(18);
+                                PartDispositionHistory_Part.JobNumber = sqlReader.GetString(2);
+                                PartDispositionHistory_Part.PartNumber = sqlReader.GetString(4);
+                                PartDispositionHistory_Part.PartNumberRH = sqlReader.GetString(5);
+                                PartDispositionHistory_Part.ColorCode = sqlReader.GetString(6);
+                                PartDispositionHistory_Part.InspectorID = "000000"; //FIX
+                                PartDispositionHistory_Part.PaintStation = sqlReader.GetString(17);
+                                PartDispositionHistory_Part.PaintDate = sqlReader.GetDateTime(16);
+                                PartDispositionHistory_Part.PartProcess = "Placeholder"; // FIX ROBOT OR MANUAL from the disp form
+                                PartDispositionHistory_Part.ProductType = sqlReader.GetString(8);
+                                PartDispositionHistory_Part.WOID = sqlReader.GetString(19);
+                                PartDispositionHistory_Part.WOIDRH = sqlReader.GetString(20);
                                 PartDispositionHistory_Part.PartDefect = partDispositionForm.dispositionPartDefect.ToString().ToUpper();
                                 PartDispositionHistory_Part.DPUCount = Convert.ToInt16(partDispositionForm.dispositionDPUNum);
                                 PartDispositionHistory_Part.PartDisposition = partDispositionForm.dispositionResult.ToString().ToUpper();
-                                PartDispositionHistory_Part.PartDescription = sqlReader.GetString(9);
-                                PartDispositionHistory_Part.PartDescriptionRH = sqlReader.GetString(10);
+                                PartDispositionHistory_Part.PartDescription = sqlReader.GetString(10);
+                                PartDispositionHistory_Part.PartDescriptionRH = sqlReader.GetString(11);
                                 PartDispositionHistory_Part.DispositionDate = DateTime.Now;
                             }
                             else
@@ -325,10 +327,12 @@ namespace CKPaint
                             sqlCommand.Parameters.AddWithValue("@INSPECTORNAME", PartDispositionHistory_Part.InspectorName);
                             sqlCommand.Parameters.AddWithValue("@JOBNUMBER", PartDispositionHistory_Part.JobNumber);
                             sqlCommand.Parameters.AddWithValue("@PARTNUMBER", PartDispositionHistory_Part.PartNumber);
+                            sqlCommand.Parameters.AddWithValue("@PARTNUMBERRH", PartDispositionHistory_Part.PartNumberRH);
                             sqlCommand.Parameters.AddWithValue("@COLORCODE", PartDispositionHistory_Part.ColorCode);
                             sqlCommand.Parameters.AddWithValue("@PRODUCTTYPE", PartDispositionHistory_Part.ProductType);
                             sqlCommand.Parameters.AddWithValue("@INSPECTORID", PartDispositionHistory_Part.InspectorID);
-                            sqlCommand.Parameters.AddWithValue("@PAINTMACHINE", PartDispositionHistory_Part.PaintMachine);
+                            sqlCommand.Parameters.AddWithValue("@PAINTSTATION", PartDispositionHistory_Part.PaintStation);
+                            sqlCommand.Parameters.AddWithValue("@PAINTDATE", PartDispositionHistory_Part.PaintDate);
                             sqlCommand.Parameters.AddWithValue("@PARTPROCESS", PartDispositionHistory_Part.PartProcess);
                             sqlCommand.Parameters.AddWithValue("@WOID", PartDispositionHistory_Part.WOID);
                             sqlCommand.Parameters.AddWithValue("@WOIDRH", PartDispositionHistory_Part.WOIDRH);

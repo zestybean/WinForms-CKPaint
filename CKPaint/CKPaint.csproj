@@ -99,6 +99,7 @@
       <DependentUpon>PartDispositionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PartDispositionHistory.cs" />
+    <Compile Include="PartInlineHistory.cs" />
     <Compile Include="PartLoader.cs">
       <SubType>Form</SubType>
     </Compile>
