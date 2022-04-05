@@ -644,17 +644,18 @@ namespace CKPaint
                             sqlReader.Read();
                             if (sqlReader.HasRows)
                             {
+                                SecondarySchedule_Part.SequenceNumber = sqlReader.GetString(1);
                                 SecondarySchedule_Part.JobNumber = sqlReader.GetString(2);
                                 SecondarySchedule_Part.SetNumber = sqlReader.GetString(3);
                                 SecondarySchedule_Part.PartNumber = sqlReader.GetString(4);
                                 SecondarySchedule_Part.ColorCode = sqlReader.GetString(6);
+                                SecondarySchedule_Part.ProductType = sqlReader.GetString(8);
                                 SecondarySchedule_Part.Description = sqlReader.GetString(10);
                                 SecondarySchedule_Part.RackCode = sqlReader.GetString(12);
                                 SecondarySchedule_Part.RackPosition = sqlReader.GetString(13);
                                 SecondarySchedule_Part.PaintBlock = sqlReader.GetString(18);
                                 SecondarySchedule_Part.WOID = sqlReader.GetString(19);
                                 SecondarySchedule_Part.PartRework = sqlReader.GetInt16(24);
-
 
                                 //PRINTING WILL OCCURR HERE!
 
