@@ -111,11 +111,11 @@ namespace CKPaint
 
                         using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
                         {
-                            sqlDataAdapter.Fill(inlinePartsDataSet, "SecondarySchedule");
+                            sqlDataAdapter.Fill(inlinePartsDataSet, "SecondaryScheduleInlineParts");
                         }
 
                         ThreadSafe(() => dataGridView1.DataSource = inlinePartsDataSet);
-                        ThreadSafe(() => dataGridView1.DataMember = "SecondarySchedule");
+                        ThreadSafe(() => dataGridView1.DataMember = "SecondaryScheduleInlineParts");
 
                     }
 
@@ -137,7 +137,6 @@ namespace CKPaint
             //This function fills the datagridview from the current data in the
             //db, because the table is using SQL dependency multi-threading needs
             //to be called in order to properly execute commands
-            DataSet inlinePartsDataSet = new DataSet();
             DataSet dispositionHistoryDataSet = new DataSet();
 
             //Series of sql calls to gather data
@@ -148,22 +147,6 @@ namespace CKPaint
                 {
                     sqlConnection.Open();
 
-                    //Execute the stored procedure for Parts OnFloor
-                    //and update the data grid view
-                    using (SqlCommand sqlCommand = new SqlCommand("spGetInlineParts", sqlConnection))
-                    {
-                        sqlCommand.CommandType = CommandType.StoredProcedure;
-
-                        using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
-                        {
-                            sqlDataAdapter.Fill(inlinePartsDataSet, "SecondarySchedule");
-                        }
-
-                        ThreadSafe(() => dataGridView1.DataSource = inlinePartsDataSet);
-                        ThreadSafe(() => dataGridView1.DataMember = "SecondarySchedule");
-
-                    }
-
                     //Execute the stored procedure for Parts Inline
                     //and update the data grid view
                     //DISPOSITION HISTORY HERE
@@ -173,11 +156,11 @@ namespace CKPaint
 
                         using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
                         {
-                            sqlDataAdapter.Fill(dispositionHistoryDataSet, "SecondarySchedule");
+                            sqlDataAdapter.Fill(dispositionHistoryDataSet, "SecondaryScheduleDispositionHistory");
                         }
 
                         ThreadSafe(() => dataGridView2.DataSource = dispositionHistoryDataSet);
-                        ThreadSafe(() => dataGridView2.DataMember = "SecondarySchedule");
+                        ThreadSafe(() => dataGridView2.DataMember = "SecondaryScheduleDispositionHistory");
 
                     }
 
@@ -192,6 +175,7 @@ namespace CKPaint
                     Console.WriteLine(err);
                 }
                 Cursor.Current = Cursors.Default;
+               
             }
         }
 
@@ -315,6 +299,7 @@ namespace CKPaint
 
             if(string.IsNullOrEmpty(SearchTxtBox.Text))
             {
+                SearchTxtBox.Clear();
                 RefreshInlinePartsTable();
                 RefreshDispositionHistoryTable();
                 return;
@@ -340,11 +325,11 @@ namespace CKPaint
 
                             using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
                             {
-                                sqlDataAdapter.Fill(inlinePartsDataset, "SecondarySchedule");
+                                sqlDataAdapter.Fill(inlinePartsDataset, "SecondaryScheduleInlineParts");
                             }
 
                             ThreadSafe(() => dataGridView1.DataSource = inlinePartsDataset);
-                            ThreadSafe(() => dataGridView1.DataMember = "SecondarySchedule");
+                            ThreadSafe(() => dataGridView1.DataMember = "SecondaryScheduleInlineParts");
 
                         }
                     }
@@ -359,11 +344,11 @@ namespace CKPaint
 
                             using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
                             {
-                                sqlDataAdapter.Fill(inlinePartsDataset, "SecondarySchedule");
+                                sqlDataAdapter.Fill(inlinePartsDataset, "SecondaryScheduleInlineParts");
                             }
 
                             ThreadSafe(() => dataGridView1.DataSource = inlinePartsDataset);
-                            ThreadSafe(() => dataGridView1.DataMember = "SecondarySchedule");
+                            ThreadSafe(() => dataGridView1.DataMember = "SecondaryScheduleInlineParts");
 
                         }
                     }
@@ -378,6 +363,7 @@ namespace CKPaint
                 }
                 Cursor.Current = Cursors.Default;
             }
+            
         }
 
         private void clearButton_Click(object sender, EventArgs e)
@@ -385,6 +371,7 @@ namespace CKPaint
             SearchTxtBox.Clear();
             RefreshInlinePartsTable();
             RefreshDispositionHistoryTable();
+           
         }
         private void finesseButton_Click(object sender, EventArgs e)
         {
