@@ -16,6 +16,7 @@ namespace CKPaint
         public string disposePartWOID = "";
         public string dispositionPartDefect = "";
         public string dispositionInspectorName = "Test";
+        public string dispositionPartProcess = "";
         public int dispositionDPUNum = 0;
         public string dispositionResult = "";
 
@@ -23,6 +24,7 @@ namespace CKPaint
         {
             InitializeComponent();
 
+            processComboBox.Text = "";
             defectCombo.Text = "";
             dispositionCombo.Text = "";
         }
@@ -34,10 +36,15 @@ namespace CKPaint
 
         private void disposePartButton_Click(object sender, EventArgs e)
         {
-            dispositionResult = dispositionResult.Trim();
+            if (string.IsNullOrEmpty(dispositionPartProcess))
+            {
+                processLabel.ForeColor = Color.Red;
+                return;
+            }
 
             if (string.IsNullOrEmpty(dispositionResult))
             {
+                dispositionLabel.ForeColor = Color.Red;
                 return;
             }
 
@@ -72,10 +79,16 @@ namespace CKPaint
 
         private void dispositionCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            dispositionCombo.BackColor = Color.White;
+            dispositionLabel.ForeColor = Color.White;
             dispositionResult = dispositionCombo.SelectedItem.ToString().ToUpper();
-          
         }
 
+        private void processComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+            processLabel.ForeColor = Color.White;
+            dispositionPartProcess = processComboBox.SelectedItem.ToString().ToUpper();
+            
+        }
     }
 }

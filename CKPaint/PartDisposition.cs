@@ -33,7 +33,8 @@ namespace CKPaint
         {
             //On the start of the program fill the table up from the DB
             //and initialiaze the SQL dependecy functions
-            RefreshTable();
+            RefreshInlinePartsTable();
+            RefreshDispositionHistoryTable();
             StartSecondaryScheduleTableDependency();
             AdjustColumnOrder(dataGridView1);
         }
@@ -56,15 +57,18 @@ namespace CKPaint
         {
             //Rearrange data grid view columns columns
             dv.Columns["JobNumber"].DisplayIndex = 0;
-            dv.Columns["WOID"].DisplayIndex = 1;
-            dv.Columns["WOIDRH"].DisplayIndex = 2;
-            dv.Columns["PartNumber"].DisplayIndex = 3;
-            dv.Columns["PartNumberRH"].DisplayIndex = 4;
-            dv.Columns["ColorCode"].DisplayIndex = 5;
-            dv.Columns["SetNumber"].DisplayIndex = 6;
-            dv.Columns["PartInline"].DisplayIndex = 7;
+            dv.Columns["SequenceNumber"].DisplayIndex = 1;
+            dv.Columns["WOID"].DisplayIndex = 2;
+            dv.Columns["WOIDRH"].DisplayIndex = 3;
+            dv.Columns["PartNumber"].DisplayIndex = 4;
+            dv.Columns["PartNumberRH"].DisplayIndex = 5;
+            dv.Columns["ColorCode"].DisplayIndex = 6;
+            dv.Columns["SetNumber"].DisplayIndex = 7;
             dv.Columns["PartRework"].DisplayIndex = 8;
-            dv.Columns["PartDisposed"].DisplayIndex = 9;
+            dv.Columns["PartFinesse"].DisplayIndex = 9;
+            dv.Columns["RackCode"].DisplayIndex = 10;
+            dv.Columns["PaintDate"].DisplayIndex = 11;
+            dv.Columns["PaintStation"].DisplayIndex = 12;
 
             //Ignore these
             dv.Columns["ScheduleID"].Visible = false;
@@ -79,9 +83,56 @@ namespace CKPaint
             dv.Columns["PaintBlock"].Visible = false;
             dv.Columns["ShipDate"].Visible = false;
             dv.Columns["ImportDate"].Visible = false;
+            dv.Columns["PartInline"].Visible = false;
+            dv.Columns["PartDisposed"].Visible = false;
+            dv.Columns["PartScrap"].Visible = false;
+        }
+        
+        void RefreshInlinePartsTable()
+        {
+            //This function fills the datagridview from the current data in the
+            //db, because the table is using SQL dependency multi-threading needs
+            //to be called in order to properly execute commands
+            DataSet inlinePartsDataSet = new DataSet();
+
+            //Series of sql calls to gather data
+            using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                try
+                {
+                    sqlConnection.Open();
+
+                    //Execute the stored procedure for Parts OnFloor
+                    //and update the data grid view
+                    using (SqlCommand sqlCommand = new SqlCommand("spGetInlineParts", sqlConnection))
+                    {
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                        using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                        {
+                            sqlDataAdapter.Fill(inlinePartsDataSet, "SecondarySchedule");
+                        }
+
+                        ThreadSafe(() => dataGridView1.DataSource = inlinePartsDataSet);
+                        ThreadSafe(() => dataGridView1.DataMember = "SecondarySchedule");
+
+                    }
+
+                    //Close connection after table is filled
+                    sqlConnection.Close();
+
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Console.WriteLine(err);
+                }
+                Cursor.Current = Cursors.Default;
+            }
         }
 
-        void RefreshTable()
+        void RefreshDispositionHistoryTable()
         {
             //This function fills the datagridview from the current data in the
             //db, because the table is using SQL dependency multi-threading needs
@@ -223,18 +274,18 @@ namespace CKPaint
                 switch (ent.ChangeType)
                 {
                     case ChangeType.Insert:
-                        {
-                            RefreshTable();
+                        {                   
+                            RefreshDispositionHistoryTable();
                         }
                         break;
                     case ChangeType.Update:
                         {
-                            RefreshTable();
+                            RefreshDispositionHistoryTable();
                         }
                         break;
                     case ChangeType.Delete:
                         {
-                            RefreshTable();
+                            RefreshDispositionHistoryTable();
                         }
                         break;
                 }
@@ -247,10 +298,102 @@ namespace CKPaint
             }
         }
 
-        private void disposePartButton_Click(object sender, EventArgs e)
+        private void searchJobNumRb_CheckedChanged(object sender, EventArgs e)
         {
-            
-           
+            RefreshInlinePartsTable();
+            RefreshDispositionHistoryTable();
+        }
+
+        private void searchWOIDRb_CheckedChanged(object sender, EventArgs e)
+        {
+            RefreshInlinePartsTable();
+            RefreshDispositionHistoryTable();
+        }
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            SearchTxtBox.Text = SearchTxtBox.Text.Trim();
+
+            if(string.IsNullOrEmpty(SearchTxtBox.Text))
+            {
+                RefreshInlinePartsTable();
+                RefreshDispositionHistoryTable();
+                return;
+            }
+
+            DataSet inlinePartsDataset = new DataSet();
+
+            //Series of sql calls to gather data
+            using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                try
+                {
+                    sqlConnection.Open();
+                    if (searchJobNumRb.Checked)
+                    {
+                        //Execute the stored procedure for Parts OnFloor
+                        //and update the data grid view
+                        using (SqlCommand sqlCommand = new SqlCommand("spGetInlinePartsByJobNumber", sqlConnection))
+                        {
+                            sqlCommand.CommandType = CommandType.StoredProcedure;
+                            sqlCommand.Parameters.AddWithValue("@JobNumber", SearchTxtBox.Text.ToString());
+
+                            using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                            {
+                                sqlDataAdapter.Fill(inlinePartsDataset, "SecondarySchedule");
+                            }
+
+                            ThreadSafe(() => dataGridView1.DataSource = inlinePartsDataset);
+                            ThreadSafe(() => dataGridView1.DataMember = "SecondarySchedule");
+
+                        }
+                    }
+                    else
+                    {
+                        //Execute the stored procedure for Parts OnFloor
+                        //and update the data grid view
+                        using (SqlCommand sqlCommand = new SqlCommand("spGetInlinePartsByWOID", sqlConnection))
+                        {
+                            sqlCommand.CommandType = CommandType.StoredProcedure;
+                            sqlCommand.Parameters.AddWithValue("@WOID", SearchTxtBox.Text.ToString());
+
+                            using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                            {
+                                sqlDataAdapter.Fill(inlinePartsDataset, "SecondarySchedule");
+                            }
+
+                            ThreadSafe(() => dataGridView1.DataSource = inlinePartsDataset);
+                            ThreadSafe(() => dataGridView1.DataMember = "SecondarySchedule");
+
+                        }
+                    }
+                    //Close connection after table is filled
+                    sqlConnection.Close();
+
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Console.WriteLine(err);
+                }
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            SearchTxtBox.Clear();
+            RefreshInlinePartsTable();
+            RefreshDispositionHistoryTable();
+        }
+        private void finesseButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void getAllReworkButton_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -295,10 +438,10 @@ namespace CKPaint
                                 PartDispositionHistory_Part.PartNumber = sqlReader.GetString(4);
                                 PartDispositionHistory_Part.PartNumberRH = sqlReader.GetString(5);
                                 PartDispositionHistory_Part.ColorCode = sqlReader.GetString(6);
-                                PartDispositionHistory_Part.InspectorID = "000000"; //FIX
+                                PartDispositionHistory_Part.InspectorID = "000000";//FIX
                                 PartDispositionHistory_Part.PaintStation = sqlReader.GetString(17);
                                 PartDispositionHistory_Part.PaintDate = sqlReader.GetDateTime(16);
-                                PartDispositionHistory_Part.PartProcess = "Placeholder"; // FIX ROBOT OR MANUAL from the disp form
+                                PartDispositionHistory_Part.PartProcess = partDispositionForm.dispositionPartProcess.ToString().ToUpper();
                                 PartDispositionHistory_Part.ProductType = sqlReader.GetString(8);
                                 PartDispositionHistory_Part.WOID = sqlReader.GetString(19);
                                 PartDispositionHistory_Part.WOIDRH = sqlReader.GetString(20);
@@ -370,5 +513,7 @@ namespace CKPaint
         {
 
         }
+
+       
     }
 }

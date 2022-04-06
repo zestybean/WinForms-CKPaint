@@ -337,63 +337,61 @@ namespace CKPaint
             }
 
             DataSet floorPartsDataSet = new DataSet();
-            DataSet inlinePartsDataSet = new DataSet();
            
-                //Series of sql calls to gather data
-                using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
+            //Series of sql calls to gather data
+            using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                try
                 {
-                    Cursor.Current = Cursors.WaitCursor;
-                    try
+                    sqlConnection.Open();
+                if (searchJobNumRb.Checked)
+                {
+                    //Execute the stored procedure for Parts OnFloor
+                    //and update the data grid view
+                    using (SqlCommand sqlCommand = new SqlCommand("spSearchOnFloorPartsByJobNumber", sqlConnection))
                     {
-                        sqlConnection.Open();
-                    if (searchJobNumRb.Checked)
-                    {
-                        //Execute the stored procedure for Parts OnFloor
-                        //and update the data grid view
-                        using (SqlCommand sqlCommand = new SqlCommand("spSearchOnFloorPartsByJobNumber", sqlConnection))
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
+                        sqlCommand.Parameters.AddWithValue("@JobNumber", SearchTxtBox.Text.ToString());
+
+                        using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
                         {
-                            sqlCommand.CommandType = CommandType.StoredProcedure;
-                            sqlCommand.Parameters.AddWithValue("@JobNumber", SearchTxtBox.Text.ToString());
-
-                            using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
-                            {
-                                sqlDataAdapter.Fill(floorPartsDataSet, "SecondaryScheduleFloorParts");
-                            }
-
-                            ThreadSafe(() => dataGridView1.DataSource = floorPartsDataSet);
-                            ThreadSafe(() => dataGridView1.DataMember = "SecondaryScheduleFloorParts");
-
+                            sqlDataAdapter.Fill(floorPartsDataSet, "SecondaryScheduleFloorParts");
                         }
-                    } else
+
+                        ThreadSafe(() => dataGridView1.DataSource = floorPartsDataSet);
+                        ThreadSafe(() => dataGridView1.DataMember = "SecondaryScheduleFloorParts");
+
+                    }
+                } else
+                {
+                    //Execute the stored procedure for Parts OnFloor
+                    //and update the data grid view
+                    using (SqlCommand sqlCommand = new SqlCommand("spSearchOnFloorPartsByWOID", sqlConnection))
                     {
-                        //Execute the stored procedure for Parts OnFloor
-                        //and update the data grid view
-                        using (SqlCommand sqlCommand = new SqlCommand("spSearchOnFloorPartsByWOID", sqlConnection))
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
+                        sqlCommand.Parameters.AddWithValue("@WOID", SearchTxtBox.Text.ToString());
+
+                        using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
                         {
-                            sqlCommand.CommandType = CommandType.StoredProcedure;
-                            sqlCommand.Parameters.AddWithValue("@WOID", SearchTxtBox.Text.ToString());
-
-                            using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
-                            {
-                                sqlDataAdapter.Fill(floorPartsDataSet, "SecondaryScheduleFloorParts");
-                            }
-
-                            ThreadSafe(() => dataGridView1.DataSource = floorPartsDataSet);
-                            ThreadSafe(() => dataGridView1.DataMember = "SecondaryScheduleFloorParts");
-
+                            sqlDataAdapter.Fill(floorPartsDataSet, "SecondaryScheduleFloorParts");
                         }
-                    }
-                        //Close connection after table is filled
-                        sqlConnection.Close();
+
+                        ThreadSafe(() => dataGridView1.DataSource = floorPartsDataSet);
+                        ThreadSafe(() => dataGridView1.DataMember = "SecondaryScheduleFloorParts");
 
                     }
-                    catch (Exception err)
-                    {
-                        MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        Console.WriteLine(err);
-                    }
-                    Cursor.Current = Cursors.Default;
-                  
+                }
+                    //Close connection after table is filled
+                    sqlConnection.Close();
+
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Console.WriteLine(err);
+                }
+                Cursor.Current = Cursors.Default;
             }
         }
 
@@ -670,6 +668,9 @@ namespace CKPaint
 
                                     PrintToZebraHelper.PrintToZebra(SecondarySchedule_Part, RH);
                                 }
+
+                                //ADD THE INLINE HISTORY INSERT HERE
+
 
                                 debugLabel.Text = "Part moved to inline success!";
                             }

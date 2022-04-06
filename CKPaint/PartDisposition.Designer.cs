@@ -43,12 +43,13 @@ namespace CKPaint
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.getAllReworkButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.clearButton = new System.Windows.Forms.Button();
             this.searchButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.searchJobNumRb = new System.Windows.Forms.RadioButton();
             this.searchWOIDRb = new System.Windows.Forms.RadioButton();
             this.SearchTxtBox = new System.Windows.Forms.TextBox();
+            this.finesseButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.controlPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -149,6 +150,7 @@ namespace CKPaint
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -202,18 +204,20 @@ namespace CKPaint
             this.getAllReworkButton.TabIndex = 22;
             this.getAllReworkButton.Text = "All Rework Parts";
             this.getAllReworkButton.UseVisualStyleBackColor = false;
+            this.getAllReworkButton.Click += new System.EventHandler(this.getAllReworkButton_Click);
             // 
-            // button1
+            // clearButton
             // 
-            this.button1.BackColor = System.Drawing.Color.Tomato;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(603, 28);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(123, 64);
-            this.button1.TabIndex = 21;
-            this.button1.Text = "Clear Search";
-            this.button1.UseVisualStyleBackColor = false;
+            this.clearButton.BackColor = System.Drawing.Color.Tomato;
+            this.clearButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clearButton.ForeColor = System.Drawing.Color.White;
+            this.clearButton.Location = new System.Drawing.Point(603, 28);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(123, 64);
+            this.clearButton.TabIndex = 21;
+            this.clearButton.Text = "Clear Search";
+            this.clearButton.UseVisualStyleBackColor = false;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
             // searchButton
             // 
@@ -226,6 +230,7 @@ namespace CKPaint
             this.searchButton.TabIndex = 18;
             this.searchButton.Text = "Search";
             this.searchButton.UseVisualStyleBackColor = false;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
             // groupBox1
             // 
@@ -245,25 +250,27 @@ namespace CKPaint
             // 
             this.searchJobNumRb.AutoSize = true;
             this.searchJobNumRb.Checked = true;
-            this.searchJobNumRb.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchJobNumRb.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchJobNumRb.Location = new System.Drawing.Point(6, 18);
             this.searchJobNumRb.Name = "searchJobNumRb";
-            this.searchJobNumRb.Size = new System.Drawing.Size(123, 24);
+            this.searchJobNumRb.Size = new System.Drawing.Size(128, 22);
             this.searchJobNumRb.TabIndex = 1;
             this.searchJobNumRb.TabStop = true;
-            this.searchJobNumRb.Text = "Job Number";
+            this.searchJobNumRb.Text = "Job/Seq Num";
             this.searchJobNumRb.UseVisualStyleBackColor = true;
+            this.searchJobNumRb.CheckedChanged += new System.EventHandler(this.searchJobNumRb_CheckedChanged);
             // 
             // searchWOIDRb
             // 
             this.searchWOIDRb.AutoSize = true;
-            this.searchWOIDRb.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchWOIDRb.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchWOIDRb.Location = new System.Drawing.Point(143, 18);
             this.searchWOIDRb.Name = "searchWOIDRb";
-            this.searchWOIDRb.Size = new System.Drawing.Size(75, 24);
+            this.searchWOIDRb.Size = new System.Drawing.Size(71, 22);
             this.searchWOIDRb.TabIndex = 0;
             this.searchWOIDRb.Text = "WOID";
             this.searchWOIDRb.UseVisualStyleBackColor = true;
+            this.searchWOIDRb.CheckedChanged += new System.EventHandler(this.searchWOIDRb_CheckedChanged);
             // 
             // SearchTxtBox
             // 
@@ -273,15 +280,29 @@ namespace CKPaint
             this.SearchTxtBox.Size = new System.Drawing.Size(227, 31);
             this.SearchTxtBox.TabIndex = 19;
             // 
+            // finesseButton
+            // 
+            this.finesseButton.BackColor = System.Drawing.Color.LightGreen;
+            this.finesseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.finesseButton.ForeColor = System.Drawing.Color.Black;
+            this.finesseButton.Location = new System.Drawing.Point(861, 28);
+            this.finesseButton.Name = "finesseButton";
+            this.finesseButton.Size = new System.Drawing.Size(123, 62);
+            this.finesseButton.TabIndex = 24;
+            this.finesseButton.Text = "All Finesse Parts";
+            this.finesseButton.UseVisualStyleBackColor = false;
+            this.finesseButton.Click += new System.EventHandler(this.finesseButton_Click);
+            // 
             // PartDisposition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GrayText;
             this.ClientSize = new System.Drawing.Size(1339, 861);
+            this.Controls.Add(this.finesseButton);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.getAllReworkButton);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.clearButton);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.SearchTxtBox);
@@ -321,11 +342,12 @@ namespace CKPaint
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button getAllReworkButton;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton searchJobNumRb;
         private System.Windows.Forms.RadioButton searchWOIDRb;
         private System.Windows.Forms.TextBox SearchTxtBox;
+        private System.Windows.Forms.Button finesseButton;
     }
 }
