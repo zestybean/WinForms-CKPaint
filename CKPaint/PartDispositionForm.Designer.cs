@@ -86,6 +86,7 @@ namespace CKPaint
             this.InspectorTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.InspectorTxtBox.Location = new System.Drawing.Point(241, 250);
             this.InspectorTxtBox.Name = "InspectorTxtBox";
+            this.InspectorTxtBox.ReadOnly = true;
             this.InspectorTxtBox.Size = new System.Drawing.Size(227, 31);
             this.InspectorTxtBox.TabIndex = 2;
             this.InspectorTxtBox.TextChanged += new System.EventHandler(this.InspectorTxtBox_TextChanged);

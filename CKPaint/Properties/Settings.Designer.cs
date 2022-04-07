@@ -70,5 +70,17 @@ namespace CKPaint.Properties {
                 this["Site"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Inspector {
+            get {
+                return ((string)(this["Inspector"]));
+            }
+            set {
+                this["Inspector"] = value;
+            }
+        }
     }
 }

@@ -394,7 +394,9 @@ namespace CKPaint
 
             PartDispositionForm partDispositionForm = new PartDispositionForm();
             partDispositionForm.disposePartWOID = partWOID;
-            
+            partDispositionForm.dispositionInspectorName = CKPaint.Properties.Settings.Default["Inspector"].ToString().ToUpper();
+
+
 
             partDispositionForm.ShowDialog();
             if (partDispositionForm.disposeActionButtonSelected)
@@ -501,6 +503,10 @@ namespace CKPaint
 
         }
 
-       
+        private void inspectorComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CKPaint.Properties.Settings.Default["Inspector"] = inspectorComboBox.Text.ToString().ToUpper();
+            Properties.Settings.Default.Save();
+        }
     }
 }

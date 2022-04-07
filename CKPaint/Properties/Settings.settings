@@ -14,5 +14,8 @@
     <Setting Name="Site" Type="System.String" Scope="User">
       <Value Profile="(Default)">5130</Value>
     </Setting>
+    <Setting Name="Inspector" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

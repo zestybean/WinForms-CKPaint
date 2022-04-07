@@ -15,7 +15,7 @@ namespace CKPaint
         public bool disposeActionButtonSelected = false;
         public string disposePartWOID = "";
         public string dispositionPartDefect = "";
-        public string dispositionInspectorName = "Test";
+        public string dispositionInspectorName = "";
         public string dispositionPartProcess = "";
         public int dispositionDPUNum = 0;
         public string dispositionResult = "";
@@ -23,7 +23,7 @@ namespace CKPaint
         public PartDispositionForm()
         {
             InitializeComponent();
-
+         
             processComboBox.Text = "";
             defectCombo.Text = "";
             dispositionCombo.Text = "";
@@ -31,6 +31,7 @@ namespace CKPaint
 
         private void PartDispositionForm_Load(object sender, EventArgs e)
         {
+            InspectorTxtBox.Text = dispositionInspectorName;
             WOIDTxtBox.Text = disposePartWOID.ToString().ToUpper();
         }
 
