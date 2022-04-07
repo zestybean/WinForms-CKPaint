@@ -11,6 +11,7 @@ namespace CKPaint
         public PartDispositionHistory()
         {
             InspectorName = "";
+            SequenceNumber = "";
             PartNumber = "";
             PartNumberRH = "";
             JobNumber = "";
@@ -32,6 +33,8 @@ namespace CKPaint
 
         //ORM DB Definition 
         public string InspectorName { get; set; }
+
+        public string SequenceNumber { get; set; }
         public string PartNumber { get; set; } //
         public string PartNumberRH { get; set; }
         public string JobNumber { get; set; } //

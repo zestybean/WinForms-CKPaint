@@ -376,11 +376,147 @@ namespace CKPaint
         private void finesseButton_Click(object sender, EventArgs e)
         {
 
+            SearchTxtBox.Text = SearchTxtBox.Text.Trim();
+
+            if (string.IsNullOrEmpty(SearchTxtBox.Text))
+            {
+                SearchTxtBox.Clear();
+                RefreshInlinePartsTable();
+                RefreshDispositionHistoryTable();
+                return;
+            }
+
+            DataSet inlinePartsDataset = new DataSet();
+
+            //Series of sql calls to gather data
+            using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                try
+                {
+                    sqlConnection.Open();
+                    if (searchJobNumRb.Checked)
+                    {
+                        //Execute the stored procedure for Parts OnFloor
+                        //and update the data grid view
+                        using (SqlCommand sqlCommand = new SqlCommand("spGetFinesseByJobNumber", sqlConnection))
+                        {
+                            sqlCommand.CommandType = CommandType.StoredProcedure;
+                            sqlCommand.Parameters.AddWithValue("@JobNumber", SearchTxtBox.Text.ToString());
+
+                            using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                            {
+                                sqlDataAdapter.Fill(inlinePartsDataset, "SecondaryScheduleInlineParts");
+                            }
+
+                            ThreadSafe(() => dataGridView1.DataSource = inlinePartsDataset);
+                            ThreadSafe(() => dataGridView1.DataMember = "SecondaryScheduleInlineParts");
+
+                        }
+                    }
+                    else
+                    {
+                        //Execute the stored procedure for Parts OnFloor
+                        //and update the data grid view
+                        using (SqlCommand sqlCommand = new SqlCommand("spGetFinesseByWOID", sqlConnection))
+                        {
+                            sqlCommand.CommandType = CommandType.StoredProcedure;
+                            sqlCommand.Parameters.AddWithValue("@WOID", SearchTxtBox.Text.ToString());
+
+                            using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                            {
+                                sqlDataAdapter.Fill(inlinePartsDataset, "SecondaryScheduleInlineParts");
+                            }
+
+                            ThreadSafe(() => dataGridView1.DataSource = inlinePartsDataset);
+                            ThreadSafe(() => dataGridView1.DataMember = "SecondaryScheduleInlineParts");
+
+                        }
+                    }
+                    //Close connection after table is filled
+                    sqlConnection.Close();
+
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Console.WriteLine(err);
+                }
+                Cursor.Current = Cursors.Default;
+            }
         }
 
         private void getAllReworkButton_Click(object sender, EventArgs e)
         {
 
+            SearchTxtBox.Text = SearchTxtBox.Text.Trim();
+
+            if (string.IsNullOrEmpty(SearchTxtBox.Text))
+            {
+                SearchTxtBox.Clear();
+                RefreshInlinePartsTable();
+                RefreshDispositionHistoryTable();
+                return;
+            }
+
+            DataSet inlinePartsDataset = new DataSet();
+
+            //Series of sql calls to gather data
+            using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                try
+                {
+                    sqlConnection.Open();
+                    if (searchJobNumRb.Checked)
+                    {
+                        //Execute the stored procedure for Parts OnFloor
+                        //and update the data grid view
+                        using (SqlCommand sqlCommand = new SqlCommand("spGetReworkByJobNumber", sqlConnection))
+                        {
+                            sqlCommand.CommandType = CommandType.StoredProcedure;
+                            sqlCommand.Parameters.AddWithValue("@JobNumber", SearchTxtBox.Text.ToString());
+
+                            using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                            {
+                                sqlDataAdapter.Fill(inlinePartsDataset, "SecondaryScheduleInlineParts");
+                            }
+
+                            ThreadSafe(() => dataGridView1.DataSource = inlinePartsDataset);
+                            ThreadSafe(() => dataGridView1.DataMember = "SecondaryScheduleInlineParts");
+
+                        }
+                    }
+                    else
+                    {
+                        //Execute the stored procedure for Parts OnFloor
+                        //and update the data grid view
+                        using (SqlCommand sqlCommand = new SqlCommand("spGetReworkByWOID", sqlConnection))
+                        {
+                            sqlCommand.CommandType = CommandType.StoredProcedure;
+                            sqlCommand.Parameters.AddWithValue("@WOID", SearchTxtBox.Text.ToString());
+
+                            using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                            {
+                                sqlDataAdapter.Fill(inlinePartsDataset, "SecondaryScheduleInlineParts");
+                            }
+
+                            ThreadSafe(() => dataGridView1.DataSource = inlinePartsDataset);
+                            ThreadSafe(() => dataGridView1.DataMember = "SecondaryScheduleInlineParts");
+
+                        }
+                    }
+                    //Close connection after table is filled
+                    sqlConnection.Close();
+
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Console.WriteLine(err);
+                }
+                Cursor.Current = Cursors.Default;
+            }
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -388,13 +524,19 @@ namespace CKPaint
             if (e.RowIndex == -1)
                 return;
 
+            if (string.IsNullOrEmpty(inspectorComboBox.Text))
+            {
+                inspectorBox.BackColor = Color.Red;
+                return;
+            }
+
             //DISPOSITION DOUBLE CLICK
             string partWOID = dataGridView1.Rows[e.RowIndex].Cells[19].Value.ToString();
             
 
             PartDispositionForm partDispositionForm = new PartDispositionForm();
             partDispositionForm.disposePartWOID = partWOID;
-            partDispositionForm.dispositionInspectorName = CKPaint.Properties.Settings.Default["Inspector"].ToString().ToUpper();
+            partDispositionForm.dispositionInspectorName = CKPaint.Properties.Settings.Default["Inspector"].ToString();
 
 
 
@@ -422,12 +564,13 @@ namespace CKPaint
                             sqlReader.Read();
                             if (sqlReader.HasRows)
                             {
-                                PartDispositionHistory_Part.InspectorName = partDispositionForm.dispositionInspectorName.ToString().ToUpper();
+                                PartDispositionHistory_Part.InspectorName = partDispositionForm.dispositionInspectorName.ToString();
+                                PartDispositionHistory_Part.SequenceNumber = sqlReader.GetString(1);
                                 PartDispositionHistory_Part.JobNumber = sqlReader.GetString(2);
                                 PartDispositionHistory_Part.PartNumber = sqlReader.GetString(4);
                                 PartDispositionHistory_Part.PartNumberRH = sqlReader.GetString(5);
                                 PartDispositionHistory_Part.ColorCode = sqlReader.GetString(6);
-                                PartDispositionHistory_Part.InspectorID = "000000";//FIX
+                                PartDispositionHistory_Part.InspectorID = getInspectorId();
                                 PartDispositionHistory_Part.PaintStation = sqlReader.GetString(17);
                                 PartDispositionHistory_Part.PaintDate = sqlReader.GetDateTime(16);
                                 PartDispositionHistory_Part.PartProcess = partDispositionForm.dispositionPartProcess.ToString().ToUpper();
@@ -457,6 +600,7 @@ namespace CKPaint
 
                             sqlCommand.CommandType = CommandType.StoredProcedure;
                             sqlCommand.Parameters.AddWithValue("@INSPECTORNAME", PartDispositionHistory_Part.InspectorName);
+                            sqlCommand.Parameters.AddWithValue("@SEQUENCENUMBER", PartDispositionHistory_Part.SequenceNumber);
                             sqlCommand.Parameters.AddWithValue("@JOBNUMBER", PartDispositionHistory_Part.JobNumber);
                             sqlCommand.Parameters.AddWithValue("@PARTNUMBER", PartDispositionHistory_Part.PartNumber);
                             sqlCommand.Parameters.AddWithValue("@PARTNUMBERRH", PartDispositionHistory_Part.PartNumberRH);
@@ -492,7 +636,7 @@ namespace CKPaint
                     }
 
                     Cursor.Current = Cursors.Default;
-
+                    RefreshInlinePartsTable();
                 }
             }
 
@@ -500,13 +644,65 @@ namespace CKPaint
 
         private void dataGridView2_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            //Do something here...
         }
 
         private void inspectorComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CKPaint.Properties.Settings.Default["Inspector"] = inspectorComboBox.Text.ToString().ToUpper();
+            inspectorBox.BackColor = Color.DarkGray;
+            CKPaint.Properties.Settings.Default["Inspector"] = inspectorComboBox.Text.ToString();
             Properties.Settings.Default.Save();
+        }
+
+        private string getInspectorId()
+        {
+            string inspectorName = CKPaint.Properties.Settings.Default["Inspector"].ToString();
+            string inspectorID = "";
+
+            //Series of sql calls to gather data
+            using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
+            {
+
+                Cursor.Current = Cursors.WaitCursor;
+                try
+                {
+                    sqlConnection.Open();
+                    using (SqlCommand sqlCommand = new SqlCommand("spGetInspectorID", sqlConnection))
+                    {
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
+                        sqlCommand.Parameters.AddWithValue("@INSPECTORNAME", inspectorName);
+                        var sqlReader = sqlCommand.ExecuteReader();
+
+                        sqlReader.Read();
+                        if (sqlReader.HasRows)
+                        {
+                            inspectorID = sqlReader.GetString(0);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Inspector does not exist!");
+                        }
+
+                        sqlCommand.Dispose();
+                        sqlReader.Close();
+                    }
+
+
+
+                    sqlConnection.Close();
+
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message, "Get InspectorID Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Console.WriteLine(err);
+                }
+
+                Cursor.Current = Cursors.Default;
+
+            }
+
+            return inspectorID;
         }
     }
 }

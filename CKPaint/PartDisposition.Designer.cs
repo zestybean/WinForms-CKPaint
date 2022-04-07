@@ -51,12 +51,13 @@ namespace CKPaint
             this.SearchTxtBox = new System.Windows.Forms.TextBox();
             this.finesseButton = new System.Windows.Forms.Button();
             this.inspectorComboBox = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.inspectorBox = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.controlPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.inspectorBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // title
@@ -277,7 +278,7 @@ namespace CKPaint
             // SearchTxtBox
             // 
             this.SearchTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SearchTxtBox.Location = new System.Drawing.Point(241, 53);
+            this.SearchTxtBox.Location = new System.Drawing.Point(242, 53);
             this.SearchTxtBox.Name = "SearchTxtBox";
             this.SearchTxtBox.Size = new System.Drawing.Size(227, 31);
             this.SearchTxtBox.TabIndex = 19;
@@ -314,23 +315,23 @@ namespace CKPaint
             "Ashley Bhena",
             "Karina Herrera",
             "Yamilexs Garza"});
-            this.inspectorComboBox.Location = new System.Drawing.Point(243, 12);
+            this.inspectorComboBox.Location = new System.Drawing.Point(6, 19);
             this.inspectorComboBox.Name = "inspectorComboBox";
-            this.inspectorComboBox.Size = new System.Drawing.Size(226, 21);
+            this.inspectorComboBox.Size = new System.Drawing.Size(215, 21);
             this.inspectorComboBox.TabIndex = 25;
             this.inspectorComboBox.SelectedIndexChanged += new System.EventHandler(this.inspectorComboBox_SelectedIndexChanged);
             // 
-            // label1
+            // inspectorBox
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(239, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 13);
-            this.label1.TabIndex = 26;
-            this.label1.Text = "Inspector:\r\n";
+            this.inspectorBox.BackColor = System.Drawing.SystemColors.GrayText;
+            this.inspectorBox.Controls.Add(this.inspectorComboBox);
+            this.inspectorBox.ForeColor = System.Drawing.Color.White;
+            this.inspectorBox.Location = new System.Drawing.Point(242, 0);
+            this.inspectorBox.Name = "inspectorBox";
+            this.inspectorBox.Size = new System.Drawing.Size(227, 47);
+            this.inspectorBox.TabIndex = 27;
+            this.inspectorBox.TabStop = false;
+            this.inspectorBox.Text = "Inspector";
             // 
             // PartDisposition
             // 
@@ -338,8 +339,7 @@ namespace CKPaint
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GrayText;
             this.ClientSize = new System.Drawing.Size(1339, 861);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.inspectorComboBox);
+            this.Controls.Add(this.inspectorBox);
             this.Controls.Add(this.finesseButton);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.getAllReworkButton);
@@ -367,6 +367,7 @@ namespace CKPaint
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.inspectorBox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -391,6 +392,6 @@ namespace CKPaint
         private System.Windows.Forms.TextBox SearchTxtBox;
         private System.Windows.Forms.Button finesseButton;
         private System.Windows.Forms.ComboBox inspectorComboBox;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox inspectorBox;
     }
 }

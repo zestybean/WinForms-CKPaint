@@ -218,7 +218,7 @@ namespace CKPaint
             this.dispositionCombo.FormattingEnabled = true;
             this.dispositionCombo.Items.AddRange(new object[] {
             "Approved",
-            "Finnesse",
+            "Finesse",
             "Rework",
             "Scrap"});
             this.dispositionCombo.Location = new System.Drawing.Point(241, 410);
