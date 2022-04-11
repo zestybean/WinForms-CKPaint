@@ -583,6 +583,8 @@ namespace CKPaint
                                 PartDispositionHistory_Part.PartDescription = sqlReader.GetString(10);
                                 PartDispositionHistory_Part.PartDescriptionRH = sqlReader.GetString(11);
                                 PartDispositionHistory_Part.DispositionDate = DateTime.Now;
+                                PartDispositionHistory_Part.PartRework = sqlReader.GetInt16(24);
+                                PartDispositionHistory_Part.PartFinesse = sqlReader.GetInt16(26);
                             }
                             else
                             {
@@ -618,6 +620,8 @@ namespace CKPaint
                             sqlCommand.Parameters.AddWithValue("@PARTDESCRIPTION", PartDispositionHistory_Part.PartDescription);
                             sqlCommand.Parameters.AddWithValue("@PARTDESCRIPTIONRH", PartDispositionHistory_Part.PartDescriptionRH);
                             sqlCommand.Parameters.AddWithValue("@DISPOSITIONDATE", PartDispositionHistory_Part.DispositionDate);
+                            sqlCommand.Parameters.AddWithValue("@PARTREWORK", PartDispositionHistory_Part.PartRework);
+                            sqlCommand.Parameters.AddWithValue("@PARTFINESSE", PartDispositionHistory_Part.PartFinesse);
 
                             sqlCommand.ExecuteNonQuery();
 

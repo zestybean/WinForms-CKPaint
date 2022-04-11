@@ -29,6 +29,9 @@ namespace CKPaint
             PartDescriptionRH = "";
             PartDisposition = "";
             DispositionDate = DateTime.Now;
+            PartRework = 0;
+            PartFinesse = 0;
+
         }
 
         //ORM DB Definition 
@@ -52,5 +55,7 @@ namespace CKPaint
         public string PartDescription { get; set; }
         public string PartDescriptionRH { get; set; }
         public DateTime DispositionDate { get; set; }
+        public Int16 PartRework { get; set; }
+        public Int16 PartFinesse { get; set; }
     }
 }
