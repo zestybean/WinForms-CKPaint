@@ -66,6 +66,8 @@ namespace CKPaint
         private void monitorButton_Click(object sender, EventArgs e)
         {
             //ADD Inline Viewer Form
+            MonitorReportForm monitorReportForm = new MonitorReportForm();
+            monitorReportForm.ShowDialog();
         }
 
         private void setVersion()
