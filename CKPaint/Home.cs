@@ -20,10 +20,16 @@ namespace CKPaint
         private void Home_Load(object sender, EventArgs e)
         {
             setPlantSiteLabels();
+            setVersion();
         }
 
         private void partLoaderBtn_Click(object sender, EventArgs e)
         {
+            if(CKPaint.Properties.Settings.Default["Station"].ToString().Trim().ToUpper() == "QA")
+            {
+                return;
+            }
+
             this.Hide();
             Form loaderWindow = new PartLoader();
             loaderWindow.ShowDialog();
@@ -33,6 +39,11 @@ namespace CKPaint
 
         private void partDispositionBtn_Click(object sender, EventArgs e)
         {
+            if (CKPaint.Properties.Settings.Default["Station"].ToString().Trim().ToUpper() != "QA")
+            {
+                return;
+            }
+
             this.Hide();
             Form dispositionWindow = new PartDisposition();
             dispositionWindow.ShowDialog();
@@ -50,6 +61,16 @@ namespace CKPaint
         {
             plantLabel.Text = "Plant:   " + CKPaint.Properties.Settings.Default["Plant"];
             siteLabel.Text = "Site:     " + CKPaint.Properties.Settings.Default["Site"];
+        }
+
+        private void monitorButton_Click(object sender, EventArgs e)
+        {
+            //ADD Inline Viewer Form
+        }
+
+        private void setVersion()
+        {
+            versionLabel.Text = versionLabel.Text + CKPaint.Properties.Settings.Default["Version"].ToString().Trim().ToUpper();
         }
     }
 }

@@ -23,7 +23,7 @@ namespace CKPaint
 
         //Sql Dependency Object
         public SqlTableDependency<SecondarySchedule> secondaryScheduleDependency;
-
+        public SqlTableDependency<PartDispositionHistory> partDispositionHistoryDependency;
         public PartDisposition()
         {
             InitializeComponent();
@@ -209,8 +209,12 @@ namespace CKPaint
                 //after, point to the functions handling the onchanged and 
                 //error functions
                 secondaryScheduleDependency = new SqlTableDependency<SecondarySchedule>(connStr_PBET);
+                partDispositionHistoryDependency = new SqlTableDependency<PartDispositionHistory>(connStr_PBET);
+                partDispositionHistoryDependency.OnChanged += PartDispositionHistyoryDependency_OnChange;
+                partDispositionHistoryDependency.OnError += SecondaryScheduleTableDependency_OnError;
                 secondaryScheduleDependency.OnChanged += SecondaryScheduleTableDependency_OnChange;
                 secondaryScheduleDependency.OnError += SecondaryScheduleTableDependency_OnError;
+                partDispositionHistoryDependency.Start();
                 secondaryScheduleDependency.Start();
                 return true;
             }
@@ -259,6 +263,39 @@ namespace CKPaint
                 {
                     case ChangeType.Insert:
                         {                   
+                            RefreshDispositionHistoryTable();
+                        }
+                        break;
+                    case ChangeType.Update:
+                        {
+                            RefreshDispositionHistoryTable();
+                        }
+                        break;
+                    case ChangeType.Delete:
+                        {
+                            RefreshDispositionHistoryTable();
+                        }
+                        break;
+                }
+
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message, "Secondary Dependency OnChange", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine(err);
+            }
+        }
+
+        private void PartDispositionHistyoryDependency_OnChange(object sender, RecordChangedEventArgs<PartDispositionHistory> ent)
+        {
+            try
+            {
+                var changedEntity = ent.Entity;
+
+                switch (ent.ChangeType)
+                {
+                    case ChangeType.Insert:
+                        {
                             RefreshDispositionHistoryTable();
                         }
                         break;
@@ -371,11 +408,10 @@ namespace CKPaint
             SearchTxtBox.Clear();
             RefreshInlinePartsTable();
             RefreshDispositionHistoryTable();
-           
         }
-        private void finesseButton_Click(object sender, EventArgs e)
-        {
 
+        private void finesseButton_Click(object sender, EventArgs e)
+        { 
             SearchTxtBox.Text = SearchTxtBox.Text.Trim();
 
             if (string.IsNullOrEmpty(SearchTxtBox.Text))
@@ -628,8 +664,6 @@ namespace CKPaint
                             sqlCommand.Dispose();
 
                         }
-
-
                         sqlConnection.Close();
 
                     }

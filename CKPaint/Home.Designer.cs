@@ -38,6 +38,8 @@ namespace CKPaint
             this.settingsButton = new System.Windows.Forms.Button();
             this.plantLabel = new System.Windows.Forms.Label();
             this.siteLabel = new System.Windows.Forms.Label();
+            this.monitorButton = new System.Windows.Forms.Button();
+            this.versionLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -105,7 +107,7 @@ namespace CKPaint
             this.settingsButton.BackColor = System.Drawing.SystemColors.HotTrack;
             this.settingsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.settingsButton.ForeColor = System.Drawing.Color.White;
-            this.settingsButton.Location = new System.Drawing.Point(311, 304);
+            this.settingsButton.Location = new System.Drawing.Point(307, 256);
             this.settingsButton.Name = "settingsButton";
             this.settingsButton.Size = new System.Drawing.Size(187, 37);
             this.settingsButton.TabIndex = 8;
@@ -137,12 +139,37 @@ namespace CKPaint
             this.siteLabel.TabIndex = 10;
             this.siteLabel.Text = "Site:";
             // 
+            // monitorButton
+            // 
+            this.monitorButton.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.monitorButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.monitorButton.ForeColor = System.Drawing.Color.White;
+            this.monitorButton.Location = new System.Drawing.Point(307, 299);
+            this.monitorButton.Name = "monitorButton";
+            this.monitorButton.Size = new System.Drawing.Size(187, 37);
+            this.monitorButton.TabIndex = 11;
+            this.monitorButton.Text = "Monitor";
+            this.monitorButton.UseVisualStyleBackColor = false;
+            this.monitorButton.Click += new System.EventHandler(this.monitorButton_Click);
+            // 
+            // versionLabel
+            // 
+            this.versionLabel.AutoSize = true;
+            this.versionLabel.ForeColor = System.Drawing.Color.White;
+            this.versionLabel.Location = new System.Drawing.Point(2, 353);
+            this.versionLabel.Name = "versionLabel";
+            this.versionLabel.Size = new System.Drawing.Size(45, 13);
+            this.versionLabel.TabIndex = 12;
+            this.versionLabel.Text = "Version:";
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Highlight;
             this.ClientSize = new System.Drawing.Size(800, 387);
+            this.Controls.Add(this.versionLabel);
+            this.Controls.Add(this.monitorButton);
             this.Controls.Add(this.siteLabel);
             this.Controls.Add(this.plantLabel);
             this.Controls.Add(this.settingsButton);
@@ -176,5 +203,7 @@ namespace CKPaint
         private System.Windows.Forms.Button settingsButton;
         private System.Windows.Forms.Label plantLabel;
         private System.Windows.Forms.Label siteLabel;
+        private System.Windows.Forms.Button monitorButton;
+        private System.Windows.Forms.Label versionLabel;
     }
 }

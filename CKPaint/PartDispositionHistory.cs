@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CKPaint
 {
-    class PartDispositionHistory
+    public class PartDispositionHistory
     {
         public PartDispositionHistory()
         {
@@ -36,7 +36,6 @@ namespace CKPaint
 
         //ORM DB Definition 
         public string InspectorName { get; set; }
-
         public string SequenceNumber { get; set; }
         public string PartNumber { get; set; } //
         public string PartNumberRH { get; set; }
