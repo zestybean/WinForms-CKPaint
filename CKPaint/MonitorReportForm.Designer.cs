@@ -87,6 +87,7 @@ namespace CKPaint
             this.generateButton.TabIndex = 5;
             this.generateButton.Text = "Generate Report";
             this.generateButton.UseVisualStyleBackColor = true;
+            this.generateButton.Click += new System.EventHandler(this.generateButton_Click);
             // 
             // saveButton
             // 
@@ -96,6 +97,7 @@ namespace CKPaint
             this.saveButton.TabIndex = 6;
             this.saveButton.Text = "Save Report";
             this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // MonitorReportForm
             // 
@@ -111,6 +113,7 @@ namespace CKPaint
             this.Controls.Add(this.dateTimeStart);
             this.MinimizeBox = false;
             this.Name = "MonitorReportForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MonitorReportForm";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.MonitorReportForm_Load);
