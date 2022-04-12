@@ -85,7 +85,7 @@ namespace CKPaint.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.1 Rev1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.1 Rev2")]
         public string Version {
             get {
                 return ((string)(this["Version"]));

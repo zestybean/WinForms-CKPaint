@@ -36,6 +36,7 @@ namespace CKPaint
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.generateButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
+            this.goToButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -99,11 +100,22 @@ namespace CKPaint
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
+            // goToButton
+            // 
+            this.goToButton.Location = new System.Drawing.Point(12, 12);
+            this.goToButton.Name = "goToButton";
+            this.goToButton.Size = new System.Drawing.Size(75, 46);
+            this.goToButton.TabIndex = 7;
+            this.goToButton.Text = "Go To File";
+            this.goToButton.UseVisualStyleBackColor = true;
+            this.goToButton.Click += new System.EventHandler(this.goToButton_Click);
+            // 
             // MonitorReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1339, 861);
+            this.Controls.Add(this.goToButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.generateButton);
             this.Controls.Add(this.dataGridView1);
@@ -115,7 +127,6 @@ namespace CKPaint
             this.Name = "MonitorReportForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MonitorReportForm";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.MonitorReportForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
@@ -132,5 +143,6 @@ namespace CKPaint
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button generateButton;
         private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.Button goToButton;
     }
 }

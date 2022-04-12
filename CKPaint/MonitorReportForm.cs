@@ -40,7 +40,7 @@ namespace CKPaint
 
         private void generateButton_Click(object sender, EventArgs e)
         {
-
+            reportDataSet.Clear();
             //Series of sql calls to gather data
             using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
             {
@@ -113,6 +113,11 @@ namespace CKPaint
                 workbook.SaveAs(@"C:\Users\Public\Desktop\CKPaint-Reports\DispositionReport.xlsx");
                 
             } 
+        }
+
+        private void goToButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(@"C:\Users\Public\Desktop\CKPaint-Reports\");
         }
     }
 }

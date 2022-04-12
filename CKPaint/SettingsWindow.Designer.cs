@@ -184,7 +184,8 @@ namespace CKPaint
             "SPOVEN 1",
             "SPOVEN 2",
             "SPOVEN 3",
-            "QA"});
+            "QA",
+            "USER"});
             this.stationComboBox.Location = new System.Drawing.Point(151, 161);
             this.stationComboBox.Name = "stationComboBox";
             this.stationComboBox.Size = new System.Drawing.Size(263, 32);

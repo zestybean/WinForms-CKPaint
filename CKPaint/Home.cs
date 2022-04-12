@@ -30,6 +30,12 @@ namespace CKPaint
                 return;
             }
 
+            if (CKPaint.Properties.Settings.Default["Station"].ToString().Trim().ToUpper() == "USER")
+            {
+                return;
+            }
+
+
             this.Hide();
             Form loaderWindow = new PartLoader();
             loaderWindow.ShowDialog();
@@ -40,6 +46,11 @@ namespace CKPaint
         private void partDispositionBtn_Click(object sender, EventArgs e)
         {
             if (CKPaint.Properties.Settings.Default["Station"].ToString().Trim().ToUpper() != "QA")
+            {
+                return;
+            }
+
+            if (CKPaint.Properties.Settings.Default["Station"].ToString().Trim().ToUpper() == "USER")
             {
                 return;
             }
