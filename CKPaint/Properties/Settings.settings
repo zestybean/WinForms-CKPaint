@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="Station" Type="System.String" Scope="User">
-      <Value Profile="(Default)">MAINLINE</Value>
+      <Value Profile="(Default)">USER</Value>
     </Setting>
     <Setting Name="Printer" Type="System.String" Scope="User">
       <Value Profile="(Default)">CKBFLEX1LZEBRA</Value>
@@ -18,7 +18,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Version" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1.1 Rev2</Value>
+      <Value Profile="(Default)">1.1 Rev3</Value>
     </Setting>
   </Settings>
 </SettingsFile>

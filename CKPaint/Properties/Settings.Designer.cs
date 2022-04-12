@@ -25,7 +25,7 @@ namespace CKPaint.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("MAINLINE")]
+        [global::System.Configuration.DefaultSettingValueAttribute("USER")]
         public string Station {
             get {
                 return ((string)(this["Station"]));
@@ -85,7 +85,7 @@ namespace CKPaint.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.1 Rev2")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.1 Rev3")]
         public string Version {
             get {
                 return ((string)(this["Version"]));

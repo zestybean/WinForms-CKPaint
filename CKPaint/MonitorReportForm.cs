@@ -20,7 +20,7 @@ namespace CKPaint
     {
         string connStr_PBET = ConfigurationManager.ConnectionStrings["PBET"].ConnectionString;
 
-        DataSet reportDataSet = new DataSet();
+        
 
         public MonitorReportForm()
         {
@@ -29,6 +29,8 @@ namespace CKPaint
 
         private void MonitorReportForm_Load(object sender, EventArgs e)
         {
+           
+
             dateTimeStart.Format = DateTimePickerFormat.Custom;
             dateTimeStart.CustomFormat = "MM/dd/yyyy hh:mm tt";
             dateTimeStart.Value = DateTime.Today.AddDays(-1);
@@ -40,7 +42,22 @@ namespace CKPaint
 
         private void generateButton_Click(object sender, EventArgs e)
         {
-            reportDataSet.Clear();
+            DataSet reportDataSet = new DataSet();
+            dataGridView1.DataSource = reportDataSet;
+            string reportType = "";
+
+            if (dispositionReportRadioBtn.Checked)
+            {
+                reportType = "DISPOSITION";
+            } else if (reworkOnFloorRadioBtn.Checked)
+            {
+                reportType = "REWORK";
+            } else
+            {
+                return;
+            }
+
+
             //Series of sql calls to gather data
             using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
             {
@@ -54,16 +71,16 @@ namespace CKPaint
                     using (SqlCommand sqlCommand = new SqlCommand("spGenerateReportByDateTime", sqlConnection))
                     {
                         sqlCommand.CommandType = CommandType.StoredProcedure;
-                        sqlCommand.Parameters.AddWithValue("@REPORTTYPE", "DISPOSITION");
+                        sqlCommand.Parameters.AddWithValue("@REPORTTYPE", reportType);
                         sqlCommand.Parameters.AddWithValue("@TIMESTART", dateTimeStart.Value);
                         sqlCommand.Parameters.AddWithValue("@TIMEEND", dateTimeEnd.Value);
                         using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
                         {
-                            sqlDataAdapter.Fill(reportDataSet, "Report");
+                            sqlDataAdapter.Fill(reportDataSet, reportType);
                         }
 
                         ThreadSafe(() => dataGridView1.DataSource = reportDataSet);
-                        ThreadSafe(() => dataGridView1.DataMember = "Report");
+                        ThreadSafe(() => dataGridView1.DataMember = reportType);
 
                     }
 
@@ -76,6 +93,18 @@ namespace CKPaint
                     MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Console.WriteLine(err);
                 }
+
+                using (var workbook = new XLWorkbook())
+                {
+
+                    DataTable reportTable = reportDataSet.Tables[0];
+
+                    var workSheet = workbook.Worksheets.Add(reportTable, reportType);
+
+                    workbook.SaveAs(@"C:\Users\Public\Desktop\CKPaint-Reports\CKPaint-"+reportType+".xlsx");
+
+                }
+
                 Cursor.Current = Cursors.Default;
             }
         }
@@ -102,17 +131,8 @@ namespace CKPaint
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            using (var workbook = new XLWorkbook())
-            {
 
-                DataTable reportTable = reportDataSet.Tables[0];
-
-
-                var workSheet = workbook.Worksheets.Add(reportTable, "DISPOSITION");
-
-                workbook.SaveAs(@"C:\Users\Public\Desktop\CKPaint-Reports\DispositionReport.xlsx");
-                
-            } 
+           
         }
 
         private void goToButton_Click(object sender, EventArgs e)

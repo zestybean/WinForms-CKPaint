@@ -42,6 +42,8 @@ namespace CKPaint
             this.siteLabel = new System.Windows.Forms.Label();
             this.siteTextBox = new System.Windows.Forms.TextBox();
             this.stationComboBox = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // settingsLabel
@@ -62,7 +64,7 @@ namespace CKPaint
             this.stationLabel.AutoSize = true;
             this.stationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stationLabel.ForeColor = System.Drawing.Color.White;
-            this.stationLabel.Location = new System.Drawing.Point(146, 133);
+            this.stationLabel.Location = new System.Drawing.Point(145, 121);
             this.stationLabel.Name = "stationLabel";
             this.stationLabel.Size = new System.Drawing.Size(93, 25);
             this.stationLabel.TabIndex = 11;
@@ -84,7 +86,7 @@ namespace CKPaint
             this.printerLabel.AutoSize = true;
             this.printerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.printerLabel.ForeColor = System.Drawing.Color.White;
-            this.printerLabel.Location = new System.Drawing.Point(146, 196);
+            this.printerLabel.Location = new System.Drawing.Point(145, 184);
             this.printerLabel.Name = "printerLabel";
             this.printerLabel.Size = new System.Drawing.Size(89, 25);
             this.printerLabel.TabIndex = 13;
@@ -93,7 +95,7 @@ namespace CKPaint
             // printerTextBox
             // 
             this.printerTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.printerTextBox.Location = new System.Drawing.Point(151, 224);
+            this.printerTextBox.Location = new System.Drawing.Point(150, 212);
             this.printerTextBox.Name = "printerTextBox";
             this.printerTextBox.Size = new System.Drawing.Size(263, 29);
             this.printerTextBox.TabIndex = 12;
@@ -133,7 +135,7 @@ namespace CKPaint
             this.plantLabel.AutoSize = true;
             this.plantLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.plantLabel.ForeColor = System.Drawing.Color.White;
-            this.plantLabel.Location = new System.Drawing.Point(146, 260);
+            this.plantLabel.Location = new System.Drawing.Point(145, 248);
             this.plantLabel.Name = "plantLabel";
             this.plantLabel.Size = new System.Drawing.Size(73, 25);
             this.plantLabel.TabIndex = 17;
@@ -148,7 +150,7 @@ namespace CKPaint
             "BV",
             "MP",
             "GP"});
-            this.plantComboBox.Location = new System.Drawing.Point(151, 288);
+            this.plantComboBox.Location = new System.Drawing.Point(150, 276);
             this.plantComboBox.Name = "plantComboBox";
             this.plantComboBox.Size = new System.Drawing.Size(263, 32);
             this.plantComboBox.TabIndex = 18;
@@ -159,7 +161,7 @@ namespace CKPaint
             this.siteLabel.AutoSize = true;
             this.siteLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.siteLabel.ForeColor = System.Drawing.Color.White;
-            this.siteLabel.Location = new System.Drawing.Point(146, 326);
+            this.siteLabel.Location = new System.Drawing.Point(145, 314);
             this.siteLabel.Name = "siteLabel";
             this.siteLabel.Size = new System.Drawing.Size(60, 25);
             this.siteLabel.TabIndex = 20;
@@ -168,7 +170,7 @@ namespace CKPaint
             // siteTextBox
             // 
             this.siteTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.siteTextBox.Location = new System.Drawing.Point(151, 354);
+            this.siteTextBox.Location = new System.Drawing.Point(150, 342);
             this.siteTextBox.Name = "siteTextBox";
             this.siteTextBox.ReadOnly = true;
             this.siteTextBox.Size = new System.Drawing.Size(263, 29);
@@ -186,10 +188,30 @@ namespace CKPaint
             "SPOVEN 3",
             "QA",
             "USER"});
-            this.stationComboBox.Location = new System.Drawing.Point(151, 161);
+            this.stationComboBox.Location = new System.Drawing.Point(150, 149);
             this.stationComboBox.Name = "stationComboBox";
             this.stationComboBox.Size = new System.Drawing.Size(263, 32);
             this.stationComboBox.TabIndex = 21;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(145, 379);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(121, 25);
+            this.label1.TabIndex = 23;
+            this.label1.Text = "Password:";
+            // 
+            // passwordTextBox
+            // 
+            this.passwordTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passwordTextBox.Location = new System.Drawing.Point(150, 407);
+            this.passwordTextBox.Name = "passwordTextBox";
+            this.passwordTextBox.PasswordChar = '*';
+            this.passwordTextBox.Size = new System.Drawing.Size(263, 29);
+            this.passwordTextBox.TabIndex = 22;
             // 
             // SettingsWindow
             // 
@@ -197,6 +219,8 @@ namespace CKPaint
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Highlight;
             this.ClientSize = new System.Drawing.Size(584, 510);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.passwordTextBox);
             this.Controls.Add(this.stationComboBox);
             this.Controls.Add(this.siteLabel);
             this.Controls.Add(this.siteTextBox);
@@ -237,5 +261,7 @@ namespace CKPaint
         private System.Windows.Forms.Label siteLabel;
         private System.Windows.Forms.TextBox siteTextBox;
         private System.Windows.Forms.ComboBox stationComboBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox passwordTextBox;
     }
 }

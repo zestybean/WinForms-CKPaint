@@ -40,6 +40,11 @@ namespace CKPaint
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            if(passwordTextBox.Text != "paintck")
+            {
+                return;
+            }
+
             CKPaint.Properties.Settings.Default["Printer"] = printerTextBox.Text.ToString().Trim().ToUpper();
             CKPaint.Properties.Settings.Default["Station"] = stationComboBox.Text.ToString().Trim().ToUpper();
             CKPaint.Properties.Settings.Default["Plant"] = plantComboBox.Text.ToString().Trim().ToUpper();
