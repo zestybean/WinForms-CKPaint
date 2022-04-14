@@ -11,10 +11,13 @@ namespace CKPaint
         public PartInlineHistory()
         {
             JobNumber = "";
+            SequenceNumber = "";
             WOID = "";
             WOIDRH = "";
             PartNumber = "";
             PartNumberRH = "";
+            Description = "";
+            DescriptionRH = "";
             ColorCode = "";
             SetNumber = "";
             PartRework = 0;
@@ -25,10 +28,13 @@ namespace CKPaint
         }
 
         public string JobNumber { get; set; }
+        public string SequenceNumber { get; set; }
         public string WOID { get; set; }
         public string WOIDRH { get; set; }
         public string PartNumber { get; set; }
         public string PartNumberRH { get; set; }
+        public string Description { get; set; }
+        public string DescriptionRH { get; set; }
         public string ColorCode { get; set; }
         public string SetNumber { get; set; }
         public Int16 PartRework { get; set; }
