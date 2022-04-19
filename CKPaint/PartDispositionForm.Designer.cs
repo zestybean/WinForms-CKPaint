@@ -205,7 +205,8 @@ namespace CKPaint
             "Dent",
             "Sink",
             "Touch up",
-            "Flash"});
+            "Flash",
+            "Contamination"});
             this.defectCombo.Location = new System.Drawing.Point(241, 341);
             this.defectCombo.Name = "defectCombo";
             this.defectCombo.Size = new System.Drawing.Size(136, 28);

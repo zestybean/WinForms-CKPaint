@@ -654,7 +654,7 @@ namespace CKPaint
                                 SecondarySchedule_Part.PaintBlock = sqlReader.GetString(18);
                                 SecondarySchedule_Part.WOID = sqlReader.GetString(19);
                                 SecondarySchedule_Part.PartRework = sqlReader.GetInt16(24);
-
+                                SecondarySchedule_Part.PaintStation = paintStation;
                                 //PRINTING WILL OCCURR HERE!
 
                                 PrintToZebraHelper.PrintToZebra(SecondarySchedule_Part);
@@ -669,8 +669,7 @@ namespace CKPaint
                                     PrintToZebraHelper.PrintToZebra(SecondarySchedule_Part, RH);
                                 }
 
-                                //ADD THE INLINE HISTORY INSERT HERE
-
+                                
 
                                 debugLabel.Text = "Part moved to inline success!";
                             }
@@ -681,6 +680,30 @@ namespace CKPaint
 
                             sqlCommand.Dispose();
                             sqlReader.Close();
+                        }
+
+                        //ADD THE INLINE HISTORY INSERT HERE
+                        using (SqlCommand sqlCommand = new SqlCommand("spInsertIntoInlineHistory", sqlConnection))
+                        {
+                            sqlCommand.CommandType = CommandType.StoredProcedure;
+                            sqlCommand.Parameters.AddWithValue("@SEQUENCENUMBER", SecondarySchedule_Part.SequenceNumber);
+                            sqlCommand.Parameters.AddWithValue("@JOBNUMBER", SecondarySchedule_Part.JobNumber);
+                            sqlCommand.Parameters.AddWithValue("@WOID", SecondarySchedule_Part.WOID);
+                            sqlCommand.Parameters.AddWithValue("@WOIDRH", SecondarySchedule_Part.WOIDRH);
+                            sqlCommand.Parameters.AddWithValue("@PARTNUMBER", SecondarySchedule_Part.PartNumber);
+                            sqlCommand.Parameters.AddWithValue("@PARTNUMBERRH", SecondarySchedule_Part.PartNumberRH);
+                            sqlCommand.Parameters.AddWithValue("@PARTDESCRIPTION", SecondarySchedule_Part.Description);
+                            sqlCommand.Parameters.AddWithValue("@PARTDESCRIPTIONRH", SecondarySchedule_Part.DescriptionRH);
+                            sqlCommand.Parameters.AddWithValue("@COLORCODE", SecondarySchedule_Part.ColorCode);
+                            sqlCommand.Parameters.AddWithValue("@SETNUMBER", SecondarySchedule_Part.SetNumber);
+                            sqlCommand.Parameters.AddWithValue("@RACKCODE", SecondarySchedule_Part.RackCode);
+                            sqlCommand.Parameters.AddWithValue("@PRODUCTTYPE", SecondarySchedule_Part.ProductType);
+                            sqlCommand.Parameters.AddWithValue("@PAINTDATE", SecondarySchedule_Part.PaintDate);
+                            sqlCommand.Parameters.AddWithValue("@PAINTSTATION", SecondarySchedule_Part.PaintStation);
+                            sqlCommand.Parameters.AddWithValue("@PARTREWORK", SecondarySchedule_Part.PartRework);
+
+                            sqlCommand.ExecuteNonQuery();
+                            sqlCommand.Dispose();
                         }
 
                     }

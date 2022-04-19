@@ -52,6 +52,9 @@ namespace CKPaint
             } else if (reworkOnFloorRadioBtn.Checked)
             {
                 reportType = "REWORK";
+            } else if (partInlineHistoryReportBtn.Checked)
+            {
+                reportType = "INLINE";
             } else
             {
                 return;

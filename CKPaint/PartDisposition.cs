@@ -634,8 +634,6 @@ namespace CKPaint
                         //THIS NEEDS A BOUNDARY CHECK
                         using (SqlCommand sqlCommand = new SqlCommand("spInsertDispositionHistory", sqlConnection))
                         {
-                            Console.WriteLine(PartDispositionHistory_Part.InspectorName);
-
                             sqlCommand.CommandType = CommandType.StoredProcedure;
                             sqlCommand.Parameters.AddWithValue("@INSPECTORNAME", PartDispositionHistory_Part.InspectorName);
                             sqlCommand.Parameters.AddWithValue("@SEQUENCENUMBER", PartDispositionHistory_Part.SequenceNumber);

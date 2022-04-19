@@ -52,6 +52,7 @@ namespace CKPaint
             this.finesseButton = new System.Windows.Forms.Button();
             this.inspectorComboBox = new System.Windows.Forms.ComboBox();
             this.inspectorBox = new System.Windows.Forms.GroupBox();
+            this.disposedSearchButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.controlPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -201,9 +202,9 @@ namespace CKPaint
             this.getAllReworkButton.BackColor = System.Drawing.Color.Gold;
             this.getAllReworkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.getAllReworkButton.ForeColor = System.Drawing.Color.Black;
-            this.getAllReworkButton.Location = new System.Drawing.Point(732, 28);
+            this.getAllReworkButton.Location = new System.Drawing.Point(678, 28);
             this.getAllReworkButton.Name = "getAllReworkButton";
-            this.getAllReworkButton.Size = new System.Drawing.Size(123, 62);
+            this.getAllReworkButton.Size = new System.Drawing.Size(96, 64);
             this.getAllReworkButton.TabIndex = 22;
             this.getAllReworkButton.Text = "Search \r\nRework \r\nParts";
             this.getAllReworkButton.UseVisualStyleBackColor = false;
@@ -214,9 +215,9 @@ namespace CKPaint
             this.clearButton.BackColor = System.Drawing.Color.Tomato;
             this.clearButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clearButton.ForeColor = System.Drawing.Color.White;
-            this.clearButton.Location = new System.Drawing.Point(603, 28);
+            this.clearButton.Location = new System.Drawing.Point(576, 28);
             this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(123, 64);
+            this.clearButton.Size = new System.Drawing.Size(96, 64);
             this.clearButton.TabIndex = 21;
             this.clearButton.Text = "Clear Search";
             this.clearButton.UseVisualStyleBackColor = false;
@@ -229,7 +230,7 @@ namespace CKPaint
             this.searchButton.ForeColor = System.Drawing.Color.White;
             this.searchButton.Location = new System.Drawing.Point(474, 28);
             this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(123, 64);
+            this.searchButton.Size = new System.Drawing.Size(96, 64);
             this.searchButton.TabIndex = 18;
             this.searchButton.Text = "Search";
             this.searchButton.UseVisualStyleBackColor = false;
@@ -288,9 +289,9 @@ namespace CKPaint
             this.finesseButton.BackColor = System.Drawing.Color.LightGreen;
             this.finesseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.finesseButton.ForeColor = System.Drawing.Color.Black;
-            this.finesseButton.Location = new System.Drawing.Point(861, 28);
+            this.finesseButton.Location = new System.Drawing.Point(780, 28);
             this.finesseButton.Name = "finesseButton";
-            this.finesseButton.Size = new System.Drawing.Size(123, 62);
+            this.finesseButton.Size = new System.Drawing.Size(96, 64);
             this.finesseButton.TabIndex = 24;
             this.finesseButton.Text = "Search\r\nFinesse\r\nParts";
             this.finesseButton.UseVisualStyleBackColor = false;
@@ -333,12 +334,26 @@ namespace CKPaint
             this.inspectorBox.TabStop = false;
             this.inspectorBox.Text = "Inspector";
             // 
+            // disposedSearchButton
+            // 
+            this.disposedSearchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.disposedSearchButton.BackColor = System.Drawing.Color.DeepPink;
+            this.disposedSearchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.disposedSearchButton.ForeColor = System.Drawing.Color.White;
+            this.disposedSearchButton.Location = new System.Drawing.Point(925, 28);
+            this.disposedSearchButton.Name = "disposedSearchButton";
+            this.disposedSearchButton.Size = new System.Drawing.Size(96, 64);
+            this.disposedSearchButton.TabIndex = 28;
+            this.disposedSearchButton.Text = "Disposed Search";
+            this.disposedSearchButton.UseVisualStyleBackColor = false;
+            // 
             // PartDisposition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GrayText;
             this.ClientSize = new System.Drawing.Size(1339, 861);
+            this.Controls.Add(this.disposedSearchButton);
             this.Controls.Add(this.inspectorBox);
             this.Controls.Add(this.finesseButton);
             this.Controls.Add(this.pictureBox1);
@@ -393,5 +408,6 @@ namespace CKPaint
         private System.Windows.Forms.Button finesseButton;
         private System.Windows.Forms.ComboBox inspectorComboBox;
         private System.Windows.Forms.GroupBox inspectorBox;
+        private System.Windows.Forms.Button disposedSearchButton;
     }
 }

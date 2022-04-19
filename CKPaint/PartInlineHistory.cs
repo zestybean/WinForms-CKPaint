@@ -10,8 +10,8 @@ namespace CKPaint
     {
         public PartInlineHistory()
         {
-            JobNumber = "";
             SequenceNumber = "";
+            JobNumber = "";
             WOID = "";
             WOIDRH = "";
             PartNumber = "";
@@ -20,15 +20,14 @@ namespace CKPaint
             DescriptionRH = "";
             ColorCode = "";
             SetNumber = "";
-            PartRework = 0;
             RackCode = "";
             ProductType = "";
             PaintDate = DateTime.Now;
             PaintStation = "";
+            PartRework = 0;
         }
-
-        public string JobNumber { get; set; }
         public string SequenceNumber { get; set; }
+        public string JobNumber { get; set; }
         public string WOID { get; set; }
         public string WOIDRH { get; set; }
         public string PartNumber { get; set; }
@@ -37,10 +36,10 @@ namespace CKPaint
         public string DescriptionRH { get; set; }
         public string ColorCode { get; set; }
         public string SetNumber { get; set; }
-        public Int16 PartRework { get; set; }
         public string RackCode { get; set; }
         public string ProductType { get; set; }
         public DateTime PaintDate { get; set; }
         public string PaintStation { get; set; }
+        public Int16 PartRework { get; set; }
     }
 }
