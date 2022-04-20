@@ -346,6 +346,7 @@ namespace CKPaint
             this.disposedSearchButton.TabIndex = 28;
             this.disposedSearchButton.Text = "Disposed Search";
             this.disposedSearchButton.UseVisualStyleBackColor = false;
+            this.disposedSearchButton.Click += new System.EventHandler(this.disposedSearchButton_Click);
             // 
             // PartDisposition
             // 

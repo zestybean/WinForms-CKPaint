@@ -50,6 +50,7 @@ namespace CKPaint
             {
                 MessageBox.Show(err.Message, "Form Closing Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(err);
+                this.Close();
             }
         }
 
@@ -127,6 +128,7 @@ namespace CKPaint
                 {
                     MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Console.WriteLine(err);
+                    this.Close();
                 }
                 Cursor.Current = Cursors.Default;
             }
@@ -173,6 +175,7 @@ namespace CKPaint
                 {
                     MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Console.WriteLine(err);
+                    this.Close();
                 }
                 Cursor.Current = Cursors.Default;
                
@@ -197,6 +200,7 @@ namespace CKPaint
             {
                 MessageBox.Show(err.Message, "Tread Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(err);
+                this.Close();
             }
         }
 
@@ -224,6 +228,7 @@ namespace CKPaint
                 MessageBox.Show("Error setting up the table dependency please check the network and contact the shift supervisor.",
                     "Secondary Dependency Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(err);
+                this.Close();
             }
 
             return false;
@@ -243,6 +248,7 @@ namespace CKPaint
             {
                 MessageBox.Show(err.Message, "Stop Secondary Dependency Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(err);
+                this.Close();
             }
             return false;
         }
@@ -251,6 +257,7 @@ namespace CKPaint
         {
             MessageBox.Show(err.Message, "Secondary Dependency OnError", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Console.WriteLine(err.Error.Message);
+            this.Close();
         }
 
         private void SecondaryScheduleTableDependency_OnChange(object sender, RecordChangedEventArgs<SecondarySchedule> ent)
@@ -283,6 +290,7 @@ namespace CKPaint
             {
                 MessageBox.Show(err.Message, "Secondary Dependency OnChange", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(err);
+                this.Close();
             }
         }
 
@@ -316,6 +324,7 @@ namespace CKPaint
             {
                 MessageBox.Show(err.Message, "Secondary Dependency OnChange", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(err);
+                this.Close();
             }
         }
 
@@ -397,6 +406,7 @@ namespace CKPaint
                 {
                     MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Console.WriteLine(err);
+                    this.Close();
                 }
                 Cursor.Current = Cursors.Default;
             }
@@ -477,6 +487,7 @@ namespace CKPaint
                 {
                     MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Console.WriteLine(err);
+                    this.Close();
                 }
                 Cursor.Current = Cursors.Default;
             }
@@ -550,6 +561,7 @@ namespace CKPaint
                 {
                     MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Console.WriteLine(err);
+                    this.Close();
                 }
                 Cursor.Current = Cursors.Default;
             }
@@ -669,6 +681,7 @@ namespace CKPaint
                     {
                         MessageBox.Show(err.Message, "Print Label OnClick Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         Console.WriteLine(err);
+                        this.Close();
                     }
 
                     Cursor.Current = Cursors.Default;
@@ -732,6 +745,7 @@ namespace CKPaint
                 {
                     MessageBox.Show(err.Message, "Get InspectorID Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Console.WriteLine(err);
+                    this.Close();
                 }
 
                 Cursor.Current = Cursors.Default;
@@ -739,6 +753,79 @@ namespace CKPaint
             }
 
             return inspectorID;
+        }
+
+        private void disposedSearchButton_Click(object sender, EventArgs e)
+        {
+            SearchTxtBox.Text = SearchTxtBox.Text.Trim();
+
+            if (string.IsNullOrEmpty(SearchTxtBox.Text))
+            {
+                SearchTxtBox.Clear();
+                RefreshInlinePartsTable();
+                RefreshDispositionHistoryTable();
+                return;
+            }
+
+            DataSet inlinePartsDataset = new DataSet();
+
+            //Series of sql calls to gather data
+            using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                try
+                {
+                    sqlConnection.Open();
+                    if (searchJobNumRb.Checked)
+                    {
+                        //Execute the stored procedure for Parts OnFloor
+                        //and update the data grid view
+                        using (SqlCommand sqlCommand = new SqlCommand("spSearchAllByWOID", sqlConnection))
+                        {
+                            sqlCommand.CommandType = CommandType.StoredProcedure;
+                            sqlCommand.Parameters.AddWithValue("@WOID", SearchTxtBox.Text.ToString());
+
+                            using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                            {
+                                sqlDataAdapter.Fill(inlinePartsDataset, "SecondaryScheduleInlineParts");
+                            }
+
+                            ThreadSafe(() => dataGridView1.DataSource = inlinePartsDataset);
+                            ThreadSafe(() => dataGridView1.DataMember = "SecondaryScheduleInlineParts");
+
+                        }
+                    }
+                    else
+                    {
+                        //Execute the stored procedure for Parts OnFloor
+                        //and update the data grid view
+                        using (SqlCommand sqlCommand = new SqlCommand("spSearchAllByWOID", sqlConnection))
+                        {
+                            sqlCommand.CommandType = CommandType.StoredProcedure;
+                            sqlCommand.Parameters.AddWithValue("@WOID", SearchTxtBox.Text.ToString());
+
+                            using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                            {
+                                sqlDataAdapter.Fill(inlinePartsDataset, "SecondaryScheduleInlineParts");
+                            }
+
+                            ThreadSafe(() => dataGridView1.DataSource = inlinePartsDataset);
+                            ThreadSafe(() => dataGridView1.DataMember = "SecondaryScheduleInlineParts");
+
+                        }
+                    }
+                    //Close connection after table is filled
+                    sqlConnection.Close();
+
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Console.WriteLine(err);
+                    this.Close();
+                }
+                Cursor.Current = Cursors.Default;
+            }
         }
     }
 }

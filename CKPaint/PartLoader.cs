@@ -87,6 +87,7 @@ namespace CKPaint
             {
                 MessageBox.Show(err.Message, "Form Closing Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(err);
+                this.Close();
             }
         }
 
@@ -126,6 +127,7 @@ namespace CKPaint
                 {
                     MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Console.WriteLine(err);
+                    this.Close();
                 }
                 Cursor.Current = Cursors.Default;
             }
@@ -166,6 +168,7 @@ namespace CKPaint
                 {
                     MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Console.WriteLine(err);
+                    this.Close();
                 }
               
                 Cursor.Current = Cursors.Default;
@@ -189,6 +192,7 @@ namespace CKPaint
             {
                 MessageBox.Show(err.Message, "Thread Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(err);
+                this.Close();
             }
         }
 
@@ -212,6 +216,7 @@ namespace CKPaint
                 MessageBox.Show("Error setting up the table dependency please check the network and contact the shift supervisor.",
                     "Secondary Dependency Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(err);
+                this.Close();
             }
 
             return false;
@@ -231,6 +236,7 @@ namespace CKPaint
             {
                 MessageBox.Show(err.Message, "Stop Secondary Dependency Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(err);
+                this.Close();
             }
             return false;
         }
@@ -239,6 +245,7 @@ namespace CKPaint
         {
             MessageBox.Show(err.Message, "Secondary Dependency OnError", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Console.WriteLine(err.Error.Message);
+            this.Close();
         }
 
         private void SecondaryScheduleTableDependency_OnChange(object sender, RecordChangedEventArgs<SecondarySchedule> ent)
@@ -272,6 +279,7 @@ namespace CKPaint
             {
                 MessageBox.Show(err.Message, "Secondary Dependency OnChange", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(err);
+                this.Close();
             }
         }
 
@@ -390,6 +398,7 @@ namespace CKPaint
                 {
                     MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Console.WriteLine(err);
+                    this.Close();
                 }
                 Cursor.Current = Cursors.Default;
             }
@@ -464,6 +473,7 @@ namespace CKPaint
                 {
                     MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Console.WriteLine(err);
+                    this.Close();
                 }
                 Cursor.Current = Cursors.Default;
                
@@ -509,6 +519,7 @@ namespace CKPaint
                 {
                     MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Console.WriteLine(err);
+                    this.Close();
                 }
                 Cursor.Current = Cursors.Default;
 
@@ -586,6 +597,7 @@ namespace CKPaint
                 {
                     MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Console.WriteLine(err);
+                    this.Close();
                 }
                 Cursor.Current = Cursors.Default;
 
@@ -711,6 +723,7 @@ namespace CKPaint
                     {
                         MessageBox.Show(err.Message, "Print Label OnClick Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         Console.WriteLine(err);
+                        this.Close();
                     }
 
                     Cursor.Current = Cursors.Default;
@@ -764,6 +777,7 @@ namespace CKPaint
                     {
                         MessageBox.Show(err.Message, "Confirm Action Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         Console.WriteLine(err);
+                        this.Close();
                     }
 
                     Cursor.Current = Cursors.Default;

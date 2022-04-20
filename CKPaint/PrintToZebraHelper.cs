@@ -27,7 +27,7 @@ public static class PrintToZebraHelper
         {
             reworkPart = "RP";
         }
-        if (secondarySchedule_Part.ProductType.Contains("MLU"))
+        if (secondarySchedule_Part.ProductType.Contains("MLU") || secondarySchedule_Part.ProductType == "Bumper")
         {  
             if (RH)
             {
