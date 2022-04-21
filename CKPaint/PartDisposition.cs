@@ -567,6 +567,30 @@ namespace CKPaint
             }
         }
 
+        string safeString(SqlDataReader sqlReader, int index)
+        {
+            if (!sqlReader.IsDBNull(index))
+            {
+                return sqlReader.GetString(index);
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
+        DateTime safeDate(SqlDataReader sqlReader, int index)
+        {
+            if (!sqlReader.IsDBNull(index))
+            {
+                return sqlReader.GetDateTime(index);
+            }
+            else
+            {
+                return DateTime.Now;
+            }
+        }
+
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex == -1)
@@ -612,6 +636,8 @@ namespace CKPaint
                             sqlReader.Read();
                             if (sqlReader.HasRows)
                             {
+                                
+
                                 PartDispositionHistory_Part.InspectorName = partDispositionForm.dispositionInspectorName.ToString();
                                 PartDispositionHistory_Part.SequenceNumber = sqlReader.GetString(1);
                                 PartDispositionHistory_Part.JobNumber = sqlReader.GetString(2);
@@ -619,8 +645,8 @@ namespace CKPaint
                                 PartDispositionHistory_Part.PartNumberRH = sqlReader.GetString(5);
                                 PartDispositionHistory_Part.ColorCode = sqlReader.GetString(6);
                                 PartDispositionHistory_Part.InspectorID = getInspectorId();
-                                PartDispositionHistory_Part.PaintStation = sqlReader.GetString(17);
-                                PartDispositionHistory_Part.PaintDate = sqlReader.GetDateTime(16);
+                                PartDispositionHistory_Part.PaintStation = safeString(sqlReader, 17);
+                                PartDispositionHistory_Part.PaintDate = safeDate(sqlReader, 16);
                                 PartDispositionHistory_Part.PartProcess = partDispositionForm.dispositionPartProcess.ToString().ToUpper();
                                 PartDispositionHistory_Part.ProductType = sqlReader.GetString(8);
                                 PartDispositionHistory_Part.WOID = sqlReader.GetString(19);
