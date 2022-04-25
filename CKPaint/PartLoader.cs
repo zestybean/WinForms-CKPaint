@@ -58,6 +58,7 @@ namespace CKPaint
             dv.Columns["PartDisposed"].DisplayIndex = 10;
             dv.Columns["PaintDate"].DisplayIndex = 11;
             dv.Columns["PaintStation"].DisplayIndex = 12;
+            dv.Columns["AssembleDate"].DisplayIndex = 13;
 
             //Ignore these
             dv.Columns["ScheduleID"].Visible = false;
@@ -68,7 +69,7 @@ namespace CKPaint
             dv.Columns["DescriptionRH"].Visible = false;
             dv.Columns["RackPosition"].Visible = false;
             dv.Columns["RackPositionRH"].Visible = false;
-            dv.Columns["AssembleDate"].Visible = false;
+           
             dv.Columns["PaintBlock"].Visible = false;
             dv.Columns["ShipDate"].Visible = false;
             dv.Columns["ImportDate"].Visible = false;
@@ -613,12 +614,20 @@ namespace CKPaint
                 return;
 
             bool RH = false;
+            bool RHOnly = false;
 
             //LOAD DOUBLE CLICK
             string woidString = dataGridView1.Rows[e.RowIndex].Cells[19].Value.ToString();
             string woidStringRH = dataGridView1.Rows[e.RowIndex].Cells[20].Value.ToString();
             string partNumberString = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
             string partNumberRHString = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
+
+            //WOID is blank
+            if (string.IsNullOrEmpty(woidString))
+            {
+                //THIS
+                RHOnly = true; 
+            }
 
             ConfirmActionWindow confirmActionWindow = new ConfirmActionWindow();
             confirmActionWindow.partWOID = woidString;
@@ -669,7 +678,10 @@ namespace CKPaint
                                 SecondarySchedule_Part.PaintStation = paintStation;
                                 //PRINTING WILL OCCURR HERE!
 
-                                PrintToZebraHelper.PrintToZebra(SecondarySchedule_Part);
+                                if (!RHOnly)
+                                {
+                                    PrintToZebraHelper.PrintToZebra(SecondarySchedule_Part);
+                                }
 
                                 if (RH)
                                 {
