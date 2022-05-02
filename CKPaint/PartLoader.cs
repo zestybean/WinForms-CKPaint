@@ -40,6 +40,22 @@ namespace CKPaint
             StartSecondaryScheduleTableDependency();
             AdjustColumnOrder(dataGridView1);
             AdjustColumnOrder(dataGridView2);
+
+            string paintStation = CKPaint.Properties.Settings.Default["Station"].ToString().Trim().ToUpper();
+
+
+            //Check for SPOVEN 2
+            if (paintStation == "SPOVEN 2")
+            {
+                searchButton.Visible = false;
+                bumperSearchButton.Visible = false;
+                peterbiltSearchButton.Visible = false;
+                getAllReworkButton.Visible = false; 
+            } else
+            {
+                primerSearchBtn.Visible = false;
+                primerReworkSearchBtn.Visible = false;
+            }
         }
 
         private void AdjustColumnOrder(DataGridView dv)
@@ -799,5 +815,125 @@ namespace CKPaint
 
         }
 
+        //PRIMER SEARCH BUTTONS
+        private void primerSearchBtn_Click(object sender, EventArgs e)
+        {
+
+            SearchTxtBox.Text = SearchTxtBox.Text.Trim();
+
+            if (String.IsNullOrEmpty(SearchTxtBox.Text))
+            {
+                SearchTxtBox.Clear();
+                RefreshPartsOnFloorTable();
+                RefreshPartsInlineTable();
+                return;
+            }
+
+            DataSet floorPartsDataSet = new DataSet();
+            DataSet inlinePartsDataSet = new DataSet();
+
+            //Series of sql calls to gather data
+            using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                try
+                {
+                    sqlConnection.Open();
+                    if (searchJobNumRb.Checked)
+                    {
+                        //Execute the stored procedure for Parts OnFloor
+                        //and update the data grid view
+                        using (SqlCommand sqlCommand = new SqlCommand("spSearchPrimerPartsByJobNumber", sqlConnection))
+                        {
+                            sqlCommand.CommandType = CommandType.StoredProcedure;
+                            sqlCommand.Parameters.AddWithValue("@JobNumber", SearchTxtBox.Text.ToString());
+
+                            using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                            {
+                                sqlDataAdapter.Fill(floorPartsDataSet, "SecondaryScheduleFloorParts");
+                            }
+
+                            ThreadSafe(() => dataGridView1.DataSource = floorPartsDataSet);
+                            ThreadSafe(() => dataGridView1.DataMember = "SecondaryScheduleFloorParts");
+
+                        }
+                    }
+                    else
+                    {
+                        //Execute the stored procedure for Parts OnFloor
+                        //and update the data grid view
+                        using (SqlCommand sqlCommand = new SqlCommand("spSearchOnFloorPrimerPartsByWOID", sqlConnection))
+                        {
+                            sqlCommand.CommandType = CommandType.StoredProcedure;
+                            sqlCommand.Parameters.AddWithValue("@WOID", SearchTxtBox.Text.ToString());
+
+                            using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                            {
+                                sqlDataAdapter.Fill(floorPartsDataSet, "SecondaryScheduleFloorParts");
+                            }
+
+                            ThreadSafe(() => dataGridView1.DataSource = floorPartsDataSet);
+                            ThreadSafe(() => dataGridView1.DataMember = "SecondaryScheduleFloorParts");
+
+                        }
+                    }
+                    //Close connection after table is filled
+                    sqlConnection.Close();
+
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Console.WriteLine(err);
+                    this.Close();
+                }
+                Cursor.Current = Cursors.Default;
+
+            }
+        }
+
+        private void primerReworkSearchBtn_Click(object sender, EventArgs e)
+        {
+            DataSet floorPartsDataSet = new DataSet();
+            DataSet inlinePartsDataSet = new DataSet();
+
+            //Series of sql calls to gather data
+            using (SqlConnection sqlConnection = new SqlConnection(connStr_PBET))
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                try
+                {
+                    sqlConnection.Open();
+
+                    //Execute the stored procedure for Parts OnFloor
+                    //and update the data grid view
+                    using (SqlCommand sqlCommand = new SqlCommand("spGetOnFloorReworkPrimerParts", sqlConnection))
+                    {
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                        using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                        {
+                            sqlDataAdapter.Fill(floorPartsDataSet, "SecondaryScheduleFloorParts");
+                        }
+
+                        ThreadSafe(() => dataGridView1.DataSource = floorPartsDataSet);
+                        ThreadSafe(() => dataGridView1.DataMember = "SecondaryScheduleFloorParts");
+
+                    }
+
+                    //Close connection after table is filled
+                    sqlConnection.Close();
+
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message, "Refresh Table Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Console.WriteLine(err);
+                    this.Close();
+                }
+                Cursor.Current = Cursors.Default;
+
+            }
+        }
     }
 }

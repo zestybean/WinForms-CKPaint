@@ -18,7 +18,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Version" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1.1 Rev5</Value>
+      <Value Profile="(Default)">1.1 Rev6</Value>
     </Setting>
   </Settings>
 </SettingsFile>

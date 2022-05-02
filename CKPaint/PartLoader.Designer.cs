@@ -54,6 +54,8 @@ namespace CKPaint
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.bumperSearchButton = new System.Windows.Forms.Button();
             this.peterbiltSearchButton = new System.Windows.Forms.Button();
+            this.primerSearchBtn = new System.Windows.Forms.Button();
+            this.primerReworkSearchBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.controlPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -342,12 +344,40 @@ namespace CKPaint
             this.peterbiltSearchButton.UseVisualStyleBackColor = false;
             this.peterbiltSearchButton.Click += new System.EventHandler(this.peterbiltSearchButton_Click);
             // 
+            // primerSearchBtn
+            // 
+            this.primerSearchBtn.BackColor = System.Drawing.Color.DodgerBlue;
+            this.primerSearchBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.primerSearchBtn.ForeColor = System.Drawing.Color.White;
+            this.primerSearchBtn.Location = new System.Drawing.Point(476, 28);
+            this.primerSearchBtn.Name = "primerSearchBtn";
+            this.primerSearchBtn.Size = new System.Drawing.Size(123, 87);
+            this.primerSearchBtn.TabIndex = 19;
+            this.primerSearchBtn.Text = "Primer Part \r\nSearch";
+            this.primerSearchBtn.UseVisualStyleBackColor = false;
+            this.primerSearchBtn.Click += new System.EventHandler(this.primerSearchBtn_Click);
+            // 
+            // primerReworkSearchBtn
+            // 
+            this.primerReworkSearchBtn.BackColor = System.Drawing.Color.Gold;
+            this.primerReworkSearchBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.primerReworkSearchBtn.ForeColor = System.Drawing.Color.Black;
+            this.primerReworkSearchBtn.Location = new System.Drawing.Point(992, 28);
+            this.primerReworkSearchBtn.Name = "primerReworkSearchBtn";
+            this.primerReworkSearchBtn.Size = new System.Drawing.Size(123, 87);
+            this.primerReworkSearchBtn.TabIndex = 20;
+            this.primerReworkSearchBtn.Text = "All Primer Rework Parts";
+            this.primerReworkSearchBtn.UseVisualStyleBackColor = false;
+            this.primerReworkSearchBtn.Click += new System.EventHandler(this.primerReworkSearchBtn_Click);
+            // 
             // PartLoader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Highlight;
             this.ClientSize = new System.Drawing.Size(1445, 861);
+            this.Controls.Add(this.primerReworkSearchBtn);
+            this.Controls.Add(this.primerSearchBtn);
             this.Controls.Add(this.peterbiltSearchButton);
             this.Controls.Add(this.bumperSearchButton);
             this.Controls.Add(this.pictureBox1);
@@ -406,6 +436,8 @@ namespace CKPaint
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button bumperSearchButton;
         private System.Windows.Forms.Button peterbiltSearchButton;
+        private System.Windows.Forms.Button primerSearchBtn;
+        private System.Windows.Forms.Button primerReworkSearchBtn;
     }
 }
 

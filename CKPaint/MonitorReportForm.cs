@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using ClosedXML.Excel;
+using System;
 using System.Configuration;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 using TableDependency.SqlClient;
 using TableDependency.SqlClient.Base.Enums;
 using TableDependency.SqlClient.Base.EventArgs;
-using ClosedXML.Excel;
 
 namespace CKPaint
 {
@@ -20,7 +14,7 @@ namespace CKPaint
     {
         string connStr_PBET = ConfigurationManager.ConnectionStrings["PBET"].ConnectionString;
 
-        
+
 
         public MonitorReportForm()
         {
@@ -29,7 +23,7 @@ namespace CKPaint
 
         private void MonitorReportForm_Load(object sender, EventArgs e)
         {
-           
+
 
             dateTimeStart.Format = DateTimePickerFormat.Custom;
             dateTimeStart.CustomFormat = "MM/dd/yyyy hh:mm tt";
@@ -49,13 +43,16 @@ namespace CKPaint
             if (dispositionReportRadioBtn.Checked)
             {
                 reportType = "DISPOSITION";
-            } else if (reworkOnFloorRadioBtn.Checked)
+            }
+            else if (reworkOnFloorRadioBtn.Checked)
             {
                 reportType = "REWORK";
-            } else if (partInlineHistoryReportBtn.Checked)
+            }
+            else if (partInlineHistoryReportBtn.Checked)
             {
                 reportType = "INLINE";
-            } else
+            }
+            else
             {
                 return;
             }
@@ -104,7 +101,7 @@ namespace CKPaint
 
                     var workSheet = workbook.Worksheets.Add(reportTable, reportType);
 
-                    workbook.SaveAs(@"C:\Users\Public\Desktop\CKPaint-Reports\CKPaint-"+reportType+".xlsx");
+                    workbook.SaveAs(@"C:\Users\Public\Desktop\CKPaint-Reports\CKPaint-" + reportType + ".xlsx");
 
                 }
 
@@ -139,7 +136,7 @@ namespace CKPaint
 
         private void monitorAllRadioBtn_CheckedChanged(object sender, EventArgs e)
         {
-      
+
 
             RefreshPartsInlineTable();
             StartSecondaryScheduleTableDependency();
