@@ -195,6 +195,7 @@ namespace CKPaint
             "Over Spray",
             "Hose Drag",
             "Damaged by Handling",
+            "Damaged at ILVS",
             "Peel Off",
             "Poor Finesse",
             "Oil",
