@@ -9,9 +9,9 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Configuration;
 
-public static class PrintToZebraHelper
+public static class PrintToZebraHelperDisposition
 { 
-    public static bool PrintToZebra(CKPaint.SecondarySchedule secondarySchedule_Part, bool RH = false)
+    public static bool PrintToZebra(CKPaint.PartDispositionHistory secondarySchedule_Part, bool RH = false)
     {
         string IPADDRESS = CKPaint.Properties.Settings.Default["Printer"].ToString();
         int PORT = 9100;
@@ -33,8 +33,6 @@ public static class PrintToZebraHelper
             {
                 fileContent = fileContent.Replace("@JN", secondarySchedule_Part.JobNumber).Replace("@LS", secondarySchedule_Part.SequenceNumber)
                .Replace("@P", secondarySchedule_Part.PartNumberRH).Replace("@CC", secondarySchedule_Part.ColorCode)
-               .Replace("@DES", secondarySchedule_Part.DescriptionRH).Replace("@RC", secondarySchedule_Part.RackCode)
-               .Replace("@RP", secondarySchedule_Part.RackPositionRH).Replace("@BLK", secondarySchedule_Part.PaintBlock)
                .Replace("@WOID", secondarySchedule_Part.WOIDRH).Replace("@DT", System.DateTime.Now.ToString())
                .Replace("@DIS", reworkPart)
                .Replace("@REV", CKPaint.Properties.Settings.Default["Station"].ToString())
@@ -44,8 +42,6 @@ public static class PrintToZebraHelper
             {
                 fileContent = fileContent.Replace("@JN", secondarySchedule_Part.JobNumber).Replace("@LS", secondarySchedule_Part.SequenceNumber)
                .Replace("@P", secondarySchedule_Part.PartNumber).Replace("@CC", secondarySchedule_Part.ColorCode)
-               .Replace("@DES", secondarySchedule_Part.Description).Replace("@RC", secondarySchedule_Part.RackCode)
-               .Replace("@RP", secondarySchedule_Part.RackPosition).Replace("@BLK", secondarySchedule_Part.PaintBlock)
                .Replace("@WOID", secondarySchedule_Part.WOID).Replace("@DT", System.DateTime.Now.ToString())
                .Replace("@DIS", reworkPart.ToString())
                .Replace("@REV", CKPaint.Properties.Settings.Default["Station"].ToString())
@@ -55,10 +51,8 @@ public static class PrintToZebraHelper
         {
             if (RH)
             {
-                fileContent = fileContent.Replace("@JN", secondarySchedule_Part.JobNumber).Replace("@LS", secondarySchedule_Part.SetNumber)
+                fileContent = fileContent.Replace("@JN", secondarySchedule_Part.JobNumber)
                .Replace("@P", secondarySchedule_Part.PartNumberRH).Replace("@CC", secondarySchedule_Part.ColorCode)
-               .Replace("@DES", secondarySchedule_Part.DescriptionRH).Replace("@RC", secondarySchedule_Part.RackCode)
-               .Replace("@RP", secondarySchedule_Part.RackPositionRH).Replace("@BLK", secondarySchedule_Part.PaintBlock)
                .Replace("@WOID", secondarySchedule_Part.WOIDRH).Replace("@DT", System.DateTime.Now.ToString())
                .Replace("@DIS", reworkPart)
                .Replace("@REV", CKPaint.Properties.Settings.Default["Station"].ToString())
@@ -66,10 +60,8 @@ public static class PrintToZebraHelper
             }
             else
             {
-                fileContent = fileContent.Replace("@JN", secondarySchedule_Part.JobNumber).Replace("@LS", secondarySchedule_Part.SetNumber)
+                fileContent = fileContent.Replace("@JN", secondarySchedule_Part.JobNumber)
                .Replace("@P", secondarySchedule_Part.PartNumber).Replace("@CC", secondarySchedule_Part.ColorCode)
-               .Replace("@DES", secondarySchedule_Part.Description).Replace("@RC", secondarySchedule_Part.RackCode)
-               .Replace("@RP", secondarySchedule_Part.RackPosition).Replace("@BLK", secondarySchedule_Part.PaintBlock)
                .Replace("@WOID", secondarySchedule_Part.WOID).Replace("@DT", System.DateTime.Now.ToString())
                .Replace("@DIS", reworkPart.ToString())
                .Replace("@REV", CKPaint.Properties.Settings.Default["Station"].ToString())

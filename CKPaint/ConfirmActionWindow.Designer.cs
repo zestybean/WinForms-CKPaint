@@ -37,7 +37,7 @@ namespace CKPaint
             this.confirmButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.codeDescriptionLabel = new System.Windows.Forms.Label();
-            this.codeTextBox = new System.Windows.Forms.TextBox();
+            this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.codeLabel = new System.Windows.Forms.Label();
             this.woidLbl = new System.Windows.Forms.Label();
             this.woidTxtLbl = new System.Windows.Forms.Label();
@@ -131,13 +131,14 @@ namespace CKPaint
             this.codeDescriptionLabel.TabIndex = 6;
             this.codeDescriptionLabel.Text = "This is an elevated action please enter\r\nthe password to override the procedure.";
             // 
-            // codeTextBox
+            // passwordTextBox
             // 
-            this.codeTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.codeTextBox.Location = new System.Drawing.Point(130, 441);
-            this.codeTextBox.Name = "codeTextBox";
-            this.codeTextBox.Size = new System.Drawing.Size(263, 29);
-            this.codeTextBox.TabIndex = 7;
+            this.passwordTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passwordTextBox.Location = new System.Drawing.Point(130, 441);
+            this.passwordTextBox.Name = "passwordTextBox";
+            this.passwordTextBox.Size = new System.Drawing.Size(263, 29);
+            this.passwordTextBox.TabIndex = 7;
+            this.passwordTextBox.TextChanged += new System.EventHandler(this.passwordTextBox_TextChanged);
             // 
             // codeLabel
             // 
@@ -260,7 +261,7 @@ namespace CKPaint
             this.Controls.Add(this.woidTxtLbl);
             this.Controls.Add(this.woidLbl);
             this.Controls.Add(this.codeLabel);
-            this.Controls.Add(this.codeTextBox);
+            this.Controls.Add(this.passwordTextBox);
             this.Controls.Add(this.codeDescriptionLabel);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.confirmButton);
@@ -293,7 +294,7 @@ namespace CKPaint
         private System.Windows.Forms.Button confirmButton;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Label codeDescriptionLabel;
-        private System.Windows.Forms.TextBox codeTextBox;
+        private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.Label codeLabel;
         private System.Windows.Forms.Label woidLbl;
         private System.Windows.Forms.Label woidTxtLbl;

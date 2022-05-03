@@ -636,8 +636,6 @@ namespace CKPaint
                             sqlReader.Read();
                             if (sqlReader.HasRows)
                             {
-                                
-
                                 PartDispositionHistory_Part.InspectorName = partDispositionForm.dispositionInspectorName.ToString();
                                 PartDispositionHistory_Part.SequenceNumber = sqlReader.GetString(1);
                                 PartDispositionHistory_Part.JobNumber = sqlReader.GetString(2);
@@ -659,6 +657,11 @@ namespace CKPaint
                                 PartDispositionHistory_Part.DispositionDate = DateTime.Now;
                                 PartDispositionHistory_Part.PartRework = sqlReader.GetInt16(24);
                                 PartDispositionHistory_Part.PartFinesse = sqlReader.GetInt16(26);
+
+                                //PRINTING WILL OCCURR HERE!!!
+                              
+                                    PrintToZebraHelperDisposition.PrintToZebra(PartDispositionHistory_Part);
+                               
                             }
                             else
                             {

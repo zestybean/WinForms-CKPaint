@@ -44,7 +44,7 @@ namespace CKPaint
                 warningLogo.BackColor = Color.Transparent;
                 codeDescriptionLabel.Visible = false;
                 codeLabel.Visible = false;
-                codeTextBox.Visible = false;
+                passwordTextBox.Visible = false;
                 confirmButton.Text = "Print Label";
 
             } else if(actionState == 1)
@@ -53,7 +53,7 @@ namespace CKPaint
                 warningLogo.BackColor = Color.Transparent;
                 codeDescriptionLabel.Visible = true;
                 codeLabel.Visible = true;
-                codeTextBox.Visible = true;
+                passwordTextBox.Visible = true;
                 instructionBox.Visible = false;
                 confirmButton.Text = "Confirm";
                 confirmButton.BackColor = Color.ForestGreen;
@@ -71,8 +71,23 @@ namespace CKPaint
 
         private void confirmButton_Click(object sender, EventArgs e)
         {
-            confirmActionButtonSelected = true;
-            this.Close();
+          if(actionState == 1)
+            {
+                if(passwordTextBox.Text == "super")
+                {
+
+                    confirmActionButtonSelected = true;
+                    this.Close();
+                } else
+                {
+                    return;
+                }
+
+            } else
+            {
+                confirmActionButtonSelected = true;
+                this.Close();
+            }
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -87,6 +102,11 @@ namespace CKPaint
                 await Task.Delay(400);
                 warningPanel.BackColor = warningPanel.BackColor == Color.DarkRed ? Color.Red : Color.DarkRed;
             }
+        }
+
+        private void passwordTextBox_TextChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

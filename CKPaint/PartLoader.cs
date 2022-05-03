@@ -696,7 +696,7 @@ namespace CKPaint
 
                                 if (!RHOnly)
                                 {
-                                    PrintToZebraHelper.PrintToZebra(SecondarySchedule_Part);
+                                    PrintToZebraHelperLoader.PrintToZebra(SecondarySchedule_Part);
                                 }
 
                                 if (RH)
@@ -706,7 +706,7 @@ namespace CKPaint
                                     SecondarySchedule_Part.RackPositionRH = sqlReader.GetString(14);
                                     SecondarySchedule_Part.WOIDRH = sqlReader.GetString(20);
 
-                                    PrintToZebraHelper.PrintToZebra(SecondarySchedule_Part, RH);
+                                    PrintToZebraHelperLoader.PrintToZebra(SecondarySchedule_Part, RH);
                                 }
 
                                 
