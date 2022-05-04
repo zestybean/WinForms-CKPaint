@@ -98,6 +98,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BadPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BadPassword.Designer.cs">
+      <DependentUpon>BadPassword.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConfirmActionWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,6 +158,9 @@
     <Compile Include="SettingsWindow.Designer.cs">
       <DependentUpon>SettingsWindow.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="BadPassword.resx">
+      <DependentUpon>BadPassword.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ConfirmActionWindow.resx">
       <DependentUpon>ConfirmActionWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -200,6 +209,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="logo.ico" />
+    <None Include="Resources\lola.jpg" />
     <None Include="Resources\sample.png" />
     <None Include="Resources\verifyInfo.jpg" />
     <None Include="Resources\arial.jpg" />

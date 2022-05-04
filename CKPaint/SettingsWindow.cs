@@ -12,7 +12,7 @@ namespace CKPaint
 {
     public partial class SettingsWindow : Form
     {
-        
+        int badPasswordCount = 0;
 
         public SettingsWindow()
         {
@@ -42,6 +42,15 @@ namespace CKPaint
         {
             if(passwordTextBox.Text != "paintck")
             {
+                badPasswordCount++;
+                
+                if(badPasswordCount >= 5)
+                {
+                    BadPassword badPasswordWindow = new BadPassword();
+                    badPasswordWindow.ShowDialog();
+                    badPasswordCount = 0;
+                }
+
                 return;
             }
 
