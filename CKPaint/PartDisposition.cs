@@ -659,9 +659,7 @@ namespace CKPaint
                                 PartDispositionHistory_Part.PartFinesse = sqlReader.GetInt16(26);
 
                                 //PRINTING WILL OCCURR HERE!!!
-                              
-                                    PrintToZebraHelperDisposition.PrintToZebra(PartDispositionHistory_Part);
-                               
+                                PrintToZebraHelperDisposition.PrintToZebra(PartDispositionHistory_Part);
                             }
                             else
                             {

@@ -21,12 +21,6 @@ public static class PrintToZebraHelperDisposition
         System.IO.StreamReader fileReader = new System.IO.StreamReader(labelPath);
         string fileContent = fileReader.ReadToEnd().ToString();
 
-        string reworkPart = "";
-
-        if (secondarySchedule_Part.PartRework == 1)
-        {
-            reworkPart = "RP";
-        }
         if (secondarySchedule_Part.ProductType.Contains("MLU") || secondarySchedule_Part.ProductType == "Bumper")
         {  
             if (RH)
@@ -34,8 +28,8 @@ public static class PrintToZebraHelperDisposition
                 fileContent = fileContent.Replace("@JN", secondarySchedule_Part.JobNumber).Replace("@LS", secondarySchedule_Part.SequenceNumber)
                .Replace("@P", secondarySchedule_Part.PartNumberRH).Replace("@CC", secondarySchedule_Part.ColorCode)
                .Replace("@WOID", secondarySchedule_Part.WOIDRH).Replace("@DT", System.DateTime.Now.ToString())
-               .Replace("@DIS", reworkPart)
-               .Replace("@REV", CKPaint.Properties.Settings.Default["Station"].ToString())
+               .Replace("@DIS", secondarySchedule_Part.PartDisposition)
+               .Replace("@REV", secondarySchedule_Part.InspectorName)
                .Replace("@LP", CKPaint.Properties.Settings.Default["Plant"].ToString());
             }
             else
@@ -43,8 +37,8 @@ public static class PrintToZebraHelperDisposition
                 fileContent = fileContent.Replace("@JN", secondarySchedule_Part.JobNumber).Replace("@LS", secondarySchedule_Part.SequenceNumber)
                .Replace("@P", secondarySchedule_Part.PartNumber).Replace("@CC", secondarySchedule_Part.ColorCode)
                .Replace("@WOID", secondarySchedule_Part.WOID).Replace("@DT", System.DateTime.Now.ToString())
-               .Replace("@DIS", reworkPart.ToString())
-               .Replace("@REV", CKPaint.Properties.Settings.Default["Station"].ToString())
+               .Replace("@DIS", secondarySchedule_Part.PartDisposition)
+               .Replace("@REV", secondarySchedule_Part.InspectorName)
                .Replace("@LP", CKPaint.Properties.Settings.Default["Plant"].ToString());
             }
         } else
@@ -54,8 +48,8 @@ public static class PrintToZebraHelperDisposition
                 fileContent = fileContent.Replace("@JN", secondarySchedule_Part.JobNumber)
                .Replace("@P", secondarySchedule_Part.PartNumberRH).Replace("@CC", secondarySchedule_Part.ColorCode)
                .Replace("@WOID", secondarySchedule_Part.WOIDRH).Replace("@DT", System.DateTime.Now.ToString())
-               .Replace("@DIS", reworkPart)
-               .Replace("@REV", CKPaint.Properties.Settings.Default["Station"].ToString())
+               .Replace("@DIS", secondarySchedule_Part.PartDisposition)
+               .Replace("@REV", secondarySchedule_Part.InspectorName)
                .Replace("@LP", CKPaint.Properties.Settings.Default["Plant"].ToString());
             }
             else
@@ -63,8 +57,8 @@ public static class PrintToZebraHelperDisposition
                 fileContent = fileContent.Replace("@JN", secondarySchedule_Part.JobNumber)
                .Replace("@P", secondarySchedule_Part.PartNumber).Replace("@CC", secondarySchedule_Part.ColorCode)
                .Replace("@WOID", secondarySchedule_Part.WOID).Replace("@DT", System.DateTime.Now.ToString())
-               .Replace("@DIS", reworkPart.ToString())
-               .Replace("@REV", CKPaint.Properties.Settings.Default["Station"].ToString())
+               .Replace("@DIS", secondarySchedule_Part.PartDisposition)
+               .Replace("@REV", secondarySchedule_Part.InspectorName)
                .Replace("@LP", CKPaint.Properties.Settings.Default["Plant"].ToString());
             }
         }
