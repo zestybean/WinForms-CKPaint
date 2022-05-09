@@ -48,9 +48,17 @@ namespace CKPaint
             this.warningLabel = new System.Windows.Forms.Label();
             this.processComboBox = new System.Windows.Forms.ComboBox();
             this.processLabel = new System.Windows.Forms.Label();
+            this.baseLabel = new System.Windows.Forms.Label();
+            this.clearLabel = new System.Windows.Forms.Label();
+            this.adproLabel = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dpuNumBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.warningLogo)).BeginInit();
             this.warningPanel.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // cancelButton
@@ -59,7 +67,7 @@ namespace CKPaint
             this.cancelButton.BackColor = System.Drawing.Color.Tomato;
             this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelButton.ForeColor = System.Drawing.Color.White;
-            this.cancelButton.Location = new System.Drawing.Point(409, 485);
+            this.cancelButton.Location = new System.Drawing.Point(415, 512);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(134, 44);
             this.cancelButton.TabIndex = 7;
@@ -73,7 +81,7 @@ namespace CKPaint
             this.disposePartButton.BackColor = System.Drawing.SystemColors.HotTrack;
             this.disposePartButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.disposePartButton.ForeColor = System.Drawing.Color.White;
-            this.disposePartButton.Location = new System.Drawing.Point(12, 485);
+            this.disposePartButton.Location = new System.Drawing.Point(12, 512);
             this.disposePartButton.Name = "disposePartButton";
             this.disposePartButton.Size = new System.Drawing.Size(134, 44);
             this.disposePartButton.TabIndex = 6;
@@ -84,7 +92,7 @@ namespace CKPaint
             // InspectorTxtBox
             // 
             this.InspectorTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.InspectorTxtBox.Location = new System.Drawing.Point(241, 250);
+            this.InspectorTxtBox.Location = new System.Drawing.Point(200, 229);
             this.InspectorTxtBox.Name = "InspectorTxtBox";
             this.InspectorTxtBox.ReadOnly = true;
             this.InspectorTxtBox.Size = new System.Drawing.Size(227, 31);
@@ -96,7 +104,7 @@ namespace CKPaint
             this.inspectorTitle.AutoSize = true;
             this.inspectorTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.inspectorTitle.ForeColor = System.Drawing.Color.White;
-            this.inspectorTitle.Location = new System.Drawing.Point(140, 254);
+            this.inspectorTitle.Location = new System.Drawing.Point(99, 233);
             this.inspectorTitle.Name = "inspectorTitle";
             this.inspectorTitle.Size = new System.Drawing.Size(102, 24);
             this.inspectorTitle.TabIndex = 16;
@@ -107,7 +115,7 @@ namespace CKPaint
             this.errorLabel.AutoSize = true;
             this.errorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.errorLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorLabel.Location = new System.Drawing.Point(238, 244);
+            this.errorLabel.Location = new System.Drawing.Point(197, 223);
             this.errorLabel.Name = "errorLabel";
             this.errorLabel.Size = new System.Drawing.Size(0, 13);
             this.errorLabel.TabIndex = 15;
@@ -115,7 +123,7 @@ namespace CKPaint
             // WOIDTxtBox
             // 
             this.WOIDTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WOIDTxtBox.Location = new System.Drawing.Point(241, 213);
+            this.WOIDTxtBox.Location = new System.Drawing.Point(200, 192);
             this.WOIDTxtBox.Name = "WOIDTxtBox";
             this.WOIDTxtBox.ReadOnly = true;
             this.WOIDTxtBox.Size = new System.Drawing.Size(227, 31);
@@ -126,7 +134,7 @@ namespace CKPaint
             this.WOIDTitle.AutoSize = true;
             this.WOIDTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.WOIDTitle.ForeColor = System.Drawing.Color.White;
-            this.WOIDTitle.Location = new System.Drawing.Point(126, 217);
+            this.WOIDTitle.Location = new System.Drawing.Point(85, 196);
             this.WOIDTitle.Name = "WOIDTitle";
             this.WOIDTitle.Size = new System.Drawing.Size(116, 24);
             this.WOIDTitle.TabIndex = 14;
@@ -208,7 +216,7 @@ namespace CKPaint
             "Touch up",
             "Flash",
             "Contamination"});
-            this.defectCombo.Location = new System.Drawing.Point(241, 341);
+            this.defectCombo.Location = new System.Drawing.Point(148, 358);
             this.defectCombo.Name = "defectCombo";
             this.defectCombo.Size = new System.Drawing.Size(136, 28);
             this.defectCombo.TabIndex = 3;
@@ -224,7 +232,7 @@ namespace CKPaint
             "Finesse",
             "Rework",
             "Scrap"});
-            this.dispositionCombo.Location = new System.Drawing.Point(241, 410);
+            this.dispositionCombo.Location = new System.Drawing.Point(148, 427);
             this.dispositionCombo.Name = "dispositionCombo";
             this.dispositionCombo.Size = new System.Drawing.Size(136, 28);
             this.dispositionCombo.TabIndex = 5;
@@ -233,7 +241,7 @@ namespace CKPaint
             // dpuNumBox
             // 
             this.dpuNumBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dpuNumBox.Location = new System.Drawing.Point(241, 375);
+            this.dpuNumBox.Location = new System.Drawing.Point(148, 392);
             this.dpuNumBox.Name = "dpuNumBox";
             this.dpuNumBox.Size = new System.Drawing.Size(66, 29);
             this.dpuNumBox.TabIndex = 4;
@@ -244,7 +252,7 @@ namespace CKPaint
             this.dpuTitle.AutoSize = true;
             this.dpuTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dpuTitle.ForeColor = System.Drawing.Color.White;
-            this.dpuTitle.Location = new System.Drawing.Point(166, 377);
+            this.dpuTitle.Location = new System.Drawing.Point(73, 394);
             this.dpuTitle.Name = "dpuTitle";
             this.dpuTitle.Size = new System.Drawing.Size(72, 24);
             this.dpuTitle.TabIndex = 24;
@@ -255,7 +263,7 @@ namespace CKPaint
             this.dispositionLabel.AutoSize = true;
             this.dispositionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dispositionLabel.ForeColor = System.Drawing.Color.White;
-            this.dispositionLabel.Location = new System.Drawing.Point(120, 410);
+            this.dispositionLabel.Location = new System.Drawing.Point(27, 427);
             this.dispositionLabel.Name = "dispositionLabel";
             this.dispositionLabel.Size = new System.Drawing.Size(118, 24);
             this.dispositionLabel.TabIndex = 25;
@@ -266,7 +274,7 @@ namespace CKPaint
             this.defectTitle.AutoSize = true;
             this.defectTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.defectTitle.ForeColor = System.Drawing.Color.White;
-            this.defectTitle.Location = new System.Drawing.Point(163, 341);
+            this.defectTitle.Location = new System.Drawing.Point(70, 358);
             this.defectTitle.Name = "defectTitle";
             this.defectTitle.Size = new System.Drawing.Size(75, 24);
             this.defectTitle.TabIndex = 23;
@@ -276,7 +284,7 @@ namespace CKPaint
             // 
             this.warningLogo.BackColor = System.Drawing.Color.Gold;
             this.warningLogo.Image = global::CKPaint.Properties.Resources.warning;
-            this.warningLogo.Location = new System.Drawing.Point(242, 13);
+            this.warningLogo.Location = new System.Drawing.Point(257, 13);
             this.warningLogo.Name = "warningLogo";
             this.warningLogo.Size = new System.Drawing.Size(82, 78);
             this.warningLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -346,7 +354,7 @@ namespace CKPaint
             this.processComboBox.Items.AddRange(new object[] {
             "Manual",
             "Robot"});
-            this.processComboBox.Location = new System.Drawing.Point(241, 287);
+            this.processComboBox.Location = new System.Drawing.Point(148, 324);
             this.processComboBox.Name = "processComboBox";
             this.processComboBox.Size = new System.Drawing.Size(136, 28);
             this.processComboBox.TabIndex = 28;
@@ -357,18 +365,210 @@ namespace CKPaint
             this.processLabel.AutoSize = true;
             this.processLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.processLabel.ForeColor = System.Drawing.Color.White;
-            this.processLabel.Location = new System.Drawing.Point(109, 287);
+            this.processLabel.Location = new System.Drawing.Point(16, 324);
             this.processLabel.Name = "processLabel";
             this.processLabel.Size = new System.Drawing.Size(133, 24);
             this.processLabel.TabIndex = 29;
             this.processLabel.Text = "Part Process:";
+            // 
+            // baseLabel
+            // 
+            this.baseLabel.AutoSize = true;
+            this.baseLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.baseLabel.ForeColor = System.Drawing.Color.White;
+            this.baseLabel.Location = new System.Drawing.Point(33, 63);
+            this.baseLabel.Name = "baseLabel";
+            this.baseLabel.Size = new System.Drawing.Size(62, 24);
+            this.baseLabel.TabIndex = 31;
+            this.baseLabel.Text = "Base:";
+            // 
+            // clearLabel
+            // 
+            this.clearLabel.AutoSize = true;
+            this.clearLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clearLabel.ForeColor = System.Drawing.Color.White;
+            this.clearLabel.Location = new System.Drawing.Point(30, 97);
+            this.clearLabel.Name = "clearLabel";
+            this.clearLabel.Size = new System.Drawing.Size(65, 24);
+            this.clearLabel.TabIndex = 32;
+            this.clearLabel.Text = "Clear:";
+            // 
+            // adproLabel
+            // 
+            this.adproLabel.AutoSize = true;
+            this.adproLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.adproLabel.ForeColor = System.Drawing.Color.White;
+            this.adproLabel.Location = new System.Drawing.Point(22, 29);
+            this.adproLabel.Name = "adproLabel";
+            this.adproLabel.Size = new System.Drawing.Size(73, 24);
+            this.adproLabel.TabIndex = 30;
+            this.adproLabel.Text = "Adpro:";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.comboBox3);
+            this.groupBox1.Controls.Add(this.comboBox2);
+            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.adproLabel);
+            this.groupBox1.Controls.Add(this.clearLabel);
+            this.groupBox1.Controls.Add(this.baseLabel);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.ForeColor = System.Drawing.Color.White;
+            this.groupBox1.Location = new System.Drawing.Point(312, 324);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(232, 131);
+            this.groupBox1.TabIndex = 36;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Painters";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.AutoCompleteCustomSource.AddRange(new string[] {
+            "Dirt",
+            "Sag Marks",
+            "Touch Marks",
+            "Solvent Pop",
+            "Light Paint",
+            "Pin Holes",
+            "Fish Eyes",
+            "Mottling",
+            "Off Color",
+            "Wrong Color",
+            "Substrate Flaw",
+            "Fibers",
+            "Part Swap",
+            "Wiper Marks",
+            "Orange Peel",
+            "Fell of Rack",
+            "Paint Run",
+            "Light Clear",
+            "Others",
+            "Adhesion Test Failure",
+            "Clear Run",
+            "Over Spray",
+            "Hose Drag",
+            "Damaged by Handling",
+            "Peel Off",
+            "Poor Finesse",
+            "Oil",
+            "Porosity",
+            "Blister",
+            "Scratch",
+            "Stain",
+            "Dent",
+            "Sink",
+            "Touch up"});
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox1.Items.AddRange(new object[] {
+            "Manual",
+            "Robot"});
+            this.comboBox1.Location = new System.Drawing.Point(90, 29);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(136, 28);
+            this.comboBox1.TabIndex = 37;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.AutoCompleteCustomSource.AddRange(new string[] {
+            "Dirt",
+            "Sag Marks",
+            "Touch Marks",
+            "Solvent Pop",
+            "Light Paint",
+            "Pin Holes",
+            "Fish Eyes",
+            "Mottling",
+            "Off Color",
+            "Wrong Color",
+            "Substrate Flaw",
+            "Fibers",
+            "Part Swap",
+            "Wiper Marks",
+            "Orange Peel",
+            "Fell of Rack",
+            "Paint Run",
+            "Light Clear",
+            "Others",
+            "Adhesion Test Failure",
+            "Clear Run",
+            "Over Spray",
+            "Hose Drag",
+            "Damaged by Handling",
+            "Peel Off",
+            "Poor Finesse",
+            "Oil",
+            "Porosity",
+            "Blister",
+            "Scratch",
+            "Stain",
+            "Dent",
+            "Sink",
+            "Touch up"});
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox2.Items.AddRange(new object[] {
+            "Manual",
+            "Robot"});
+            this.comboBox2.Location = new System.Drawing.Point(90, 63);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(136, 28);
+            this.comboBox2.TabIndex = 38;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.AutoCompleteCustomSource.AddRange(new string[] {
+            "Dirt",
+            "Sag Marks",
+            "Touch Marks",
+            "Solvent Pop",
+            "Light Paint",
+            "Pin Holes",
+            "Fish Eyes",
+            "Mottling",
+            "Off Color",
+            "Wrong Color",
+            "Substrate Flaw",
+            "Fibers",
+            "Part Swap",
+            "Wiper Marks",
+            "Orange Peel",
+            "Fell of Rack",
+            "Paint Run",
+            "Light Clear",
+            "Others",
+            "Adhesion Test Failure",
+            "Clear Run",
+            "Over Spray",
+            "Hose Drag",
+            "Damaged by Handling",
+            "Peel Off",
+            "Poor Finesse",
+            "Oil",
+            "Porosity",
+            "Blister",
+            "Scratch",
+            "Stain",
+            "Dent",
+            "Sink",
+            "Touch up"});
+            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox3.Items.AddRange(new object[] {
+            "Manual",
+            "Robot"});
+            this.comboBox3.Location = new System.Drawing.Point(90, 97);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(136, 28);
+            this.comboBox3.TabIndex = 39;
             // 
             // PartDispositionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.ClientSize = new System.Drawing.Size(555, 541);
+            this.ClientSize = new System.Drawing.Size(561, 568);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.processComboBox);
             this.Controls.Add(this.processLabel);
             this.Controls.Add(this.warningLabel);
@@ -397,6 +597,8 @@ namespace CKPaint
             ((System.ComponentModel.ISupportInitialize)(this.dpuNumBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.warningLogo)).EndInit();
             this.warningPanel.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -422,5 +624,12 @@ namespace CKPaint
         private System.Windows.Forms.Label warningLabel;
         private System.Windows.Forms.ComboBox processComboBox;
         private System.Windows.Forms.Label processLabel;
+        private System.Windows.Forms.Label baseLabel;
+        private System.Windows.Forms.Label clearLabel;
+        private System.Windows.Forms.Label adproLabel;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
